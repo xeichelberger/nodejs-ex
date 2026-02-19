@@ -314,7 +314,7 @@ def detect_instagram_confidence(photo):
     # No camera make/model suggests download rather than recording
     if hasattr(photo, "exif_info") and photo.exif_info:
         exif = photo.exif_info
-        if not exif.get("CameraMake") and not exif.get("CameraModel"):
+        if not getattr(exif, "camera_make", None) and not getattr(exif, "camera_model", None):
             score += 1
 
     if score >= 4:
