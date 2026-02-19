@@ -10,7 +10,7 @@ set -e
 
 echo ""
 echo "================================================================"
-echo "  Instagram Video Organizer — Setup"
+echo "  Instagram Video Organizer v2 — Setup"
 echo "================================================================"
 echo ""
 
@@ -30,11 +30,11 @@ if ! command -v brew &> /dev/null; then
 fi
 
 # ── Install system tools ──
-echo "Installing system dependencies (ffmpeg, rclone, ollama, python)..."
+echo "Installing system dependencies (ffmpeg, rclone, python)..."
 echo "(Already-installed packages will be skipped)"
 echo ""
 
-brew install ffmpeg rclone ollama python@3.11
+brew install ffmpeg rclone python@3.11
 
 echo ""
 
@@ -51,20 +51,12 @@ fi
 
 echo "Installing Python packages..."
 echo "(openai-whisper includes PyTorch — expect ~2GB download on first run)"
+echo "(anthropic is for Claude AI vision — best quality categorization)"
 echo ""
 
 source "$VENV_DIR/bin/activate"
 pip install --upgrade pip --quiet
 pip install -r "$SCRIPT_DIR/requirements.txt"
-
-echo ""
-
-# ── Pull Ollama model ──
-echo "Downloading AI model for categorization (llama3.1 — ~4.7GB)..."
-echo "(This is a one-time download)"
-echo ""
-
-ollama pull llama3.1
 
 echo ""
 echo "================================================================"
@@ -90,9 +82,14 @@ echo "       - A browser will open — sign in to your Google account"
 echo "       - Shared drive: Choose 'n' (no)"
 echo "       - Confirm with 'y'"
 echo ""
-echo "  2. START OLLAMA"
-echo "     Open the Ollama app from Applications,"
-echo "     or run: ollama serve"
+echo "  2. SET YOUR CLAUDE API KEY (recommended for best results)"
+echo "     Get a key from: https://console.anthropic.com/"
+echo "     Then either:"
+echo "       export ANTHROPIC_API_KEY='your-key-here'"
+echo "     Or create a .env file:"
+echo "       echo 'ANTHROPIC_API_KEY=your-key-here' > $SCRIPT_DIR/.env"
+echo ""
+echo "     (If you skip this, the script will try Ollama as a fallback)"
 echo ""
 echo "  3. RUN THE ORGANIZER"
 echo "     bash run.sh"

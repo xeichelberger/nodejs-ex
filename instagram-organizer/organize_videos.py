@@ -2,18 +2,22 @@
 """
 Instagram Video Organizer
 =========================
-Scans Apple Photos for Instagram-downloaded videos, transcribes and
-categorizes them using local AI, then uploads to Google Drive.
+Scans Apple Photos for downloaded/saved Instagram videos, extracts frames,
+analyzes them with AI vision, categorizes, and uploads to Google Drive.
 
-Requirements: macOS, Python 3.10+, ffmpeg, ollama, rclone
+Requirements: macOS, Python 3.10+, ffmpeg, rclone
+Optionally: Anthropic API key (for Claude vision) OR ollama + llava (local)
 Run setup.sh first to install all dependencies.
 """
 
 import os
 import sys
 import json
+import glob
 import shutil
+import base64
 import subprocess
+import tempfile
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -21,33 +25,86 @@ from pathlib import Path
 # CONFIGURATION — Edit these to customize behavior
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-MONTHS_TO_SCAN = 6
+MONTHS_TO_SCAN = 12
 RCLONE_REMOTE = "gdrive"
 DRIVE_BASE_FOLDER = "Instagram Videos"
-OLLAMA_MODEL = "llama3.1"
-WHISPER_MODEL = "base"
+FRAMES_PER_VIDEO = 4          # Number of frames to extract per video
+WHISPER_MODEL = "base"        # Whisper model size: tiny, base, small, medium
+
+# AI backend for categorization: "claude" (best) or "ollama" (free/local)
+AI_BACKEND = "claude"
+CLAUDE_MODEL = "claude-sonnet-4-5-20250929"
+OLLAMA_MODEL = "llava"        # Vision model for Ollama (llava can see images)
+OLLAMA_TEXT_MODEL = "llama3.1" # Text-only fallback
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# MECE CATEGORY STRUCTURE
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 CATEGORIES = {
-    "E-Commerce & Business": (
-        "Online selling, dropshipping, Shopify, Amazon FBA, product sourcing, "
-        "e-commerce strategies, online business, side hustles, making money online"
-    ),
-    "AI & Technology": (
-        "Artificial intelligence, tech tools, automation, apps, software, "
-        "coding, AI news, ChatGPT, machine learning, gadgets"
-    ),
-    "Manifestation & Mindset": (
-        "Law of attraction, mindset shifts, personal growth, visualization, "
-        "affirmations, spirituality, meditation, self-improvement, motivation"
-    ),
-    "Marketing & Growth": (
-        "Social media marketing, content creation, audience building, ads, "
-        "branding, funnels, influencer tips, growth hacks, SEO"
-    ),
-    "Lifestyle & Misc": (
-        "Fitness, cooking, entertainment, travel, fashion, relationships, "
-        "everything else that doesn't fit the above categories"
-    ),
+    "E-Commerce & Online Selling": {
+        "description": (
+            "Dropshipping, Shopify stores, Amazon FBA, product sourcing, "
+            "TikTok Shop, print-on-demand, online arbitrage, digital products, "
+            "supplier tips, e-commerce platforms, online store strategies"
+        ),
+        "subfolder": "01 - E-Commerce & Online Selling",
+    },
+    "AI Tools & Technology": {
+        "description": (
+            "ChatGPT, AI tools, automation workflows, AI news & breakthroughs, "
+            "software tutorials, apps, coding, no-code tools, tech gadgets, "
+            "machine learning, AI for business"
+        ),
+        "subfolder": "02 - AI Tools & Technology",
+    },
+    "Awakening & Manifestation": {
+        "description": (
+            "Law of attraction, manifesting, spiritual awakening, consciousness, "
+            "meditation, visualization, affirmations, energy work, "
+            "higher self, universe/source, vibration, quantum manifestation"
+        ),
+        "subfolder": "03 - Awakening & Manifestation",
+    },
+    "Business Ideas & Entrepreneurship": {
+        "description": (
+            "Startup ideas, side hustles, passive income, freelancing, "
+            "business models, making money online (general), agency building, "
+            "real estate investing, flipping, service businesses"
+        ),
+        "subfolder": "04 - Business Ideas & Entrepreneurship",
+    },
+    "Marketing & Content Creation": {
+        "description": (
+            "Social media growth, content strategy, Instagram/TikTok/YouTube tips, "
+            "branding, ads, copywriting, funnels, email marketing, "
+            "influencer strategies, audience building, SEO"
+        ),
+        "subfolder": "05 - Marketing & Content Creation",
+    },
+    "Personal Development & Mindset": {
+        "description": (
+            "Productivity, discipline, habits, goal setting, motivation, "
+            "self-improvement, stoicism, confidence, leadership, "
+            "health & fitness for performance, morning routines, reading"
+        ),
+        "subfolder": "06 - Personal Development & Mindset",
+    },
+    "Finance & Investing": {
+        "description": (
+            "Stocks, crypto, real estate investing, budgeting, saving, "
+            "financial literacy, tax strategies, credit, wealth building, "
+            "trading, index funds, retirement"
+        ),
+        "subfolder": "07 - Finance & Investing",
+    },
+    "Lifestyle & Other": {
+        "description": (
+            "Travel, cooking, fashion, entertainment, relationships, fitness, "
+            "humor, culture, anything that doesn't clearly fit the categories above"
+        ),
+        "subfolder": "08 - Lifestyle & Other",
+    },
 }
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -79,6 +136,32 @@ def check_python_package(package, pip_name=None):
         sys.exit(1)
 
 
+def check_claude_api():
+    key = os.environ.get("ANTHROPIC_API_KEY", "")
+    if not key:
+        # Check if there's a .env file
+        env_path = os.path.join(os.path.dirname(__file__), ".env")
+        if os.path.exists(env_path):
+            with open(env_path) as f:
+                for line in f:
+                    if line.strip().startswith("ANTHROPIC_API_KEY="):
+                        key = line.strip().split("=", 1)[1].strip().strip('"').strip("'")
+                        os.environ["ANTHROPIC_API_KEY"] = key
+                        break
+
+    if not key:
+        print("WARNING: ANTHROPIC_API_KEY not set.")
+        print("  Claude vision (best quality) won't be available.")
+        print("  Falling back to Ollama for categorization.")
+        print()
+        print("  To use Claude, either:")
+        print("    export ANTHROPIC_API_KEY='your-key-here'")
+        print(f"    Or create a .env file in {os.path.dirname(__file__)}/.env")
+        print()
+        return False
+    return True
+
+
 def check_ollama_running():
     import requests
 
@@ -86,16 +169,9 @@ def check_ollama_running():
         resp = requests.get("http://localhost:11434/api/tags", timeout=5)
         if resp.status_code != 200:
             raise Exception("bad status")
-        models = [m["name"] for m in resp.json().get("models", [])]
-        if not any(OLLAMA_MODEL in m for m in models):
-            print(f"ERROR: Ollama model '{OLLAMA_MODEL}' not found.")
-            print(f"  Run: ollama pull {OLLAMA_MODEL}")
-            sys.exit(1)
-    except requests.exceptions.ConnectionError:
-        print("ERROR: Ollama is not running.")
-        print("  Start it with: ollama serve")
-        print("  (Or just open the Ollama app from your Applications folder)")
-        sys.exit(1)
+        return True
+    except Exception:
+        return False
 
 
 def check_rclone_remote():
@@ -111,15 +187,33 @@ def check_rclone_remote():
 
 
 def run_preflight():
+    global AI_BACKEND
+
     print("Running preflight checks...")
     check_macos()
     check_command("ffmpeg", "brew install ffmpeg")
     check_command("rclone", "brew install rclone")
-    check_command("ollama", "brew install ollama")
     check_python_package("osxphotos")
-    check_python_package("whisper", "openai-whisper")
     check_python_package("requests")
-    check_ollama_running()
+
+    # Determine best available AI backend
+    has_claude = check_claude_api()
+    has_ollama = check_ollama_running()
+
+    if AI_BACKEND == "claude" and has_claude:
+        check_python_package("anthropic")
+        print("  AI backend: Claude API (vision + text)")
+    elif has_ollama:
+        AI_BACKEND = "ollama"
+        print(f"  AI backend: Ollama (local)")
+    else:
+        print("ERROR: No AI backend available.")
+        print("  Either set ANTHROPIC_API_KEY for Claude, or start Ollama (ollama serve)")
+        sys.exit(1)
+
+    check_python_package("whisper", "openai-whisper")
+    print("  Audio transcription: Whisper (local)")
+
     check_rclone_remote()
     print("  All checks passed!\n")
 
@@ -142,44 +236,137 @@ def scan_photos():
     videos = [p for p in all_photos if p.ismovie and p.date >= cutoff]
     print(f"  Found {len(videos)} total videos in the last {MONTHS_TO_SCAN} months")
 
-    instagram_videos = [v for v in videos if is_from_instagram(v)]
-    print(f"  Identified {len(instagram_videos)} videos with Instagram metadata\n")
+    # Separate into high-confidence Instagram and possible Instagram
+    instagram_confident = []
+    instagram_possible = []
+    non_instagram = []
 
-    return instagram_videos
+    for v in videos:
+        confidence = detect_instagram_confidence(v)
+        if confidence == "high":
+            instagram_confident.append(v)
+        elif confidence == "medium":
+            instagram_possible.append(v)
+        else:
+            non_instagram.append(v)
+
+    print(f"  High-confidence Instagram videos: {len(instagram_confident)}")
+    print(f"  Possible Instagram videos: {len(instagram_possible)}")
+    print(f"  Other videos: {len(non_instagram)}")
+    print()
+
+    return instagram_confident, instagram_possible, non_instagram
 
 
-def is_from_instagram(photo):
-    """Detect if a video was downloaded from Instagram based on metadata."""
-    # Check original filename for Instagram-related patterns
+def detect_instagram_confidence(photo):
+    """
+    Detect if a video was downloaded/saved from Instagram.
+    Returns: 'high', 'medium', or 'low'
+
+    Saved Instagram reels often have:
+    - Filenames like: IMG_XXXX.MOV, or random hashes
+    - Short duration (15-90 seconds typical for reels)
+    - Vertical aspect ratio (9:16)
+    - No EXIF camera info (since it's a download, not a recording)
+    """
+    score = 0
+
+    # Check filename for Instagram patterns
     fname = (photo.original_filename or photo.filename or "").lower()
     if any(p in fname for p in ["instagram", "insta", "reel", "ig_", "ig-"]):
-        return True
+        score += 10
 
-    # Check description/title fields
+    # Check description/title
     for field in [photo.description, photo.title]:
-        if field and "instagram" in field.lower():
-            return True
+        if field and any(w in field.lower() for w in ["instagram", "reel", "ig"]):
+            score += 10
 
-    # Check user-added or Photos ML keywords
+    # Check keywords
     for kw in photo.keywords or []:
-        if "instagram" in kw.lower():
-            return True
+        if any(w in kw.lower() for w in ["instagram", "reel"]):
+            score += 10
 
-    # Check labels (Apple's on-device ML scene/object detection)
+    # Check labels
     for label in photo.labels or []:
         if "instagram" in label.lower():
-            return True
+            score += 5
 
-    return False
+    if score >= 10:
+        return "high"
+
+    # Heuristic checks for saved-but-unlabeled videos (screen recordings, etc.)
+    # Short duration is typical for reels (under 90 seconds)
+    if hasattr(photo, "duration") and photo.duration:
+        if 5 <= photo.duration <= 90:
+            score += 2
+        elif 90 < photo.duration <= 180:
+            score += 1
+
+    # Vertical aspect ratio (portrait mode) is typical for reels
+    if photo.width and photo.height and photo.height > photo.width:
+        ratio = photo.height / photo.width
+        if 1.5 <= ratio <= 2.0:  # 9:16 = 1.78
+            score += 2
+
+    # No camera make/model suggests download rather than recording
+    if hasattr(photo, "exif_info") and photo.exif_info:
+        exif = photo.exif_info
+        if not exif.get("CameraMake") and not exif.get("CameraModel"):
+            score += 1
+
+    if score >= 4:
+        return "medium"
+
+    return "low"
 
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# STEP 2: EXPORT VIDEOS FROM PHOTOS LIBRARY
+# STEP 2: INTERACTIVE VIDEO SELECTION
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+def select_videos(confident, possible, others):
+    """Let user choose which videos to process."""
+    selected = list(confident)  # Always include high-confidence
+
+    if possible:
+        print(f"\nFound {len(possible)} videos that MIGHT be from Instagram:")
+        for i, v in enumerate(possible, 1):
+            name = v.original_filename or v.filename
+            date_str = v.date.strftime("%Y-%m-%d")
+            dur = f"{v.duration:.0f}s" if hasattr(v, "duration") and v.duration else "?"
+            print(f"  {i}. {name}  ({date_str}, {dur})")
+
+        print()
+        resp = input("Include these possible Instagram videos? [yes/no/pick]: ").strip().lower()
+        if resp in ("yes", "y"):
+            selected.extend(possible)
+        elif resp == "pick":
+            nums = input("Enter numbers to include (comma-separated, e.g. 1,3,5): ").strip()
+            for n in nums.split(","):
+                try:
+                    idx = int(n.strip()) - 1
+                    if 0 <= idx < len(possible):
+                        selected.append(possible[idx])
+                except ValueError:
+                    pass
+
+    if others and not selected:
+        print("\nNo Instagram videos detected. Want to scan ALL recent videos instead?")
+        resp = input("Process all videos? [yes/no]: ").strip().lower()
+        if resp in ("yes", "y"):
+            selected = list(confident) + list(possible) + list(others)
+
+    return selected
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# STEP 3: EXPORT VIDEOS FROM PHOTOS LIBRARY
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
 def export_videos(photos_list, export_dir):
-    print(f"Exporting {len(photos_list)} videos...\n")
+    print(f"\nExporting {len(photos_list)} videos...\n")
 
     exported = []
     for i, photo in enumerate(photos_list, 1):
@@ -187,7 +374,6 @@ def export_videos(photos_list, export_dir):
         print(f"  [{i}/{len(photos_list)}] {name}...", end=" ")
 
         try:
-            # Export video file from Photos library to our working directory
             paths = photo.export(export_dir)
             if paths:
                 exported.append(
@@ -196,6 +382,7 @@ def export_videos(photos_list, export_dir):
                         "filename": name,
                         "date": photo.date.isoformat(),
                         "uuid": photo.uuid,
+                        "duration": getattr(photo, "duration", None),
                     }
                 )
                 print("OK")
@@ -209,15 +396,88 @@ def export_videos(photos_list, export_dir):
 
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# STEP 3: TRANSCRIBE VIDEO AUDIO USING WHISPER (LOCAL)
+# STEP 4: EXTRACT KEY FRAMES FROM VIDEOS
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+def extract_frames(videos, frames_dir):
+    """Extract key frames from each video using ffmpeg."""
+    print(f"Extracting {FRAMES_PER_VIDEO} frames per video...\n")
+
+    for i, video in enumerate(videos, 1):
+        video_path = video["exported_path"]
+        name = video["filename"]
+        print(f"  [{i}/{len(videos)}] {name}...", end=" ")
+
+        # Create per-video frame directory
+        safe_name = Path(name).stem.replace(" ", "_")[:50]
+        vid_frames_dir = os.path.join(frames_dir, f"{i:03d}_{safe_name}")
+        os.makedirs(vid_frames_dir, exist_ok=True)
+
+        try:
+            # Get video duration
+            duration = video.get("duration")
+            if not duration:
+                probe = subprocess.run(
+                    [
+                        "ffprobe", "-v", "quiet",
+                        "-show_entries", "format=duration",
+                        "-of", "json", video_path,
+                    ],
+                    capture_output=True, text=True, timeout=30,
+                )
+                probe_data = json.loads(probe.stdout)
+                duration = float(probe_data["format"]["duration"])
+
+            # Calculate timestamps for evenly-spaced frames
+            # Skip first/last 5% to avoid black frames
+            start = duration * 0.05
+            end = duration * 0.95
+            if FRAMES_PER_VIDEO == 1:
+                timestamps = [duration / 2]
+            else:
+                step = (end - start) / (FRAMES_PER_VIDEO - 1)
+                timestamps = [start + step * j for j in range(FRAMES_PER_VIDEO)]
+
+            frame_paths = []
+            for j, ts in enumerate(timestamps):
+                frame_path = os.path.join(vid_frames_dir, f"frame_{j:02d}.jpg")
+                subprocess.run(
+                    [
+                        "ffmpeg", "-y", "-ss", str(ts),
+                        "-i", video_path,
+                        "-vframes", "1",
+                        "-q:v", "2",  # High quality JPEG
+                        frame_path,
+                    ],
+                    capture_output=True, timeout=30,
+                )
+                if os.path.exists(frame_path):
+                    frame_paths.append(frame_path)
+
+            video["frame_paths"] = frame_paths
+            print(f"OK ({len(frame_paths)} frames)")
+
+        except Exception as e:
+            video["frame_paths"] = []
+            print(f"FAILED ({e})")
+
+    extracted = sum(1 for v in videos if v.get("frame_paths"))
+    print(f"\n  Extracted frames for {extracted}/{len(videos)} videos\n")
+    return videos
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# STEP 5: TRANSCRIBE VIDEO AUDIO (OPTIONAL)
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
 def transcribe_videos(videos):
+    """Transcribe audio using Whisper — this is the primary categorization signal."""
     import whisper
 
     print(f"Loading Whisper '{WHISPER_MODEL}' model...")
-    print("(First run downloads ~150MB model file — this is a one-time download)\n")
+    print("(First run downloads the model file — this is a one-time download)\n")
     model = whisper.load_model(WHISPER_MODEL)
 
     print(f"Transcribing {len(videos)} videos...\n")
@@ -229,7 +489,6 @@ def transcribe_videos(videos):
             result = model.transcribe(video["exported_path"])
             video["transcript"] = result["text"].strip()
 
-            # Get duration from last segment
             if result.get("segments"):
                 video["duration_seconds"] = round(result["segments"][-1]["end"])
 
@@ -245,63 +504,171 @@ def transcribe_videos(videos):
 
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# STEP 4: CATEGORIZE USING OLLAMA (LOCAL LLM)
+# STEP 6: CATEGORIZE USING AI VISION
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
-def categorize_videos(videos):
+def build_category_prompt():
+    """Build the categorization prompt with category descriptions."""
+    lines = []
+    for name, info in CATEGORIES.items():
+        lines.append(f"  - {name}: {info['description']}")
+    return "\n".join(lines)
+
+
+def encode_image_b64(path):
+    """Read an image file and return base64-encoded string."""
+    with open(path, "rb") as f:
+        return base64.b64encode(f.read()).decode("utf-8")
+
+
+def categorize_with_claude(video, category_prompt):
+    """Use Claude API with vision to categorize a video from its frames + transcript."""
+    import anthropic
+
+    client = anthropic.Anthropic()
+
+    # Build message content with frames
+    content = []
+
+    # Add frames as images
+    frames = video.get("frame_paths", [])
+    if frames:
+        content.append({
+            "type": "text",
+            "text": f"Here are {len(frames)} frames extracted from an Instagram video:"
+        })
+        for frame_path in frames[:4]:  # Max 4 frames
+            img_b64 = encode_image_b64(frame_path)
+            content.append({
+                "type": "image",
+                "source": {
+                    "type": "base64",
+                    "media_type": "image/jpeg",
+                    "data": img_b64,
+                },
+            })
+
+    # Add transcript if available
+    transcript = video.get("transcript", "")
+    if transcript:
+        content.append({
+            "type": "text",
+            "text": f"\nAudio transcript:\n\"{transcript[:3000]}\""
+        })
+
+    # Add categorization instruction
+    content.append({
+        "type": "text",
+        "text": (
+            "\n\nBased on the visual content and audio transcript above, "
+            "categorize this Instagram video into ONE of these categories:\n\n"
+            f"{category_prompt}\n\n"
+            "Respond with ONLY a JSON object in this format:\n"
+            '{"category": "Exact Category Name", "confidence": "high/medium/low", '
+            '"reason": "Brief 1-sentence explanation"}'
+        ),
+    })
+
+    response = client.messages.create(
+        model=CLAUDE_MODEL,
+        max_tokens=200,
+        messages=[{"role": "user", "content": content}],
+    )
+
+    raw = response.content[0].text.strip()
+    return parse_category_response(raw)
+
+
+def categorize_with_ollama(video, category_prompt):
+    """Use Ollama (llava for vision, llama for text-only) to categorize a video."""
     import requests
 
-    print(f"Categorizing videos using Ollama ({OLLAMA_MODEL})...\n")
+    frames = video.get("frame_paths", [])
+    transcript = video.get("transcript", "")
 
-    category_list = "\n".join(
-        f"  - {name}: {desc}" for name, desc in CATEGORIES.items()
-    )
-    valid_names = list(CATEGORIES.keys())
-
-    for i, video in enumerate(videos, 1):
-        transcript = video.get("transcript", "")
-
-        if not transcript:
-            video["category"] = "Uncategorized"
-            print(f"  [{i}/{len(videos)}] {video['filename']} -> Uncategorized (no transcript)")
-            continue
-
-        print(f"  [{i}/{len(videos)}] {video['filename']}...", end=" ")
+    if frames:
+        # Use llava (vision model) with the first frame
+        img_b64 = encode_image_b64(frames[0])
 
         prompt = (
+            "Look at this frame from an Instagram video.\n"
+        )
+        if transcript:
+            prompt += f'\nAudio transcript: "{transcript[:2000]}"\n'
+        prompt += (
+            f"\nCategorize it into ONE of these categories:\n{category_prompt}\n\n"
+            "Reply with ONLY the exact category name, nothing else."
+        )
+
+        resp = requests.post(
+            "http://localhost:11434/api/generate",
+            json={
+                "model": OLLAMA_MODEL,
+                "prompt": prompt,
+                "images": [img_b64],
+                "stream": False,
+                "options": {"temperature": 0.1},
+            },
+            timeout=120,
+        )
+        raw = resp.json()["response"].strip()
+
+    elif transcript:
+        # Text-only fallback with llama
+        prompt = (
             "You are categorizing an Instagram video based on its audio transcript.\n\n"
-            f"Available categories:\n{category_list}\n\n"
+            f"Available categories:\n{category_prompt}\n\n"
             f'Video transcript:\n"{transcript[:2000]}"\n\n'
             "Which single category best fits this video? "
             "Reply with ONLY the exact category name from the list above, nothing else."
         )
+        resp = requests.post(
+            "http://localhost:11434/api/generate",
+            json={
+                "model": OLLAMA_TEXT_MODEL,
+                "prompt": prompt,
+                "stream": False,
+                "options": {"temperature": 0.1},
+            },
+            timeout=120,
+        )
+        raw = resp.json()["response"].strip()
+    else:
+        return "Lifestyle & Other", "low", "No frames or transcript available"
 
-        try:
-            resp = requests.post(
-                "http://localhost:11434/api/generate",
-                json={
-                    "model": OLLAMA_MODEL,
-                    "prompt": prompt,
-                    "stream": False,
-                    "options": {"temperature": 0.1},
-                },
-                timeout=120,
-            )
-            raw = resp.json()["response"].strip()
-            matched = match_category(raw, valid_names)
-            video["category"] = matched
-            print(f"-> {matched}")
-        except Exception as e:
-            video["category"] = "Uncategorized"
-            print(f"FAILED ({e})")
-
-    categorized = sum(1 for v in videos if v.get("category") != "Uncategorized")
-    print(f"\n  Categorized {categorized}/{len(videos)} videos\n")
-    return videos
+    matched = match_category_name(raw, list(CATEGORIES.keys()))
+    return matched, "medium", ""
 
 
-def match_category(raw, valid_categories):
+def parse_category_response(raw):
+    """Parse the JSON response from Claude."""
+    try:
+        # Try to extract JSON from the response
+        # Handle case where model wraps in markdown code block
+        cleaned = raw.strip()
+        if cleaned.startswith("```"):
+            cleaned = cleaned.split("\n", 1)[1] if "\n" in cleaned else cleaned
+            cleaned = cleaned.rsplit("```", 1)[0].strip()
+        if cleaned.startswith("json"):
+            cleaned = cleaned[4:].strip()
+
+        data = json.loads(cleaned)
+        category = data.get("category", "")
+        confidence = data.get("confidence", "medium")
+        reason = data.get("reason", "")
+
+        # Validate category name
+        matched = match_category_name(category, list(CATEGORIES.keys()))
+        return matched, confidence, reason
+
+    except (json.JSONDecodeError, KeyError):
+        # Fallback: try to match the raw text
+        matched = match_category_name(raw, list(CATEGORIES.keys()))
+        return matched, "low", ""
+
+
+def match_category_name(raw, valid_categories):
     """Match LLM output to the closest valid category name."""
     raw_lower = raw.lower().strip().strip('"').strip("'")
 
@@ -317,15 +684,67 @@ def match_category(raw, valid_categories):
 
     # Keyword overlap
     for cat in valid_categories:
-        words = cat.lower().replace("&", "").split()
-        if any(w in raw_lower for w in words if len(w) > 3):
+        words = cat.lower().replace("&", "").replace("-", " ").split()
+        matches = sum(1 for w in words if len(w) > 3 and w in raw_lower)
+        if matches >= 2:
             return cat
 
-    return "Uncategorized"
+    # Single strong keyword
+    for cat in valid_categories:
+        words = cat.lower().replace("&", "").replace("-", " ").split()
+        if any(w in raw_lower for w in words if len(w) > 4):
+            return cat
+
+    return "Lifestyle & Other"
+
+
+def categorize_videos(videos):
+    """Categorize all videos using the configured AI backend."""
+    print(f"Categorizing videos using {AI_BACKEND}...\n")
+
+    category_prompt = build_category_prompt()
+    valid_names = list(CATEGORIES.keys())
+
+    for i, video in enumerate(videos, 1):
+        frames = video.get("frame_paths", [])
+        transcript = video.get("transcript", "")
+
+        if not frames and not transcript:
+            video["category"] = "Lifestyle & Other"
+            video["confidence"] = "low"
+            video["reason"] = "No visual or audio data available"
+            print(f"  [{i}/{len(videos)}] {video['filename']} -> Lifestyle & Other (no data)")
+            continue
+
+        print(f"  [{i}/{len(videos)}] {video['filename']}...", end=" ")
+
+        try:
+            if AI_BACKEND == "claude":
+                cat, conf, reason = categorize_with_claude(video, category_prompt)
+            else:
+                cat, conf, reason = categorize_with_ollama(video, category_prompt)
+
+            video["category"] = cat
+            video["confidence"] = conf
+            video["reason"] = reason
+            print(f"-> {cat} ({conf})")
+
+        except Exception as e:
+            video["category"] = "Lifestyle & Other"
+            video["confidence"] = "low"
+            video["reason"] = f"Error: {e}"
+            print(f"FAILED ({e})")
+
+    categorized = sum(
+        1 for v in videos if v.get("category") != "Lifestyle & Other"
+        or v.get("confidence") != "low"
+    )
+    print(f"\n  Categorized {categorized}/{len(videos)} videos\n")
+    return videos
 
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# STEP 5: DISPLAY RESULTS FOR REVIEW
+# STEP 7: DISPLAY RESULTS + INTERACTIVE REVIEW
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
@@ -336,70 +755,141 @@ def display_results(videos):
 
     by_category = {}
     for v in videos:
-        cat = v.get("category", "Uncategorized")
+        cat = v.get("category", "Lifestyle & Other")
         by_category.setdefault(cat, []).append(v)
 
-    for cat in list(CATEGORIES.keys()) + ["Uncategorized"]:
-        vids = by_category.get(cat, [])
+    for cat_name, cat_info in CATEGORIES.items():
+        vids = by_category.get(cat_name, [])
         if not vids:
             continue
-        print(f"\n  {cat} ({len(vids)} videos)")
-        print("  " + "-" * 40)
+        print(f"\n  {cat_info['subfolder']}  ({len(vids)} videos)")
+        print("  " + "-" * 50)
         for v in vids:
             t = v.get("transcript", "")
-            preview = (t[:70] + "...") if len(t) > 70 else (t or "(no transcript)")
-            dur = v.get("duration_seconds", "?")
+            preview = (t[:60] + "...") if len(t) > 60 else (t or "(no transcript)")
+            dur = v.get("duration_seconds") or v.get("duration") or "?"
+            if isinstance(dur, float):
+                dur = f"{dur:.0f}"
+            conf = v.get("confidence", "?")
+            reason = v.get("reason", "")
+
             print(f"    {v['filename']}")
-            print(f"      Date: {v['date'][:10]}  |  Duration: {dur}s")
-            print(f"      Preview: {preview}")
+            print(f"      Date: {v['date'][:10]}  |  Duration: {dur}s  |  Confidence: {conf}")
+            if reason:
+                print(f"      Reason: {reason}")
+            if preview != "(no transcript)":
+                print(f"      Audio: {preview}")
 
     print("\n" + "=" * 70)
     total = len(videos)
-    categorized = sum(1 for v in videos if v.get("category") != "Uncategorized")
-    print(f"  Total: {total}  |  Categorized: {categorized}  |  Uncategorized: {total - categorized}")
+    high_conf = sum(1 for v in videos if v.get("confidence") == "high")
+    med_conf = sum(1 for v in videos if v.get("confidence") == "medium")
+    low_conf = sum(1 for v in videos if v.get("confidence") == "low")
+    print(f"  Total: {total}  |  High: {high_conf}  |  Medium: {med_conf}  |  Low: {low_conf}")
     print("=" * 70)
 
 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# STEP 6: UPLOAD TO GOOGLE DRIVE VIA RCLONE
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+def interactive_review(videos):
+    """Allow user to review and re-categorize low-confidence videos."""
+    low_conf = [v for v in videos if v.get("confidence") == "low"]
 
+    if not low_conf:
+        return videos
 
-def upload_to_drive(videos):
-    print(f"\nUploading to Google Drive ({RCLONE_REMOTE}:{DRIVE_BASE_FOLDER}/)...\n")
+    print(f"\n{len(low_conf)} video(s) have low confidence. Review them?")
+    resp = input("[yes/no]: ").strip().lower()
 
-    success = 0
-    for i, video in enumerate(videos, 1):
-        category = video.get("category", "Uncategorized")
-        src = video["exported_path"]
-        basename = os.path.basename(src)
-        dest = f"{RCLONE_REMOTE}:{DRIVE_BASE_FOLDER}/{category}/{basename}"
+    if resp not in ("yes", "y"):
+        return videos
 
-        print(f"  [{i}/{len(videos)}] -> {category}/{basename}...", end=" ")
+    cat_names = list(CATEGORIES.keys())
+    cat_menu = "\n".join(f"  {i+1}. {name}" for i, name in enumerate(cat_names))
 
+    for v in low_conf:
+        print(f"\n  Video: {v['filename']}")
+        print(f"  Current category: {v['category']}")
+        t = v.get("transcript", "")
+        if t:
+            print(f"  Transcript preview: {t[:100]}...")
+        print(f"\n  Categories:\n{cat_menu}")
+        print(f"  0. Keep current ({v['category']})")
+
+        choice = input("  Choose [0-8]: ").strip()
         try:
-            result = subprocess.run(
-                ["rclone", "copyto", src, dest],
-                capture_output=True,
-                text=True,
-                timeout=300,
-            )
-            if result.returncode == 0:
-                print("OK")
-                success += 1
+            idx = int(choice)
+            if 1 <= idx <= len(cat_names):
+                v["category"] = cat_names[idx - 1]
+                v["confidence"] = "manual"
+                print(f"  -> Changed to: {v['category']}")
             else:
-                print(f"FAILED ({result.stderr.strip()[:100]})")
-        except subprocess.TimeoutExpired:
-            print("FAILED (upload timed out)")
-        except Exception as e:
-            print(f"FAILED ({e})")
+                print(f"  -> Keeping: {v['category']}")
+        except ValueError:
+            print(f"  -> Keeping: {v['category']}")
 
-    print(f"\n  Uploaded {success}/{len(videos)} videos\n")
-    return success
+    return videos
 
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# STEP 7: SAVE RESULTS TO JSON
+# STEP 8: ORGANIZE LOCAL FILES INTO CATEGORY FOLDERS
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+def organize_local(videos, organized_dir):
+    """Copy videos into category subfolders locally before uploading."""
+    print("Organizing videos into category folders...\n")
+
+    for cat_info in CATEGORIES.values():
+        os.makedirs(os.path.join(organized_dir, cat_info["subfolder"]), exist_ok=True)
+
+    for video in videos:
+        cat = video.get("category", "Lifestyle & Other")
+        subfolder = CATEGORIES.get(cat, {}).get("subfolder", "08 - Lifestyle & Other")
+        src = video["exported_path"]
+        dest = os.path.join(organized_dir, subfolder, os.path.basename(src))
+        shutil.copy2(src, dest)
+        video["organized_path"] = dest
+
+    print("  Done organizing locally.\n")
+    return videos
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# STEP 9: UPLOAD TO GOOGLE DRIVE VIA RCLONE
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+def upload_to_drive(organized_dir):
+    """Upload the entire organized folder structure to Google Drive."""
+    dest = f"{RCLONE_REMOTE}:{DRIVE_BASE_FOLDER}"
+    print(f"Uploading to Google Drive ({dest}/)...\n")
+
+    try:
+        result = subprocess.run(
+            [
+                "rclone", "copy",
+                organized_dir,
+                dest,
+                "--progress",
+                "--transfers", "4",
+            ],
+            timeout=1800,  # 30 min timeout for large batches
+        )
+        if result.returncode == 0:
+            print("\n  Upload complete!\n")
+            return True
+        else:
+            print("\n  Upload had errors. Check the output above.\n")
+            return False
+    except subprocess.TimeoutExpired:
+        print("\n  Upload timed out after 30 minutes.\n")
+        return False
+    except Exception as e:
+        print(f"\n  Upload failed: {e}\n")
+        return False
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# STEP 10: SAVE RESULTS TO JSON
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
@@ -410,14 +900,21 @@ def save_results(videos, output_path):
             {
                 "filename": v["filename"],
                 "date": v["date"],
-                "category": v.get("category", "Uncategorized"),
+                "category": v.get("category", "Lifestyle & Other"),
+                "confidence": v.get("confidence", ""),
+                "reason": v.get("reason", ""),
                 "transcript": v.get("transcript", ""),
-                "duration_seconds": v.get("duration_seconds"),
+                "duration_seconds": v.get("duration_seconds") or v.get("duration"),
                 "uuid": v.get("uuid", ""),
             }
         )
 
-    data = {"scan_date": datetime.now().isoformat(), "videos": results}
+    data = {
+        "scan_date": datetime.now().isoformat(),
+        "ai_backend": AI_BACKEND,
+        "categories_used": list(CATEGORIES.keys()),
+        "videos": results,
+    }
     with open(output_path, "w") as f:
         json.dump(data, f, indent=2)
 
@@ -432,8 +929,8 @@ def save_results(videos, output_path):
 def main():
     print()
     print("=" * 70)
-    print("  INSTAGRAM VIDEO ORGANIZER")
-    print("  Scan  ->  Transcribe  ->  Categorize  ->  Upload to Google Drive")
+    print("  INSTAGRAM VIDEO ORGANIZER v2")
+    print("  Scan -> Extract Frames -> Transcribe -> AI Vision -> Upload")
     print("=" * 70)
     print()
 
@@ -443,63 +940,83 @@ def main():
     # ── Working directory ──
     work_dir = os.path.join(os.path.expanduser("~"), ".instagram-organizer")
     export_dir = os.path.join(work_dir, "exports")
+    frames_dir = os.path.join(work_dir, "frames")
+    organized_dir = os.path.join(work_dir, "organized")
     os.makedirs(export_dir, exist_ok=True)
+    os.makedirs(frames_dir, exist_ok=True)
+    os.makedirs(organized_dir, exist_ok=True)
     results_path = os.path.join(work_dir, "results.json")
 
     # ── Step 1: Scan Apple Photos ──
-    instagram_videos = scan_photos()
+    confident, possible, others = scan_photos()
 
-    if not instagram_videos:
-        print("No Instagram videos found in the last {} months.".format(MONTHS_TO_SCAN))
-        print("\nPossible reasons:")
-        print("  - Videos were not downloaded directly from Instagram")
-        print("  - Videos don't have Instagram metadata in their filenames")
-        print("  - No videos in the specified time range")
-        print("\nTip: Screen-recorded videos won't be detected in this version.")
+    if not confident and not possible and not others:
+        print(f"No videos found in the last {MONTHS_TO_SCAN} months.")
         return
 
-    # ── Show found videos and confirm ──
-    print("Found these Instagram videos:\n")
-    for i, v in enumerate(instagram_videos, 1):
+    if not confident and not possible:
+        print("No Instagram videos detected automatically.")
+        print(f"But found {len(others)} other videos.\n")
+
+    # ── Step 2: Interactive selection ──
+    selected = select_videos(confident, possible, others)
+
+    if not selected:
+        print("No videos selected. Exiting.")
+        return
+
+    # ── Show selected and confirm ──
+    print(f"\nReady to process {len(selected)} videos:\n")
+    for i, v in enumerate(selected, 1):
         name = v.original_filename or v.filename
         date_str = v.date.strftime("%Y-%m-%d")
-        print(f"  {i}. {name}  ({date_str})")
+        dur = f"{v.duration:.0f}s" if hasattr(v, "duration") and v.duration else "?"
+        print(f"  {i}. {name}  ({date_str}, {dur})")
 
     print()
-    response = input("Proceed with processing these videos? [yes/no]: ").strip().lower()
+    response = input("Proceed? [yes/no]: ").strip().lower()
     if response not in ("yes", "y"):
         print("Cancelled.")
         return
 
-    # ── Step 2: Export from Photos library ──
-    print()
-    exported = export_videos(instagram_videos, export_dir)
+    # ── Step 3: Export from Photos library ──
+    exported = export_videos(selected, export_dir)
 
     if not exported:
         print("No videos could be exported. They may be stored in iCloud.")
         print("Open Photos app and download them locally first, then re-run.")
         return
 
-    # ── Step 3: Transcribe audio ──
-    transcribed = transcribe_videos(exported)
+    # ── Step 4: Extract key frames ──
+    with_frames = extract_frames(exported, frames_dir)
 
-    # ── Step 4: Categorize with local AI ──
+    # ── Step 5: Transcribe audio (optional enhancement) ──
+    transcribed = transcribe_videos(with_frames)
+
+    # ── Step 6: Categorize with AI vision ──
     categorized = categorize_videos(transcribed)
 
-    # ── Step 5: Review results ──
+    # ── Step 7: Review results ──
     display_results(categorized)
-    save_results(categorized, results_path)
+    reviewed = interactive_review(categorized)
 
-    # ── Step 6: Upload to Google Drive ──
+    # ── Step 8: Organize locally ──
+    organized = organize_local(reviewed, organized_dir)
+
+    # ── Save results ──
+    save_results(organized, results_path)
+
+    # ── Step 9: Upload to Google Drive ──
     print("\nReview the categories above. If something looks wrong, you can")
     print(f"edit the results file at: {results_path}")
-    print()
+    print("Or re-run the script to re-categorize.\n")
     response = input("Upload these videos to Google Drive now? [yes/no]: ").strip().lower()
 
     if response in ("yes", "y"):
-        uploaded = upload_to_drive(categorized)
-        print(f"Done! {uploaded} videos uploaded to Google Drive.")
-        print(f"Check your Drive under the '{DRIVE_BASE_FOLDER}/' folder.\n")
+        success = upload_to_drive(organized_dir)
+        if success:
+            print(f"Done! Videos uploaded to Google Drive.")
+            print(f"Check your Drive under the '{DRIVE_BASE_FOLDER}/' folder.\n")
     else:
         print("Upload skipped. You can re-run the script later to upload.\n")
 
@@ -508,8 +1025,8 @@ def main():
     print("NEXT STEPS:")
     print(f"  1. Check Google Drive -> '{DRIVE_BASE_FOLDER}' folder")
     print("  2. Verify videos are in the right categories")
-    print("  3. Once confirmed, manually delete originals from Apple Photos")
-    print(f"  4. Clean up temp files: rm -rf {export_dir}")
+    print("  3. Once confirmed, delete originals from Apple Photos")
+    print(f"  4. Clean up temp files: rm -rf {work_dir}")
     print("-" * 70)
     print()
 
