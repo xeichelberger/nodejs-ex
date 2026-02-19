@@ -4,6 +4,7 @@ const { getDb } = require('../database');
 const seoAnalyzer = require('../services/seo-analyzer');
 const gsc = require('../services/google-search-console');
 const serpTracker = require('../services/serp-tracker');
+const contentPerformance = require('../services/content-performance');
 
 function logJob(jobName, status, result) {
   try {
@@ -74,9 +75,33 @@ function startCronJobs() {
     }
   });
 
+  // Weekly content performance check — runs after SERP data is fresh
+  cron.schedule(config.cron.performanceCheck, async () => {
+    console.log('[CRON] Starting content performance check...');
+    const jobId = logJob('performance_check', 'running');
+
+    try {
+      const db = getDb();
+      const sites = db.prepare('SELECT * FROM sites').all();
+      let totalChecked = 0;
+
+      for (const site of sites) {
+        const result = await contentPerformance.checkAll(site.id);
+        totalChecked += result.checked;
+      }
+
+      logJob('performance_check', 'completed', { jobId, sites: sites.length, articles_checked: totalChecked });
+      console.log(`[CRON] Content performance check complete. ${totalChecked} articles checked.`);
+    } catch (err) {
+      logJob('performance_check', 'failed', { jobId, error: err.message });
+      console.error('[CRON] Performance check failed:', err.message);
+    }
+  });
+
   console.log('[CRON] Scheduled jobs initialized.');
   console.log(`  - SEO Audit: ${config.cron.seoAudit}`);
   console.log(`  - SERP Check: ${config.cron.serpCheck}`);
+  console.log(`  - Performance Check: ${config.cron.performanceCheck}`);
 }
 
 module.exports = { startCronJobs };

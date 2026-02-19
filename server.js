@@ -73,6 +73,9 @@ app.use('/api/reviews', require('./routes/reviews'));
 // Publish pipeline (generate -> publish -> interlink -> submit)
 app.use('/api/pipeline', require('./routes/pipeline'));
 
+// Content performance tracking (feedback loop after publish)
+app.use('/api/performance', require('./routes/performance'));
+
 // ==================== Health check ====================
 
 app.get('/health', (req, res) => {

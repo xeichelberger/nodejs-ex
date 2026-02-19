@@ -169,6 +169,26 @@ function migrate(database) {
       FOREIGN KEY (site_id) REFERENCES sites(id)
     );
 
+    -- Content performance tracking (snapshots over time for published pipeline content)
+    CREATE TABLE IF NOT EXISTS content_performance (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      site_id INTEGER,
+      pipeline_run_id INTEGER NOT NULL,
+      content_id INTEGER,
+      keyword TEXT,
+      article_url TEXT,
+      position INTEGER,
+      previous_position INTEGER,
+      clicks INTEGER DEFAULT 0,
+      impressions INTEGER DEFAULT 0,
+      ctr REAL DEFAULT 0,
+      days_since_publish INTEGER DEFAULT 0,
+      status TEXT DEFAULT 'indexing', -- 'not_indexed', 'indexing', 'ranking', 'page_1', 'top_3', 'stalled', 'declining'
+      checked_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (site_id) REFERENCES sites(id),
+      FOREIGN KEY (pipeline_run_id) REFERENCES pipeline_runs(id)
+    );
+
     -- Cron job run log
     CREATE TABLE IF NOT EXISTS job_runs (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -187,6 +207,8 @@ function migrate(database) {
     CREATE INDEX IF NOT EXISTS idx_content_site_type ON content(site_id, type);
     CREATE INDEX IF NOT EXISTS idx_link_suggestions_site ON link_suggestions(site_id);
     CREATE INDEX IF NOT EXISTS idx_pipeline_runs_site ON pipeline_runs(site_id);
+    CREATE INDEX IF NOT EXISTS idx_content_performance_site ON content_performance(site_id);
+    CREATE INDEX IF NOT EXISTS idx_content_performance_run ON content_performance(pipeline_run_id);
   `);
 }
 
@@ -194,6 +216,7 @@ function reset() {
   const d = getDb();
   d.exec(`
     DROP TABLE IF EXISTS job_runs;
+    DROP TABLE IF EXISTS content_performance;
     DROP TABLE IF EXISTS pipeline_runs;
     DROP TABLE IF EXISTS brand_voice;
     DROP TABLE IF EXISTS geo_optimizations;
