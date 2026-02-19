@@ -4,23 +4,60 @@ const config = require('../config');
 class ShopifyService {
   constructor() {
     this.baseUrl = null;
-    this.headers = null;
+    this._accessToken = null;
+    this._tokenExpiresAt = null;
+    this._useClientCredentials = false;
     this._init();
   }
 
   _init() {
-    if (config.shopify.storeDomain && config.shopify.accessToken) {
-      const domain = config.shopify.storeDomain.replace(/\/$/, '');
-      this.baseUrl = `https://${domain}/admin/api/2024-01`;
-      this.headers = {
-        'X-Shopify-Access-Token': config.shopify.accessToken,
-        'Content-Type': 'application/json',
-      };
+    const { storeDomain, accessToken, clientId, clientSecret } = config.shopify;
+    if (!storeDomain) return;
+
+    const domain = storeDomain.replace(/\/$/, '');
+    this.baseUrl = `https://${domain}/admin/api/2024-01`;
+    this._domain = domain;
+
+    if (clientId && clientSecret) {
+      // New Dev Dashboard flow: client credentials grant (tokens expire every 24h)
+      this._useClientCredentials = true;
+      this._clientId = clientId;
+      this._clientSecret = clientSecret;
+    } else if (accessToken) {
+      // Legacy static token (shpat_)
+      this._accessToken = accessToken;
     }
   }
 
   isConfigured() {
-    return !!(this.baseUrl && this.headers);
+    if (!this.baseUrl) return false;
+    return !!(this._accessToken || this._useClientCredentials);
+  }
+
+  async _ensureToken() {
+    if (!this._useClientCredentials) return;
+
+    // Refresh if no token or within 5 minutes of expiry
+    const bufferMs = 5 * 60 * 1000;
+    if (this._accessToken && this._tokenExpiresAt && Date.now() < this._tokenExpiresAt - bufferMs) {
+      return;
+    }
+
+    const tokenUrl = `https://${this._domain}/admin/oauth/access_token`;
+    const res = await axios.post(tokenUrl, new URLSearchParams({
+      client_id: this._clientId,
+      client_secret: this._clientSecret,
+      grant_type: 'client_credentials',
+    }).toString(), {
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      timeout: 15000,
+    });
+
+    this._accessToken = res.data.access_token;
+    // Shopify client credentials tokens last 24h; set expiry with margin
+    const expiresIn = res.data.expires_in || 86400;
+    this._tokenExpiresAt = Date.now() + expiresIn * 1000;
+    console.log('[Shopify] Access token refreshed, expires in', expiresIn, 'seconds');
   }
 
   // ==================== Products ====================
@@ -244,13 +281,19 @@ class ShopifyService {
 
   async _request(method, url, data = null) {
     if (!this.isConfigured()) {
-      throw new Error('Shopify is not configured. Set SHOPIFY_STORE_DOMAIN and SHOPIFY_ACCESS_TOKEN.');
+      throw new Error('Shopify is not configured. Set SHOPIFY_STORE_DOMAIN and either SHOPIFY_ACCESS_TOKEN or SHOPIFY_CLIENT_ID + SHOPIFY_CLIENT_SECRET.');
     }
+
+    // Ensure we have a valid token (refreshes if using client credentials and expired)
+    await this._ensureToken();
 
     const options = {
       method,
       url,
-      headers: this.headers,
+      headers: {
+        'X-Shopify-Access-Token': this._accessToken,
+        'Content-Type': 'application/json',
+      },
       timeout: 15000,
     };
 

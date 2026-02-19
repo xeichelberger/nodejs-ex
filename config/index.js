@@ -15,6 +15,8 @@ const config = {
   shopify: {
     storeDomain: process.env.SHOPIFY_STORE_DOMAIN || '',
     accessToken: process.env.SHOPIFY_ACCESS_TOKEN || '',
+    clientId: process.env.SHOPIFY_CLIENT_ID || '',
+    clientSecret: process.env.SHOPIFY_CLIENT_SECRET || '',
   },
 
   google: {

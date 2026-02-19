@@ -40,7 +40,7 @@ class PublishPipeline {
       throw new Error('keyword and topic are required');
     }
     if (publish && !shopify.isConfigured()) {
-      throw new Error('Shopify is not configured. Set SHOPIFY_STORE_DOMAIN and SHOPIFY_ACCESS_TOKEN.');
+      throw new Error('Shopify is not configured. Set SHOPIFY_STORE_DOMAIN and either SHOPIFY_ACCESS_TOKEN or SHOPIFY_CLIENT_ID + SHOPIFY_CLIENT_SECRET.');
     }
     if (!contentGenerator.isConfigured()) {
       throw new Error('Anthropic API not configured. Set ANTHROPIC_API_KEY.');
