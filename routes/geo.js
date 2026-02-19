@@ -28,7 +28,7 @@ router.post('/audit', async (req, res, next) => {
 // Generate GEO-optimized content
 router.post('/content', async (req, res, next) => {
   try {
-    const { brand_name, topic, keyword, content_type, niche } = req.body;
+    const { brand_name, topic, keyword, content_type, niche, site_id } = req.body;
 
     if (!brand_name || !topic) {
       return res.status(400).json({ error: 'brand_name and topic are required' });
@@ -40,6 +40,7 @@ router.post('/content', async (req, res, next) => {
       keyword: keyword || topic,
       contentType: content_type,
       niche: niche || '',
+      siteId: site_id,
     });
 
     res.json({ content: result });

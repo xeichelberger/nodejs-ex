@@ -1,6 +1,7 @@
 const Anthropic = require('@anthropic-ai/sdk');
 const config = require('../config');
 const { getDb } = require('../database');
+const brandVoiceService = require('./brand-voice');
 
 // ============================================================
 // TONE SYSTEM — baked into every content generation call.
@@ -53,22 +54,56 @@ class ContentGenerator {
   }
 
   /**
+   * Resolve voice instructions for a given site.
+   * If a brand voice document is stored for the site, use that.
+   * Otherwise fall back to the generic TONE_INSTRUCTIONS.
+   */
+  _resolveVoice(siteId, manualBrandVoice) {
+    // Manual brandVoice param takes top priority (backward compat)
+    if (manualBrandVoice) {
+      return `BRAND VOICE GUIDE (follow this precisely):\n${manualBrandVoice}\n\n${TONE_INSTRUCTIONS}`;
+    }
+
+    // Auto-load from database if site_id provided
+    if (siteId) {
+      const storedVoice = brandVoiceService.getVoiceForPrompt(siteId);
+      if (storedVoice) {
+        return `BRAND VOICE GUIDE (follow this precisely — this overrides any generic tone rules):\n${storedVoice}`;
+      }
+    }
+
+    // Fallback to generic
+    return TONE_INSTRUCTIONS;
+  }
+
+  /**
+   * Resolve brand name — check stored voice, then fall back to param.
+   */
+  _resolveBrandName(siteId, manualBrandName) {
+    if (manualBrandName) return manualBrandName;
+    if (siteId) return brandVoiceService.getBrandName(siteId) || 'the brand';
+    return 'the brand';
+  }
+
+  /**
    * Generate an SEO-optimized blog post
    */
-  async generateBlogPost({ keyword, topic, brandName, tone = 'professional but conversational', wordCount = 1500, additionalContext = '', brandVoice = '' }) {
+  async generateBlogPost({ keyword, topic, brandName, tone = 'professional but conversational', wordCount = 1500, additionalContext = '', brandVoice = '', siteId }) {
     this._ensureConfigured();
+
+    const resolvedVoice = this._resolveVoice(siteId, brandVoice);
+    const resolvedBrand = this._resolveBrandName(siteId, brandName);
 
     const prompt = `Write an SEO-optimized blog post for an ecommerce brand.
 
-BRAND: ${brandName || 'the brand'}
+BRAND: ${resolvedBrand}
 PRIMARY KEYWORD: ${keyword}
 TOPIC: ${topic}
 TONE: ${tone}
 TARGET WORD COUNT: ${wordCount}
-${brandVoice ? `BRAND VOICE NOTES: ${brandVoice}` : ''}
 ${additionalContext ? `ADDITIONAL CONTEXT: ${additionalContext}` : ''}
 
-${TONE_INSTRUCTIONS}
+${resolvedVoice}
 
 SEO Requirements:
 1. Create an engaging H1 title that naturally includes the primary keyword
@@ -131,19 +166,21 @@ Return as JSON:
   /**
    * Generate SEO-optimized product descriptions
    */
-  async generateProductDescription({ productName, currentDescription, features, keyword, brandName, brandVoice = '' }) {
+  async generateProductDescription({ productName, currentDescription, features, keyword, brandName, brandVoice = '', siteId }) {
     this._ensureConfigured();
+
+    const resolvedVoice = this._resolveVoice(siteId, brandVoice);
+    const resolvedBrand = this._resolveBrandName(siteId, brandName);
 
     const prompt = `Write an SEO-optimized product description for an ecommerce store.
 
 PRODUCT: ${productName}
-BRAND: ${brandName || 'the brand'}
+BRAND: ${resolvedBrand}
 TARGET KEYWORD: ${keyword || productName}
 CURRENT DESCRIPTION: ${(currentDescription || 'None').substring(0, 500)}
 KEY FEATURES: ${features ? features.join(', ') : 'Not specified'}
-${brandVoice ? `BRAND VOICE NOTES: ${brandVoice}` : ''}
 
-${TONE_INSTRUCTIONS}
+${resolvedVoice}
 
 Product Copy Requirements:
 1. Write a compelling product description (200-400 words)
@@ -279,17 +316,17 @@ Return as JSON:
    * Humanize / rewrite existing content to remove AI tells.
    * Use this as a second pass on any content — generated or existing.
    */
-  async humanizeContent({ content, brandVoice = '', preserveHtml = true }) {
+  async humanizeContent({ content, brandVoice = '', preserveHtml = true, siteId }) {
     this._ensureConfigured();
+
+    const resolvedVoice = this._resolveVoice(siteId, brandVoice);
 
     const prompt = `Rewrite this content to sound completely human-written. This is a readability and voice pass, NOT a content rewrite — keep all the same information, structure, and HTML headings.
 
 CONTENT TO HUMANIZE:
 ${content.substring(0, 8000)}
 
-${brandVoice ? `BRAND VOICE NOTES: ${brandVoice}` : ''}
-
-${TONE_INSTRUCTIONS}
+${resolvedVoice}
 
 Additional rewrite rules:
 - Replace any em dashes (—) with commas or periods
@@ -313,19 +350,21 @@ Return as JSON:
    * Write an article from a competitor content brief (the "beat the competitor" workflow).
    * Takes a content brief (from competitor-analyzer) and writes a full article.
    */
-  async writeFromBrief({ brief, brandName, brandVoice = '', targetKeyword }) {
+  async writeFromBrief({ brief, brandName, brandVoice = '', targetKeyword, siteId }) {
     this._ensureConfigured();
+
+    const resolvedVoice = this._resolveVoice(siteId, brandVoice);
+    const resolvedBrand = this._resolveBrandName(siteId, brandName);
 
     const prompt = `Write a full article based on this content brief. The goal is to create content that outperforms a competitor's article on the same topic.
 
-BRAND: ${brandName || 'the brand'}
+BRAND: ${resolvedBrand}
 TARGET KEYWORD: ${targetKeyword || ''}
-${brandVoice ? `BRAND VOICE: ${brandVoice}` : ''}
 
 CONTENT BRIEF:
 ${typeof brief === 'string' ? brief : JSON.stringify(brief, null, 2)}
 
-${TONE_INSTRUCTIONS}
+${resolvedVoice}
 
 Article requirements:
 1. Use the H1 and H2 outline from the brief exactly — don't skip or merge sections

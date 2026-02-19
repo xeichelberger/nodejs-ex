@@ -3,6 +3,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const config = require('../config');
 const { getDb } = require('../database');
+const brandVoiceService = require('./brand-voice');
 
 /**
  * GEO (Generative Engine Optimization) module
@@ -78,8 +79,18 @@ class GEOOptimizer {
    * Generate GEO-optimized content for a specific topic
    * This creates content specifically designed to be cited by AI search engines
    */
-  async generateGEOContent({ brandName, topic, keyword, contentType = 'authority_article', niche = '' }) {
+  async generateGEOContent({ brandName, topic, keyword, contentType = 'authority_article', niche = '', siteId }) {
     this._ensureConfigured();
+
+    // Auto-load brand voice if site has one configured
+    let voiceBlock = '';
+    if (siteId) {
+      const storedVoice = brandVoiceService.getVoiceForPrompt(siteId);
+      if (storedVoice) {
+        voiceBlock = `\nBRAND VOICE GUIDE (follow this for tone and style):\n${storedVoice}\n`;
+      }
+      if (!brandName) brandName = brandVoiceService.getBrandName(siteId) || brandName;
+    }
 
     const prompt = `Create GEO (Generative Engine Optimization) content for a brand to maximize chances of being cited by AI search engines like ChatGPT, Perplexity, and Google AI Overviews.
 
@@ -88,7 +99,7 @@ TOPIC: ${topic}
 PRIMARY KEYWORD: ${keyword}
 CONTENT TYPE: ${contentType}
 NICHE: ${niche}
-
+${voiceBlock}
 GEO-Specific Requirements:
 1. STRUCTURED DATA: Use clear, well-organized sections with descriptive headings that AI can easily parse
 2. DEFINITIVE STATEMENTS: Include clear, quotable statements that AI can extract as answers

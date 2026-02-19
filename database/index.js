@@ -140,6 +140,18 @@ function migrate(database) {
       FOREIGN KEY (site_id) REFERENCES sites(id)
     );
 
+    -- Brand voice configuration per site (auto-applied to all content generation)
+    CREATE TABLE IF NOT EXISTS brand_voice (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      site_id INTEGER NOT NULL UNIQUE,
+      voice_document TEXT NOT NULL,
+      brand_name TEXT,
+      summary TEXT,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (site_id) REFERENCES sites(id)
+    );
+
     -- Cron job run log
     CREATE TABLE IF NOT EXISTS job_runs (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -164,6 +176,7 @@ function reset() {
   const d = getDb();
   d.exec(`
     DROP TABLE IF EXISTS job_runs;
+    DROP TABLE IF EXISTS brand_voice;
     DROP TABLE IF EXISTS geo_optimizations;
     DROP TABLE IF EXISTS gsc_data;
     DROP TABLE IF EXISTS link_suggestions;

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { getDb } = require('../database');
+const brandVoice = require('../services/brand-voice');
 
 // List all tracked sites
 router.get('/', (req, res) => {
@@ -44,6 +45,45 @@ router.delete('/:id', (req, res) => {
   const db = getDb();
   db.prepare('DELETE FROM sites WHERE id = ?').run(req.params.id);
   res.json({ deleted: true });
+});
+
+// ==================== Brand Voice ====================
+
+// Get brand voice for a site
+router.get('/:id/voice', (req, res) => {
+  const voice = brandVoice.get(parseInt(req.params.id, 10));
+  if (!voice) return res.json({ voice: null, message: 'No brand voice configured for this site. Content will use generic professional tone.' });
+  res.json({ voice });
+});
+
+// Set or update brand voice for a site
+router.put('/:id/voice', (req, res) => {
+  const { voice_document, brand_name, summary } = req.body;
+
+  if (!voice_document) {
+    return res.status(400).json({ error: 'voice_document is required. Paste your full brand voice guide.' });
+  }
+
+  const db = getDb();
+  const site = db.prepare('SELECT * FROM sites WHERE id = ?').get(req.params.id);
+  if (!site) return res.status(404).json({ error: 'Site not found' });
+
+  const voice = brandVoice.set(parseInt(req.params.id, 10), {
+    voiceDocument: voice_document,
+    brandName: brand_name,
+    summary,
+  });
+
+  res.json({
+    voice,
+    message: 'Brand voice saved. All content generation for this site will now automatically use this voice.',
+  });
+});
+
+// Delete brand voice for a site
+router.delete('/:id/voice', (req, res) => {
+  brandVoice.delete(parseInt(req.params.id, 10));
+  res.json({ deleted: true, message: 'Brand voice removed. Content will use generic professional tone.' });
 });
 
 module.exports = router;

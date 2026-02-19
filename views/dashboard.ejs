@@ -110,9 +110,11 @@
       <h2 class="section-title">API Reference</h2>
       <p style="color: #94a3b8; margin-bottom: 16px;">All endpoints require <code style="color: #38bdf8;">X-API-Key</code> header (if API_KEY is set in .env)</p>
 
-      <h3 style="color: #94a3b8; margin: 20px 0 10px;">Sites</h3>
+      <h3 style="color: #94a3b8; margin: 20px 0 10px;">Sites & Brand Voice</h3>
       <div class="api-ref"><span class="method method-get">GET</span><code>/api/sites</code><div class="desc">List all tracked sites</div></div>
       <div class="api-ref"><span class="method method-post">POST</span><code>/api/sites</code><div class="desc">Add a site: { "url": "https://...", "name": "My Store" }</div></div>
+      <div class="api-ref"><span class="method method-get">GET</span><code>/api/sites/:id/voice</code><div class="desc">Get brand voice for a site</div></div>
+      <div class="api-ref"><span class="method method-put">PUT</span><code>/api/sites/:id/voice</code><div class="desc">Set brand voice: { "voice_document": "full guide...", "brand_name": "..." } — auto-applied to all content</div></div>
 
       <h3 style="color: #94a3b8; margin: 20px 0 10px;">SEO Analysis</h3>
       <div class="api-ref"><span class="method method-post">POST</span><code>/api/analysis/page</code><div class="desc">Analyze a single page: { "url": "https://...", "site_id": 1 }</div></div>
@@ -120,8 +122,8 @@
       <div class="api-ref"><span class="method method-get">GET</span><code>/api/analysis/summary/:site_id</code><div class="desc">Get audit summary for a site</div></div>
       <div class="api-ref"><span class="method method-post">POST</span><code>/api/analysis/sitemap</code><div class="desc">Parse a sitemap: { "url": "https://.../sitemap.xml" }</div></div>
 
-      <h3 style="color: #94a3b8; margin: 20px 0 10px;">Content Generation (Claude AI) — human tone baked in</h3>
-      <div class="api-ref"><span class="method method-post">POST</span><code>/api/content/blog-post</code><div class="desc">Generate blog post: { "keyword": "...", "topic": "...", "brand_name": "...", "brand_voice": "..." }</div></div>
+      <h3 style="color: #94a3b8; margin: 20px 0 10px;">Content Generation (Claude AI) — pass site_id to auto-apply brand voice</h3>
+      <div class="api-ref"><span class="method method-post">POST</span><code>/api/content/blog-post</code><div class="desc">Generate blog post: { "keyword": "...", "topic": "...", "site_id": 1 } — auto-loads brand voice</div></div>
       <div class="api-ref"><span class="method method-post">POST</span><code>/api/content/meta-description</code><div class="desc">Generate meta descriptions: { "page_title": "...", "keyword": "..." }</div></div>
       <div class="api-ref"><span class="method method-post">POST</span><code>/api/content/product-description</code><div class="desc">Generate product description: { "product_name": "...", "keyword": "...", "brand_voice": "..." }</div></div>
       <div class="api-ref"><span class="method method-post">POST</span><code>/api/content/suggest-improvements</code><div class="desc">Get SEO improvement suggestions for a page</div></div>

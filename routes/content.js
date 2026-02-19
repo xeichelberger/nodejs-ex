@@ -19,6 +19,7 @@ router.post('/blog-post', async (req, res, next) => {
       tone,
       wordCount: word_count,
       additionalContext: additional_context,
+      siteId: site_id,
     });
 
     // Save to database if site_id provided
@@ -73,6 +74,7 @@ router.post('/product-description', async (req, res, next) => {
       features,
       keyword,
       brandName: brand_name,
+      siteId: site_id,
     });
 
     if (site_id) {
@@ -164,7 +166,7 @@ router.post('/calendar', async (req, res, next) => {
 // Humanize content (remove AI tells, improve readability)
 router.post('/humanize', async (req, res, next) => {
   try {
-    const { content, brand_voice, preserve_html } = req.body;
+    const { content, brand_voice, preserve_html, site_id } = req.body;
 
     if (!content) {
       return res.status(400).json({ error: 'content is required' });
@@ -174,6 +176,7 @@ router.post('/humanize', async (req, res, next) => {
       content,
       brandVoice: brand_voice,
       preserveHtml: preserve_html !== false,
+      siteId: site_id,
     });
 
     res.json({ result });
@@ -196,6 +199,7 @@ router.post('/write-from-brief', async (req, res, next) => {
       brandName: brand_name,
       brandVoice: brand_voice,
       targetKeyword: target_keyword,
+      siteId: site_id,
     });
 
     if (site_id) {

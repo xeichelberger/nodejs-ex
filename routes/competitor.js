@@ -87,12 +87,13 @@ router.post('/outperform', async (req, res, next) => {
       return res.status(400).json({ error: briefResult.error });
     }
 
-    // Step 2: Write article from brief
+    // Step 2: Write article from brief (auto-loads brand voice from site_id)
     const article = await contentGenerator.writeFromBrief({
       brief: briefResult.brief,
       brandName: brand_name,
       brandVoice: brand_voice,
       targetKeyword: target_keyword,
+      siteId: site_id,
     });
 
     // Step 3: Save to database if site_id provided
