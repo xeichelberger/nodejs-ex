@@ -101,4 +101,30 @@ router.get('/sitemaps', async (req, res, next) => {
   }
 });
 
+// Submit URL for indexing (after publishing new content)
+router.post('/submit-url', async (req, res, next) => {
+  try {
+    const { url } = req.body;
+    if (!url) return res.status(400).json({ error: 'url is required' });
+
+    const result = await gsc.submitUrlForIndexing(url);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Get index status for a URL
+router.post('/index-status', async (req, res, next) => {
+  try {
+    const { url } = req.body;
+    if (!url) return res.status(400).json({ error: 'url is required' });
+
+    const result = await gsc.getIndexStatus(url);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;

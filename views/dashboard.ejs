@@ -120,12 +120,34 @@
       <div class="api-ref"><span class="method method-get">GET</span><code>/api/analysis/summary/:site_id</code><div class="desc">Get audit summary for a site</div></div>
       <div class="api-ref"><span class="method method-post">POST</span><code>/api/analysis/sitemap</code><div class="desc">Parse a sitemap: { "url": "https://.../sitemap.xml" }</div></div>
 
-      <h3 style="color: #94a3b8; margin: 20px 0 10px;">Content Generation (Claude AI)</h3>
-      <div class="api-ref"><span class="method method-post">POST</span><code>/api/content/blog-post</code><div class="desc">Generate blog post: { "keyword": "...", "topic": "...", "brand_name": "..." }</div></div>
+      <h3 style="color: #94a3b8; margin: 20px 0 10px;">Content Generation (Claude AI) — human tone baked in</h3>
+      <div class="api-ref"><span class="method method-post">POST</span><code>/api/content/blog-post</code><div class="desc">Generate blog post: { "keyword": "...", "topic": "...", "brand_name": "...", "brand_voice": "..." }</div></div>
       <div class="api-ref"><span class="method method-post">POST</span><code>/api/content/meta-description</code><div class="desc">Generate meta descriptions: { "page_title": "...", "keyword": "..." }</div></div>
-      <div class="api-ref"><span class="method method-post">POST</span><code>/api/content/product-description</code><div class="desc">Generate product description: { "product_name": "...", "keyword": "..." }</div></div>
+      <div class="api-ref"><span class="method method-post">POST</span><code>/api/content/product-description</code><div class="desc">Generate product description: { "product_name": "...", "keyword": "...", "brand_voice": "..." }</div></div>
       <div class="api-ref"><span class="method method-post">POST</span><code>/api/content/suggest-improvements</code><div class="desc">Get SEO improvement suggestions for a page</div></div>
       <div class="api-ref"><span class="method method-post">POST</span><code>/api/content/calendar</code><div class="desc">Generate content calendar: { "brand_name": "...", "niche": "..." }</div></div>
+      <div class="api-ref"><span class="method method-post">POST</span><code>/api/content/humanize</code><div class="desc">Remove AI tells from any content: { "content": "...", "brand_voice": "..." }</div></div>
+      <div class="api-ref"><span class="method method-post">POST</span><code>/api/content/write-from-brief</code><div class="desc">Write article from competitor brief: { "brief": {...}, "brand_name": "..." }</div></div>
+
+      <h3 style="color: #94a3b8; margin: 20px 0 10px;">Competitor Analysis</h3>
+      <div class="api-ref"><span class="method method-post">POST</span><code>/api/competitor/crawl</code><div class="desc">Crawl competitor site (Screaming Frog-style): { "url": "...", "max_pages": 200 }</div></div>
+      <div class="api-ref"><span class="method method-post">POST</span><code>/api/competitor/top-pages</code><div class="desc">Find competitor's most linked-to pages: { "url": "...", "blog_only": true }</div></div>
+      <div class="api-ref"><span class="method method-post">POST</span><code>/api/competitor/analyze-page</code><div class="desc">Deep-analyze a competitor page: { "url": "..." }</div></div>
+      <div class="api-ref"><span class="method method-post">POST</span><code>/api/competitor/brief</code><div class="desc">Generate content brief to outperform competitor: { "url": "...", "brand_name": "..." }</div></div>
+      <div class="api-ref"><span class="method method-post">POST</span><code>/api/competitor/outperform</code><div class="desc">Full workflow: analyze + brief + write article: { "url": "...", "brand_name": "..." }</div></div>
+      <div class="api-ref"><span class="method method-post">POST</span><code>/api/competitor/compare</code><div class="desc">Compare content coverage vs competitor: { "your_url": "...", "competitor_url": "..." }</div></div>
+
+      <h3 style="color: #94a3b8; margin: 20px 0 10px;">Schema Markup Generation</h3>
+      <div class="api-ref"><span class="method method-post">POST</span><code>/api/schema/recommend</code><div class="desc">Scan page and recommend schemas to add: { "url": "..." }</div></div>
+      <div class="api-ref"><span class="method method-post">POST</span><code>/api/schema/product</code><div class="desc">Generate Product JSON-LD: { "name": "...", "price": 29.99, "rating": 4.5 }</div></div>
+      <div class="api-ref"><span class="method method-post">POST</span><code>/api/schema/faq</code><div class="desc">Generate FAQPage JSON-LD: { "faqs": [{"question": "...", "answer": "..."}] }</div></div>
+      <div class="api-ref"><span class="method method-post">POST</span><code>/api/schema/article</code><div class="desc">Generate Article JSON-LD: { "title": "...", "author_name": "..." }</div></div>
+      <div class="api-ref"><span class="method method-post">POST</span><code>/api/schema/organization</code><div class="desc">Generate Organization JSON-LD: { "name": "...", "url": "..." }</div></div>
+
+      <h3 style="color: #94a3b8; margin: 20px 0 10px;">Reviews & UGC SEO</h3>
+      <div class="api-ref"><span class="method method-get">GET</span><code>/api/reviews/audit</code><div class="desc">Audit review SEO across all Shopify products</div></div>
+      <div class="api-ref"><span class="method method-post">POST</span><code>/api/reviews/schema</code><div class="desc">Generate Product schema with star ratings for SERPs</div></div>
+      <div class="api-ref"><span class="method method-post">POST</span><code>/api/reviews/strategy</code><div class="desc">Get review collection strategy for SEO</div></div>
 
       <h3 style="color: #94a3b8; margin: 20px 0 10px;">GEO Optimization</h3>
       <div class="api-ref"><span class="method method-post">POST</span><code>/api/geo/audit</code><div class="desc">GEO brand audit: { "brand_name": "...", "site_url": "..." }</div></div>
@@ -149,6 +171,8 @@
       <div class="api-ref"><span class="method method-get">GET</span><code>/api/gsc/low-ctr</code><div class="desc">Pages with high impressions but low CTR</div></div>
       <div class="api-ref"><span class="method method-get">GET</span><code>/api/gsc/striking-distance</code><div class="desc">Keywords close to page 1 (positions 8-20)</div></div>
       <div class="api-ref"><span class="method method-post">POST</span><code>/api/gsc/sync</code><div class="desc">Sync GSC data: { "site_id": 1 }</div></div>
+      <div class="api-ref"><span class="method method-post">POST</span><code>/api/gsc/submit-url</code><div class="desc">Submit URL for indexing: { "url": "https://..." }</div></div>
+      <div class="api-ref"><span class="method method-post">POST</span><code>/api/gsc/index-status</code><div class="desc">Check index status of a URL: { "url": "https://..." }</div></div>
 
       <h3 style="color: #94a3b8; margin: 20px 0 10px;">Shopify</h3>
       <div class="api-ref"><span class="method method-get">GET</span><code>/api/shopify/products/audit</code><div class="desc">Audit all product SEO</div></div>

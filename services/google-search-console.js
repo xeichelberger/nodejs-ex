@@ -202,6 +202,35 @@ class GoogleSearchConsole {
   }
 
   /**
+   * Submit a URL for indexing via the Indexing API.
+   * Useful after publishing new content — tells Google to crawl it now.
+   * Note: Requires the Indexing API enabled in Google Cloud Console
+   * and the service account to have owner permissions on the property.
+   */
+  async submitUrlForIndexing(pageUrl) {
+    this._ensureConfigured();
+
+    try {
+      const indexing = google.indexing({ version: 'v3', auth: this.auth });
+      const response = await indexing.urlNotifications.publish({
+        requestBody: {
+          url: pageUrl,
+          type: 'URL_UPDATED',
+        },
+      });
+      return { submitted: true, url: pageUrl, response: response.data };
+    } catch (err) {
+      // Indexing API may not be enabled — fall back to inspection API
+      return {
+        submitted: false,
+        url: pageUrl,
+        error: err.message,
+        fallback_tip: 'If the Indexing API is not enabled, you can submit via GSC UI or use the URL Inspection approach.',
+      };
+    }
+  }
+
+  /**
    * Get list of sitemaps submitted
    */
   async getSitemaps(siteUrl = config.google.siteUrl) {

@@ -61,6 +61,15 @@ app.use('/api/gsc', require('./routes/gsc-routes'));
 // Shopify
 app.use('/api/shopify', require('./routes/shopify-routes'));
 
+// Competitor analysis
+app.use('/api/competitor', require('./routes/competitor'));
+
+// Schema markup generation
+app.use('/api/schema', require('./routes/schema'));
+
+// Reviews & UGC SEO
+app.use('/api/reviews', require('./routes/reviews'));
+
 // ==================== Health check ====================
 
 app.get('/health', (req, res) => {

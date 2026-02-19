@@ -161,6 +161,57 @@ router.post('/calendar', async (req, res, next) => {
   }
 });
 
+// Humanize content (remove AI tells, improve readability)
+router.post('/humanize', async (req, res, next) => {
+  try {
+    const { content, brand_voice, preserve_html } = req.body;
+
+    if (!content) {
+      return res.status(400).json({ error: 'content is required' });
+    }
+
+    const result = await contentGenerator.humanizeContent({
+      content,
+      brandVoice: brand_voice,
+      preserveHtml: preserve_html !== false,
+    });
+
+    res.json({ result });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Write an article from a content brief (used with competitor analysis)
+router.post('/write-from-brief', async (req, res, next) => {
+  try {
+    const { brief, brand_name, brand_voice, target_keyword, site_id } = req.body;
+
+    if (!brief) {
+      return res.status(400).json({ error: 'brief is required' });
+    }
+
+    const result = await contentGenerator.writeFromBrief({
+      brief,
+      brandName: brand_name,
+      brandVoice: brand_voice,
+      targetKeyword: target_keyword,
+    });
+
+    if (site_id) {
+      const contentId = contentGenerator.saveContent(site_id, 'brief_article', result, {
+        targetKeyword: target_keyword,
+        title: result.title,
+      });
+      result.content_id = contentId;
+    }
+
+    res.json({ article: result });
+  } catch (err) {
+    next(err);
+  }
+});
+
 // List saved content
 router.get('/:site_id', (req, res) => {
   const db = getDb();
