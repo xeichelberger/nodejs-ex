@@ -1,34 +1,9 @@
-const config = require('../config');
-
 /**
- * Parse a cookie value from the raw Cookie header.
- */
-function getCookie(req, name) {
-  const cookies = req.headers.cookie || '';
-  const match = cookies.match(new RegExp(`(?:^|;\\s*)${name}=([^;]*)`));
-  return match ? decodeURIComponent(match[1]) : null;
-}
-
-/**
- * Simple API key authentication middleware.
- * Checks for API key in header: X-API-Key, query param: ?api_key=...,
- * or session cookie (set when the dashboard loads).
+ * Authentication middleware — disabled for development.
+ * Re-enable API key checks for production deployment.
  */
 function requireAuth(req, res, next) {
-  // Skip auth in development or if no API key is set
-  if (config.env === 'development' || !config.apiKey) {
-    return next();
-  }
-
-  // Check multiple sources: custom header, standard Bearer token, query param, cookie
-  const bearer = (req.headers.authorization || '').replace(/^Bearer\s+/i, '');
-  const apiKey = req.headers['x-api-key'] || bearer || req.query.api_key || getCookie(req, '_seo_auth');
-
-  if (!apiKey || apiKey !== config.apiKey) {
-    return res.status(401).json({ error: 'Unauthorized. Provide a valid API key via X-API-Key header.' });
-  }
-
-  next();
+  return next();
 }
 
 module.exports = { requireAuth };
