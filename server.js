@@ -29,6 +29,16 @@ app.set('views', path.join(__dirname, 'views'));
 // ==================== Dashboard ====================
 
 app.get('/', (req, res) => {
+  // Set auth cookie so API calls work through Shopify CLI proxy
+  // (proxies may strip custom X-API-Key headers but always forward cookies)
+  if (config.apiKey) {
+    res.cookie('_seo_auth', config.apiKey, {
+      httpOnly: true,
+      sameSite: 'none',
+      secure: true,
+      maxAge: 24 * 60 * 60 * 1000,
+    });
+  }
   res.render('dashboard', { apiKey: config.apiKey || '' });
 });
 
