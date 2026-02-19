@@ -26,19 +26,20 @@ app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+// Static files
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Prevent caching on all responses (avoids stale auth errors in browser)
+app.use((req, res, next) => {
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+  res.set('Pragma', 'no-cache');
+  res.set('Expires', '0');
+  next();
+});
+
 // ==================== Dashboard ====================
 
 app.get('/', (req, res) => {
-  // Set auth cookie so API calls work through Shopify CLI proxy
-  // (proxies may strip custom X-API-Key headers but always forward cookies)
-  if (config.apiKey) {
-    res.cookie('_seo_auth', config.apiKey, {
-      httpOnly: true,
-      sameSite: 'none',
-      secure: true,
-      maxAge: 24 * 60 * 60 * 1000,
-    });
-  }
   res.render('dashboard', { apiKey: config.apiKey || '' });
 });
 
