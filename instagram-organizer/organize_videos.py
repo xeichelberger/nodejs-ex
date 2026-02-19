@@ -18,7 +18,7 @@ import shutil
 import base64
 import subprocess
 import tempfile
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -230,7 +230,7 @@ def scan_photos():
     print("(macOS may ask for Photos access permission — click Allow)\n")
 
     photosdb = osxphotos.PhotosDB()
-    cutoff = datetime.now() - timedelta(days=MONTHS_TO_SCAN * 30)
+    cutoff = datetime.now(timezone.utc) - timedelta(days=MONTHS_TO_SCAN * 30)
 
     all_photos = photosdb.photos()
     videos = [p for p in all_photos if p.ismovie and p.date >= cutoff]
