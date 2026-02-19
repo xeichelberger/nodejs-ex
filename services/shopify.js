@@ -18,14 +18,14 @@ class ShopifyService {
     this.baseUrl = `https://${domain}/admin/api/2024-01`;
     this._domain = domain;
 
-    if (clientId && clientSecret) {
-      // New Dev Dashboard flow: client credentials grant (tokens expire every 24h)
+    if (accessToken) {
+      // Preferred: static Admin API token (shpat_…)
+      this._accessToken = accessToken;
+    } else if (clientId && clientSecret) {
+      // Fallback: client credentials grant (requires specific store/plan support)
       this._useClientCredentials = true;
       this._clientId = clientId;
       this._clientSecret = clientSecret;
-    } else if (accessToken) {
-      // Legacy static token (shpat_)
-      this._accessToken = accessToken;
     }
   }
 
