@@ -230,10 +230,13 @@ def scan_photos():
     print("(macOS may ask for Photos access permission — click Allow)\n")
 
     photosdb = osxphotos.PhotosDB()
-    cutoff = datetime.now(timezone.utc) - timedelta(days=MONTHS_TO_SCAN * 30)
+    cutoff = datetime.now() - timedelta(days=MONTHS_TO_SCAN * 30)
 
     all_photos = photosdb.photos()
-    videos = [p for p in all_photos if p.ismovie and p.date >= cutoff]
+    videos = [
+        p for p in all_photos
+        if p.ismovie and p.date.replace(tzinfo=None) >= cutoff
+    ]
     print(f"  Found {len(videos)} total videos in the last {MONTHS_TO_SCAN} months")
 
     # Separate into high-confidence Instagram and possible Instagram
