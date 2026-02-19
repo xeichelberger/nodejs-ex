@@ -15,8 +15,8 @@ function getCookie(req, name) {
  * or session cookie (set when the dashboard loads).
  */
 function requireAuth(req, res, next) {
-  // Skip auth in development if no API key is set
-  if (!config.apiKey) {
+  // Skip auth in development or if no API key is set
+  if (config.env === 'development' || !config.apiKey) {
     return next();
   }
 
