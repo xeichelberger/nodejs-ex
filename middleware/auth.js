@@ -20,7 +20,9 @@ function requireAuth(req, res, next) {
     return next();
   }
 
-  const apiKey = req.headers['x-api-key'] || req.query.api_key || getCookie(req, '_seo_auth');
+  // Check multiple sources: custom header, standard Bearer token, query param, cookie
+  const bearer = (req.headers.authorization || '').replace(/^Bearer\s+/i, '');
+  const apiKey = req.headers['x-api-key'] || bearer || req.query.api_key || getCookie(req, '_seo_auth');
 
   if (!apiKey || apiKey !== config.apiKey) {
     return res.status(401).json({ error: 'Unauthorized. Provide a valid API key via X-API-Key header.' });

@@ -191,7 +191,10 @@
 
     function apiHeaders() {
       const headers = { 'Content-Type': 'application/json' };
-      if (API_KEY) headers['X-API-Key'] = API_KEY;
+      if (API_KEY) {
+        headers['X-API-Key'] = API_KEY;
+        headers['Authorization'] = 'Bearer ' + API_KEY;
+      }
       return headers;
     }
 
