@@ -29,7 +29,7 @@ app.set('views', path.join(__dirname, 'views'));
 // ==================== Dashboard ====================
 
 app.get('/', (req, res) => {
-  res.render('dashboard');
+  res.render('dashboard', { apiKey: config.apiKey || '' });
 });
 
 // ==================== Shopify OAuth (no auth required — one-time setup) ====================

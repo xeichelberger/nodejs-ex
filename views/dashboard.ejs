@@ -187,7 +187,7 @@
   <div id="loading">Working...</div>
 
   <script>
-    const API_KEY = ''; // Set if you have one configured
+    const API_KEY = '<%= apiKey %>'; // Injected from server config
 
     function apiHeaders() {
       const headers = { 'Content-Type': 'application/json' };
