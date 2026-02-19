@@ -32,6 +32,9 @@ app.get('/', (req, res) => {
   res.render('dashboard');
 });
 
+// ==================== Shopify OAuth (no auth required — one-time setup) ====================
+app.use('/auth', require('./routes/shopify-auth'));
+
 // ==================== API Routes ====================
 
 // All API routes require authentication
