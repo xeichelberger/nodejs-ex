@@ -30,6 +30,7 @@ describe('Database', () => {
     expect(tableNames).to.include('job_runs');
     expect(tableNames).to.include('pipeline_runs');
     expect(tableNames).to.include('content_performance');
+    expect(tableNames).to.include('reoptimization_actions');
   });
 
   it('should insert and retrieve a site', () => {

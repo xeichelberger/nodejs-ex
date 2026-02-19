@@ -28,6 +28,7 @@ const config = {
     serpCheck: process.env.CRON_SERP_CHECK || '0 6 * * *',       // Daily 6am
     contentSuggestions: process.env.CRON_CONTENT_SUGGESTIONS || '0 8 * * 1', // Monday 8am
     performanceCheck: process.env.CRON_PERFORMANCE_CHECK || '0 9 * * 1',    // Monday 9am (after SERP data)
+    autoReoptimize: process.env.CRON_AUTO_REOPTIMIZE || '0 10 * * 1',      // Monday 10am (after performance check)
   },
 
   // Rate limiting for crawling

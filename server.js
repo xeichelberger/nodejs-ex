@@ -76,6 +76,9 @@ app.use('/api/pipeline', require('./routes/pipeline'));
 // Content performance tracking (feedback loop after publish)
 app.use('/api/performance', require('./routes/performance'));
 
+// Auto-reoptimization (autonomous fixes for underperforming content)
+app.use('/api/reoptimize', require('./routes/reoptimize'));
+
 // ==================== Health check ====================
 
 app.get('/health', (req, res) => {

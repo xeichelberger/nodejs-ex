@@ -189,6 +189,23 @@ function migrate(database) {
       FOREIGN KEY (pipeline_run_id) REFERENCES pipeline_runs(id)
     );
 
+    -- Auto-reoptimization action log
+    CREATE TABLE IF NOT EXISTS reoptimization_actions (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      site_id INTEGER,
+      pipeline_run_id INTEGER NOT NULL,
+      keyword TEXT,
+      article_url TEXT,
+      trigger_status TEXT NOT NULL, -- what performance status triggered this
+      strategy TEXT NOT NULL,       -- strategy name (e.g. 'boost_stalled_article')
+      reason TEXT,
+      steps TEXT,                   -- JSON array of step results
+      success INTEGER DEFAULT 0,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (site_id) REFERENCES sites(id),
+      FOREIGN KEY (pipeline_run_id) REFERENCES pipeline_runs(id)
+    );
+
     -- Cron job run log
     CREATE TABLE IF NOT EXISTS job_runs (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -209,6 +226,8 @@ function migrate(database) {
     CREATE INDEX IF NOT EXISTS idx_pipeline_runs_site ON pipeline_runs(site_id);
     CREATE INDEX IF NOT EXISTS idx_content_performance_site ON content_performance(site_id);
     CREATE INDEX IF NOT EXISTS idx_content_performance_run ON content_performance(pipeline_run_id);
+    CREATE INDEX IF NOT EXISTS idx_reopt_actions_site ON reoptimization_actions(site_id);
+    CREATE INDEX IF NOT EXISTS idx_reopt_actions_run ON reoptimization_actions(pipeline_run_id);
   `);
 }
 
@@ -216,6 +235,7 @@ function reset() {
   const d = getDb();
   d.exec(`
     DROP TABLE IF EXISTS job_runs;
+    DROP TABLE IF EXISTS reoptimization_actions;
     DROP TABLE IF EXISTS content_performance;
     DROP TABLE IF EXISTS pipeline_runs;
     DROP TABLE IF EXISTS brand_voice;

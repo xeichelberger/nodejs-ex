@@ -5,6 +5,7 @@ const seoAnalyzer = require('../services/seo-analyzer');
 const gsc = require('../services/google-search-console');
 const serpTracker = require('../services/serp-tracker');
 const contentPerformance = require('../services/content-performance');
+const autoReoptimize = require('../services/auto-reoptimize');
 
 function logJob(jobName, status, result) {
   try {
@@ -98,10 +99,34 @@ function startCronJobs() {
     }
   });
 
+  // Weekly auto-reoptimize — runs after performance check, fixes underperformers
+  cron.schedule(config.cron.autoReoptimize, async () => {
+    console.log('[CRON] Starting auto-reoptimize sweep...');
+    const jobId = logJob('auto_reoptimize', 'running');
+
+    try {
+      const db = getDb();
+      const sites = db.prepare('SELECT * FROM sites').all();
+      let totalActions = 0;
+
+      for (const site of sites) {
+        const result = await autoReoptimize.sweep(site.id);
+        totalActions += result.actions_taken;
+      }
+
+      logJob('auto_reoptimize', 'completed', { jobId, sites: sites.length, actions_taken: totalActions });
+      console.log(`[CRON] Auto-reoptimize complete. ${totalActions} actions taken.`);
+    } catch (err) {
+      logJob('auto_reoptimize', 'failed', { jobId, error: err.message });
+      console.error('[CRON] Auto-reoptimize failed:', err.message);
+    }
+  });
+
   console.log('[CRON] Scheduled jobs initialized.');
   console.log(`  - SEO Audit: ${config.cron.seoAudit}`);
   console.log(`  - SERP Check: ${config.cron.serpCheck}`);
   console.log(`  - Performance Check: ${config.cron.performanceCheck}`);
+  console.log(`  - Auto-Reoptimize: ${config.cron.autoReoptimize}`);
 }
 
 module.exports = { startCronJobs };
