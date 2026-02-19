@@ -2,12 +2,12 @@
 
 client_id = "1c139cc72f8fbe81e77d2bc2612637ac"
 name = "ClawdSEOBot"
-application_url = "http://localhost:8080"
+application_url = "https://krystal-solvolytic-eustolia.ngrok-free.dev"
 embedded = false
 
 [auth]
 redirect_urls = [
-  "http://localhost:8080/auth/shopify/callback"
+  "https://krystal-solvolytic-eustolia.ngrok-free.dev/auth/shopify/callback"
 ]
 
 [access_scopes]
