@@ -1,34 +1,38 @@
 {
-  "name": "nodejs-ex",
-  "version": "0.0.1",
-  "description": "Node.js sample app for OpenShift 3",
+  "name": "seo-bot",
+  "version": "1.0.0",
+  "description": "SEO bot for ecommerce websites - analyzes, generates content, and optimizes SEO/GEO/SERP",
   "main": "server.js",
   "dependencies": {
-    "chai": "^3.5.0",
-    "chai-http": "^2.0.1",
-    "ejs": "^2.4.1",
-    "express": "^4.13.4",
-    "mocha": "^2.4.5",
-    "mongodb": "^2.1.16",
-    "morgan": "^1.7.0",
-    "object-assign":"4.1.0"
+    "@anthropic-ai/sdk": "^0.39.0",
+    "axios": "^1.7.0",
+    "better-sqlite3": "^11.0.0",
+    "cheerio": "^1.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.0",
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
+    "googleapis": "^144.0.0",
+    "helmet": "^8.0.0",
+    "morgan": "^1.10.0",
+    "node-cron": "^3.0.3",
+    "robots-parser": "^3.0.1",
+    "xml2js": "^0.6.2"
   },
-  "engine": {
-    "node": "*",
-    "npm": "*"
+  "devDependencies": {
+    "chai": "^4.5.0",
+    "chai-http": "^4.4.0",
+    "mocha": "^10.7.0",
+    "sinon": "^19.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "scripts": {
     "start": "node server.js",
-    "test": "IP=0.0.0.0 PORT=3030 mocha --timeout 5000 tests/*_test.js"
+    "dev": "node --watch server.js",
+    "test": "PORT=3030 mocha --timeout 10000 tests/**/*.test.js tests/*_test.js",
+    "db:reset": "node -e \"require('./database').reset()\""
   },
-  "repository": {
-    "type": "git",
-    "url": "http://github.com/openshift/nodejs-ex.git"
-  },
-  "author": "Steve Speicher <sspeiche@gmail.com>",
-  "license": "CC-BY-1.0",
-  "bugs": {
-    "url": "http://github.com/openshift/nodejs-ex/issues"
-  },
-  "homepage": "http://github.com/openshift/nodejs-ex"
+  "license": "MIT"
 }

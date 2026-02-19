@@ -1,107 +1,100 @@
-//  OpenShift sample Node application
-var express = require('express'),
-    fs      = require('fs'),
-    app     = express(),
-    eps     = require('ejs'),
-    morgan  = require('morgan');
-    
-Object.assign=require('object-assign')
+require('dotenv').config();
 
-app.engine('html', require('ejs').renderFile);
-app.use(morgan('combined'))
+const express = require('express');
+const morgan = require('morgan');
+const helmet = require('helmet');
+const cors = require('cors');
+const path = require('path');
 
-var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
-    ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
-    mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
-    mongoURLLabel = "";
+const config = require('./config');
+const { requireAuth } = require('./middleware/auth');
+const { startCronJobs } = require('./cron');
 
-if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
-  var mongoServiceName = process.env.DATABASE_SERVICE_NAME.toUpperCase(),
-      mongoHost = process.env[mongoServiceName + '_SERVICE_HOST'],
-      mongoPort = process.env[mongoServiceName + '_SERVICE_PORT'],
-      mongoDatabase = process.env[mongoServiceName + '_DATABASE'],
-      mongoPassword = process.env[mongoServiceName + '_PASSWORD']
-      mongoUser = process.env[mongoServiceName + '_USER'];
+// Initialize database on startup
+require('./database').getDb();
 
-  if (mongoHost && mongoPort && mongoDatabase) {
-    mongoURLLabel = mongoURL = 'mongodb://';
-    if (mongoUser && mongoPassword) {
-      mongoURL += mongoUser + ':' + mongoPassword + '@';
-    }
-    // Provide UI label that excludes user id and pw
-    mongoURLLabel += mongoHost + ':' + mongoPort + '/' + mongoDatabase;
-    mongoURL += mongoHost + ':' +  mongoPort + '/' + mongoDatabase;
+const app = express();
 
-  }
-}
-var db = null,
-    dbDetails = new Object();
+// Middleware
+app.use(helmet({ contentSecurityPolicy: false })); // CSP off for dashboard inline scripts
+app.use(cors());
+app.use(morgan('combined'));
+app.use(express.json({ limit: '5mb' }));
+app.use(express.urlencoded({ extended: true }));
 
-var initDb = function(callback) {
-  if (mongoURL == null) return;
+// Template engine
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
-  var mongodb = require('mongodb');
-  if (mongodb == null) return;
+// ==================== Dashboard ====================
 
-  mongodb.connect(mongoURL, function(err, conn) {
-    if (err) {
-      callback(err);
-      return;
-    }
+app.get('/', (req, res) => {
+  res.render('dashboard');
+});
 
-    db = conn;
-    dbDetails.databaseName = db.databaseName;
-    dbDetails.url = mongoURLLabel;
-    dbDetails.type = 'MongoDB';
+// ==================== API Routes ====================
 
-    console.log('Connected to MongoDB at: %s', mongoURL);
+// All API routes require authentication
+app.use('/api', requireAuth);
+
+// Site management
+app.use('/api/sites', require('./routes/sites'));
+
+// SEO analysis
+app.use('/api/analysis', require('./routes/analysis'));
+
+// Content generation
+app.use('/api/content', require('./routes/content'));
+
+// GEO optimization
+app.use('/api/geo', require('./routes/geo'));
+
+// Internal linking
+app.use('/api/linking', require('./routes/linking'));
+
+// Keyword & SERP tracking
+app.use('/api/keywords', require('./routes/keywords'));
+
+// Google Search Console
+app.use('/api/gsc', require('./routes/gsc-routes'));
+
+// Shopify
+app.use('/api/shopify', require('./routes/shopify-routes'));
+
+// ==================== Health check ====================
+
+app.get('/health', (req, res) => {
+  res.json({
+    status: 'ok',
+    uptime: process.uptime(),
+    integrations: {
+      shopify: require('./services/shopify').isConfigured(),
+      gsc: require('./services/google-search-console').isConfigured(),
+      anthropic: require('./services/content-generator').isConfigured(),
+    },
   });
-};
-
-app.get('/xeichelberger-app2', function (req, res) {
-  // try to initialize the db on every request if it's not already
-  // initialized.
-  if (!db) {
-    initDb(function(err){});
-  }
-  if (db) {
-    var col = db.collection('counts');
-    // Create a document with request IP and current time of request
-    col.insert({ip: req.ip, date: Date.now()});
-    col.count(function(err, count){
-      res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails });
-    });
-  } else {
-    res.render('index.html', { pageCountMessage : null});
-  }
 });
 
-app.get('/pagecount', function (req, res) {
-  // try to initialize the db on every request if it's not already
-  // initialized.
-  if (!db) {
-    initDb(function(err){});
-  }
-  if (db) {
-    db.collection('counts').count(function(err, count ){
-      res.send('{ pageCount: ' + count + '}');
-    });
-  } else {
-    res.send('{ pageCount: -1 }');
-  }
+// ==================== Error handling ====================
+
+app.use((err, req, res, _next) => {
+  console.error('[ERROR]', err.stack || err.message);
+
+  const status = err.status || 500;
+  res.status(status).json({
+    error: config.env === 'production' ? 'Internal server error' : err.message,
+  });
 });
 
-// error handling
-app.use(function(err, req, res, next){
-  console.error(err.stack);
-  res.status(500).send('Something bad happened!');
+// ==================== Start server ====================
+
+app.listen(config.port, config.ip, () => {
+  console.log(`\n  SEO Bot running on http://${config.ip}:${config.port}`);
+  console.log(`  Dashboard: http://localhost:${config.port}/`);
+  console.log(`  API Base:  http://localhost:${config.port}/api\n`);
 });
 
-initDb(function(err){
-  console.log('Error connecting to Mongo. Message:\n'+err);
-});
+// Start cron jobs
+startCronJobs();
 
-app.listen(port, ip);
-console.log('Server running on http://%s:%s', ip, port);
-
-module.exports = app ;
+module.exports = app;
