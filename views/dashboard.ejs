@@ -195,18 +195,25 @@
       return headers;
     }
 
+    // Append API key as query param (fallback when proxies strip custom headers/cookies)
+    function apiUrl(path) {
+      if (!API_KEY) return path;
+      const sep = path.includes('?') ? '&' : '?';
+      return `${path}${sep}api_key=${encodeURIComponent(API_KEY)}`;
+    }
+
     async function loadDashboard() {
       try {
         // Load sites
-        const sitesRes = await fetch('/api/sites', { headers: apiHeaders() });
+        const sitesRes = await fetch(apiUrl('/api/sites'), { headers: apiHeaders() });
         const sitesData = await sitesRes.json();
         document.getElementById('site-count').textContent = sitesData.sites.length;
         renderSitesTable(sitesData.sites);
 
         // Load integration statuses
         const [shopifyRes, gscRes] = await Promise.all([
-          fetch('/api/shopify/status', { headers: apiHeaders() }).catch(() => ({ json: () => ({ configured: false }) })),
-          fetch('/api/gsc/status', { headers: apiHeaders() }).catch(() => ({ json: () => ({ configured: false }) })),
+          fetch(apiUrl('/api/shopify/status'), { headers: apiHeaders() }).catch(() => ({ json: () => ({ configured: false }) })),
+          fetch(apiUrl('/api/gsc/status'), { headers: apiHeaders() }).catch(() => ({ json: () => ({ configured: false }) })),
         ]);
 
         const shopify = await shopifyRes.json();
@@ -251,7 +258,7 @@
 
       showLoading();
       try {
-        const res = await fetch('/api/sites', {
+        const res = await fetch(apiUrl('/api/sites'), {
           method: 'POST',
           headers: apiHeaders(),
           body: JSON.stringify({ url, name }),
@@ -270,7 +277,7 @@
 
       showLoading();
       try {
-        const res = await fetch('/api/analysis/site', {
+        const res = await fetch(apiUrl('/api/analysis/site'), {
           method: 'POST',
           headers: apiHeaders(),
           body: JSON.stringify({ site_id: siteId, max_pages: 20 }),
@@ -285,7 +292,7 @@
 
     async function deleteSite(siteId) {
       if (!confirm('Remove this site from tracking?')) return;
-      await fetch(`/api/sites/${siteId}`, { method: 'DELETE', headers: apiHeaders() });
+      await fetch(apiUrl(`/api/sites/${siteId}`), { method: 'DELETE', headers: apiHeaders() });
       loadDashboard();
     }
 

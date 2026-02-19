@@ -34,8 +34,7 @@ app.get('/', (req, res) => {
   if (config.apiKey) {
     res.cookie('_seo_auth', config.apiKey, {
       httpOnly: true,
-      sameSite: 'none',
-      secure: true,
+      sameSite: 'lax',
       maxAge: 24 * 60 * 60 * 1000,
     });
   }
