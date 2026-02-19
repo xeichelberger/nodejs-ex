@@ -28,6 +28,7 @@ describe('Database', () => {
     expect(tableNames).to.include('gsc_data');
     expect(tableNames).to.include('geo_optimizations');
     expect(tableNames).to.include('job_runs');
+    expect(tableNames).to.include('pipeline_runs');
   });
 
   it('should insert and retrieve a site', () => {

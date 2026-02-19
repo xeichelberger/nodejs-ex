@@ -70,6 +70,9 @@ app.use('/api/schema', require('./routes/schema'));
 // Reviews & UGC SEO
 app.use('/api/reviews', require('./routes/reviews'));
 
+// Publish pipeline (generate -> publish -> interlink -> submit)
+app.use('/api/pipeline', require('./routes/pipeline'));
+
 // ==================== Health check ====================
 
 app.get('/health', (req, res) => {

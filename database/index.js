@@ -152,6 +152,23 @@ function migrate(database) {
       FOREIGN KEY (site_id) REFERENCES sites(id)
     );
 
+    -- Publish pipeline run log
+    CREATE TABLE IF NOT EXISTS pipeline_runs (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      site_id INTEGER,
+      keyword TEXT,
+      topic TEXT,
+      blog_id INTEGER,
+      content_id INTEGER,
+      article_id INTEGER,
+      article_url TEXT,
+      steps TEXT, -- JSON array of step results
+      status TEXT DEFAULT 'running', -- 'running', 'completed', 'failed'
+      started_at DATETIME,
+      finished_at DATETIME,
+      FOREIGN KEY (site_id) REFERENCES sites(id)
+    );
+
     -- Cron job run log
     CREATE TABLE IF NOT EXISTS job_runs (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -169,6 +186,7 @@ function migrate(database) {
     CREATE INDEX IF NOT EXISTS idx_gsc_data_site_date ON gsc_data(site_id, date);
     CREATE INDEX IF NOT EXISTS idx_content_site_type ON content(site_id, type);
     CREATE INDEX IF NOT EXISTS idx_link_suggestions_site ON link_suggestions(site_id);
+    CREATE INDEX IF NOT EXISTS idx_pipeline_runs_site ON pipeline_runs(site_id);
   `);
 }
 
@@ -176,6 +194,7 @@ function reset() {
   const d = getDb();
   d.exec(`
     DROP TABLE IF EXISTS job_runs;
+    DROP TABLE IF EXISTS pipeline_runs;
     DROP TABLE IF EXISTS brand_voice;
     DROP TABLE IF EXISTS geo_optimizations;
     DROP TABLE IF EXISTS gsc_data;
