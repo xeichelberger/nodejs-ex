@@ -253,9 +253,23 @@ def scan_photos():
         else:
             non_instagram.append(v)
 
+    # Count screen recordings vs downloads in possible matches
+    screen_recs = sum(1 for v in instagram_possible if getattr(v, "screenshot", False)
+                      or (v.original_filename or v.filename or "").lower().startswith("rpreplay"))
+    downloads = len(instagram_possible) - screen_recs
+
     print(f"  High-confidence Instagram videos: {len(instagram_confident)}")
-    print(f"  Possible Instagram videos: {len(instagram_possible)}")
-    print(f"  Other videos: {len(non_instagram)}")
+    print(f"  Possible Instagram videos: {len(instagram_possible)}", end="")
+    if instagram_possible:
+        parts = []
+        if screen_recs:
+            parts.append(f"{screen_recs} screen recordings")
+        if downloads:
+            parts.append(f"{downloads} downloads")
+        print(f"  ({', '.join(parts)})")
+    else:
+        print()
+    print(f"  Other videos (personal recordings, etc.): {len(non_instagram)}")
     print()
 
     return instagram_confident, instagram_possible, non_instagram
@@ -263,63 +277,110 @@ def scan_photos():
 
 def detect_instagram_confidence(photo):
     """
-    Detect if a video was downloaded/saved from Instagram.
+    Detect if a video was downloaded/screen-recorded from Instagram.
     Returns: 'high', 'medium', or 'low'
 
-    Saved Instagram reels often have:
-    - Filenames like: IMG_XXXX.MOV, or random hashes
-    - Short duration (15-90 seconds typical for reels)
-    - Vertical aspect ratio (9:16)
-    - No EXIF camera info (since it's a download, not a recording)
-    """
-    score = 0
+    Two main sources of Instagram videos in a camera roll:
+    1. Downloads: Saved from Instagram app or browser. These have NO camera
+       EXIF, NO GPS, are vertical 9:16, and often exactly 1080x1920.
+    2. Screen recordings: iOS screen recordings while watching Instagram.
+       Filenames start with "RPReplay", marked as screenshot by iOS, vertical.
 
-    # Check filename for Instagram patterns
+    Personal recordings (shot with the phone camera) have camera EXIF and
+    GPS and should always be 'low'.
+    """
+    # ── TIER 1: Explicit Instagram metadata → instant high confidence ──
     fname = (photo.original_filename or photo.filename or "").lower()
     if any(p in fname for p in ["instagram", "insta", "reel", "ig_", "ig-"]):
-        score += 10
-
-    # Check description/title
-    for field in [photo.description, photo.title]:
-        if field and any(w in field.lower() for w in ["instagram", "reel", "ig"]):
-            score += 10
-
-    # Check keywords
-    for kw in photo.keywords or []:
-        if any(w in kw.lower() for w in ["instagram", "reel"]):
-            score += 10
-
-    # Check labels
-    for label in photo.labels or []:
-        if "instagram" in label.lower():
-            score += 5
-
-    if score >= 10:
         return "high"
 
-    # Heuristic checks for saved-but-unlabeled videos (screen recordings, etc.)
-    # Short duration is typical for reels (under 90 seconds)
-    if hasattr(photo, "duration") and photo.duration:
-        if 5 <= photo.duration <= 90:
-            score += 2
-        elif 90 < photo.duration <= 180:
-            score += 1
+    for field in [photo.description, photo.title]:
+        if field and any(w in field.lower() for w in ["instagram", "reel", "ig"]):
+            return "high"
 
-    # Vertical aspect ratio (portrait mode) is typical for reels
+    for kw in photo.keywords or []:
+        if any(w in kw.lower() for w in ["instagram", "reel"]):
+            return "high"
+
+    for label in photo.labels or []:
+        if "instagram" in label.lower():
+            return "high"
+
+    # ── Gather video properties ──
+
+    # Screen recording detection (iOS marks these, filenames start with RPReplay)
+    is_screen_recording = getattr(photo, "screenshot", False)
+    if not is_screen_recording:
+        if fname.startswith("rpreplay") or "screen recording" in fname or "screen_recording" in fname:
+            is_screen_recording = True
+
+    # Vertical aspect ratio (9:16 portrait, typical for reels/stories)
+    is_vertical = False
     if photo.width and photo.height and photo.height > photo.width:
         ratio = photo.height / photo.width
-        if 1.5 <= ratio <= 2.0:  # 9:16 = 1.78
-            score += 2
+        if 1.5 <= ratio <= 2.2:
+            is_vertical = True
 
-    # No camera make/model suggests download rather than recording
-    if hasattr(photo, "exif_info") and photo.exif_info:
-        exif = photo.exif_info
-        if not getattr(exif, "camera_make", None) and not getattr(exif, "camera_model", None):
-            score += 1
+    # Duration
+    duration = getattr(photo, "duration", None) or 0
+    is_short = 3 <= duration <= 90        # Typical reel length
+    is_medium_len = 90 < duration <= 180  # Longer reels / multi-story
 
-    if score >= 4:
+    # Camera EXIF — personal recordings have this, downloads don't
+    has_camera = False
+    try:
+        exif = getattr(photo, "exif_info", None)
+        if exif:
+            if getattr(exif, "camera_make", None) or getattr(exif, "camera_model", None):
+                has_camera = True
+    except Exception:
+        pass
+
+    # GPS location — personal recordings often have this, downloads don't
+    has_location = False
+    try:
+        loc = getattr(photo, "location", None)
+        if loc and loc[0] is not None and loc[1] is not None:
+            has_location = True
+    except Exception:
+        pass
+
+    # Instagram-typical video resolutions
+    is_insta_resolution = False
+    if photo.width and photo.height:
+        w, h = photo.width, photo.height
+        insta_resolutions = [
+            (1080, 1920),  # Standard reel / story (9:16)
+            (1080, 1350),  # Portrait post (4:5)
+            (720, 1280),   # Lower quality reel
+            (640, 1136),   # Older device reel
+        ]
+        for iw, ih in insta_resolutions:
+            if abs(w - iw) <= 10 and abs(h - ih) <= 10:
+                is_insta_resolution = True
+                break
+
+    # ── TIER 2: Screen recording of vertical content ──
+    # A vertical screen recording is almost certainly social media (IG/TikTok)
+    if is_screen_recording and is_vertical:
         return "medium"
 
+    # ── TIER 3: Downloaded video (no camera EXIF = not shot on this phone) ──
+    if not has_camera:
+        score = 0
+        if is_vertical:
+            score += 3           # Vertical download = likely social media
+        if is_insta_resolution:
+            score += 2           # Exact Instagram encoding resolution
+        if not has_location:
+            score += 1           # No GPS = further confirms download
+        if is_short or is_medium_len:
+            score += 1           # Reel-typical duration
+
+        if score >= 3:
+            return "medium"
+
+    # ── Everything else → low confidence (personal recordings, etc.) ──
     return "low"
 
 
@@ -338,7 +399,11 @@ def select_videos(confident, possible, others):
             name = v.original_filename or v.filename
             date_str = v.date.strftime("%Y-%m-%d")
             dur = f"{v.duration:.0f}s" if hasattr(v, "duration") and v.duration else "?"
-            print(f"  {i}. {name}  ({date_str}, {dur})")
+            dims = f"{v.width}x{v.height}" if v.width and v.height else "?"
+            # Show detection reason
+            is_sr = getattr(v, "screenshot", False) or (name or "").lower().startswith("rpreplay")
+            tag = "screen rec" if is_sr else "download"
+            print(f"  {i}. {name}  ({date_str}, {dur}, {dims}, {tag})")
 
         print()
         resp = input("Include these possible Instagram videos? [yes/no/pick]: ").strip().lower()
