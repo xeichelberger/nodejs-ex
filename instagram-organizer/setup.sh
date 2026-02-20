@@ -38,6 +38,20 @@ brew install ffmpeg rclone python@3.11
 
 echo ""
 
+# ── Install Ollama (free local AI) ──
+if ! command -v ollama &> /dev/null; then
+    echo "Installing Ollama (free local AI for video categorization)..."
+    brew install ollama
+    echo ""
+fi
+
+echo "Pulling Ollama models (one-time download)..."
+echo "(llava ~4GB for vision, llama3.1 ~4GB for text)"
+echo ""
+ollama pull llava
+ollama pull llama3.1
+echo ""
+
 # ── Create Python virtual environment ──
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 VENV_DIR="$SCRIPT_DIR/venv"
@@ -82,14 +96,10 @@ echo "       - A browser will open — sign in to your Google account"
 echo "       - Shared drive: Choose 'n' (no)"
 echo "       - Confirm with 'y'"
 echo ""
-echo "  2. SET YOUR CLAUDE API KEY (recommended for best results)"
-echo "     Get a key from: https://console.anthropic.com/"
-echo "     Then either:"
-echo "       export ANTHROPIC_API_KEY='your-key-here'"
-echo "     Or create a .env file:"
-echo "       echo 'ANTHROPIC_API_KEY=your-key-here' > $SCRIPT_DIR/.env"
+echo "  2. START OLLAMA (must be running before each use)"
+echo "     In a separate terminal, run:"
 echo ""
-echo "     (If you skip this, the script will try Ollama as a fallback)"
+echo "       ollama serve"
 echo ""
 echo "  3. RUN THE ORGANIZER"
 echo "     bash run.sh"
