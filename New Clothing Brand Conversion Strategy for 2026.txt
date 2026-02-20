@@ -1,0 +1,96 @@
+00:00:00
+Let's be honest. You don't want customers who just buy wants you want and groupies. You want fans, right? You want people who come back week after week spending more and bringing their friends with them. The truth is, you don't need more traffic. You need better experiences that make people want to shop with you again and again. So today I want to show you how to make your website so addictive customers can't stay away. So first off, we have the in and out model. It's a frictionless
+
+00:00:25
+path to repeat purchase. Think about it. Why do people keep going back to In and Out? It's delicious. But it's not that they don't have a huge menu, right? Like they have the same stuff. It's the exact opposite. It's very simple, predictable, fast. Right? Your online order should be the same. A returning customer already knows what they like, so why make them jump through hoops to buy it again? Now here's how you can create a frictionless path. Logging an account features
+
+00:00:52
+that remember size, past orders and preferences. If you don't have this. This is like one of those things where I think majority of Shopify stores, when you open them new, it's on by default. But if you don't go to settings and go to customer account and then make sure that you have the new customer account, they've changed the name of this multiple times right now, just as customer accounts versus legacy, I'm sure this year they'll probably get rid of legacy completely.
+
+00:01:14
+But just make sure that you have customer accounts, because this allows the customer to sign in without any password, see all their previous data, click a nice little button to say buy again if they choose to do that. Now, with this in mind, to all the people that are coming back, you also need to make sure that you're doing and giving them smart recommendations based on previous purchases. Someone bought joggers last month showing the matching hoodie this month, right? Make it easy so they don't have to think.
+
+00:01:39
+They just land. Click and checkout and I'll give you a couple apps that will help with this. Hey, I just wanna introduce myself. My name is Christian Pinion, one of the co-founders here at Bear Branding. We've helped over 700 clothing brands grow and scale online. I would appreciate if you like subscribe so you don't miss any of our company. Now we kind of touch a little bit on recommendations and personalization, and I think this one is we're diving a little bit deeper, right is what I call
+
+00:02:02
+the Netflix effect. Right? Netflix does not show everyone the exact same home page and neither should you every time there. If I were to turn on Netflix right now, I will get a recommended sort of home page grid feed of what my preferences are in terms of things that I've seen in the past, and if my wife does it, she will get all the ROM coms and national baking holiday shows that are out there. So you're returning. Visitors should see a curated personal experience based on their shopping habits,
+
+00:02:38
+so the more it feels like the site knows them, the more they'll want to keep coming back. There's a few apps that can help you with this one blind spot, rebuy or not. So to actually show product recommendations, you know, showing recently viewed items. You may also like that actually change dynamically per customer. You can also build VIP customer segments, right? Who are your big spenders and how can we make the experience a little bit different? Can we show them early access exclusive drops
+
+00:03:09
+right here from the homepage? They don't have to go anywhere else. It just magically changes based on who they are. So this actually builds psychological ownership, right? The more customize your store feels, the more it feels like actually belongs to them. And if you don't, anything like this already, I want you to drop a comment. I would love to hear what tools strategies you've used to personalize your site. There may be not much right in terms of of personalization out there right now,
+
+00:03:36
+but some of the tools that I gave you have some of the options, you know, to start doing some of these things. Obviously big players, you know, you got the the Nike the Skims, like they're doing this. Like if I go to some of those websites and then you go to like you will see different hero banners, you will see different product recommendations. And that's really what we're trying to get to, is a truly unique experience for the customer. When they get to the site, something else that you want to do is
+
+00:04:02
+you want to make it rewarding. You want to gamify the shopping experience. Humans are wired for dopamine hits, and that's why we check our phone 100 times a day. And your website can actually deliver that same hit through gamified rewards or incentives. So you could have a loyalty program that actually feels fun off. So you could use an app like smile, loyalty, lion, one that I've actually like using lately a lot is called Toki Loyalty. It has kind of like this experience on these membership cards.
+
+00:04:34
+And then you also have the mobile wallet passes to me. I think Toki has like a little bit of a fresher view on loyalty points and all that kind of stuff, and it also gives you the ability to get points based on things that you do on social or refer friends and different things like that, which is very, very powerful. Another way is just progress. Bar is like showing customers how close they are to free shipping, or their next tiered award reward right after spending 100 $200, right? That's always
+
+00:05:02
+just a very easy thing that it almost doesn't feel like gamifying. But if you're gamifying the process a little bit now, something else is that like spin to win pop ups? Sometimes I could maybe feel spammy, but Klaviyo has actually given you the ability now to do spin. They will pop up within their their their signup form section, so you're able to do something that actually looks cool. You set up your own percentages right on. So you actually make it real. It's not just like everyone gets
+
+00:05:27
+the exact same price, you're actually truly gamifying that experience. And if you haven't heard of all year, I would say check it out. Alia is sort of the newcomer when it comes to pop ups, but they're doing a really good job of gamifying that experience, giving you a little bit of education, doing a little bit of a quiz, you know, right there within the actual pop up, which seems crazy, but psychologically it just it feels more engaging, right? It feels like I have to go through this little process,
+
+00:05:52
+this little, little extra steps in order to get this reward. Now, the fourth way is to automate the comeback email SMS. We need flows to bring people back. Let's say someone made a purchase that shouldn't be the end, right? Someone makes a purchase. That shouldn't be the end. That's the start of their addiction. Here. You need to stay in their world, not with span, but with strategic, value driven messaging actually makes them want to come back. And obviously there's tons of flows out there.
+
+00:06:23
+But I think every single clothing brand should have these flows. Want a post-purchase education flow? Tell them how to style their new piece, how to wash it, how to pair it with. There also needs to be a review plus UGC request flow. You're showing social proof you're making them feel part of the community. And lastly, a win back flow. If they haven't purchased for you in 30 or 60 days, offer a compelling reason to return. It could be a limited time offer. It could be early access to a new drop.
+
+00:06:52
+Any of those things would work, but at least those three flows are absolutely must haves for holding brands, according to Omni. Send automated emails. Get about a 29% open rate on average versus 19% for average campaign emails. So that just means that your flows or your automation are doing twice the work in terms of opening and converting with zero extra effort once they're actually set up. And I know, I mean, we recommend and we have about ten, 12 different email flows that that we have built.
+
+00:07:22
+And they do take home. Right. They do take time to to fully set up and fully design each of these emails to make it match your branding. But once these are set up, they're just working for you. They're, they're they're doing all the work and making you more sales and bringing more people back to your store. Now for number five subscription and bundle offers, I think that that creates an addictive convenience, if you will. So like obviously getting products on, on autopilot is very addictive, right?
+
+00:07:51
+For example, if you sell socks, underwear, teas, skincare, like anything that needs regular replenishment, offer a subscription. There's tools out there like rechargeable descriptions that let customers set it and forget it. And even if it's a subscription doesn't necessarily make sense for your product. Consider maybe build your own bundle options. So let customers curate it. Maybe a three pack or a five pack of items that you love. Obviously, when it comes to teas, I'm actually
+
+00:08:15
+wearing a true classic. True classic is the best example descriptions and and build build a build in your own bundles on the website. You can also do save x percent of money when you bundles of discount for multiple purchases, right? You really want to encourage that. Larger heart sizes and repeated orders like giving them a meal plan for their closet right left decision fatigue, more loyal I else that makes websites addictive is is the ability to keep it fresh. And here's the harsh truth stale
+
+00:08:47
+websites just don't convert. If your site looks the same week over week, customers will assume that nothing has changed and bounce, or that you don't care about your website, or that there's no one truly running this. Someone just set it up and forgot about it a long time ago. So it's very, very important to stay up to date. It's even like it's one of those things where, I don't know, it's Christmas right now. Like even if you keep the exact same hero banner, change it to add
+
+00:09:12
+little Christmas trees in the back end, right? I did a little bit of snowflakes that just that little tweak psychologically tells me like, hey, this has been updated, you know, or now for New Years do little fireworks and within the hero banner, like, like you want to make sure that when you go to it, it feels like the season that we're currently and you want to treat your homepage like, like a merch table at a concert, you want to change it often. You want to feature bestsellers or new drives.
+
+00:09:39
+You want to have timely things in here. You also want to create urgency. I think this is something else, you know, in terms of limited quantities, countdown, timers, early access. I think a lot of people call it talk about urgency, but it can be done in a way where it's subtle. It's not necessarily flashing red on the product page. You know, we don't want any of that. But if it's truthful for good urgency, I think that can do really, really well. And also you want to promote your drops
+
+00:10:05
+like like their events, right? It's not just about just product. You want customers thinking like, I wonder what's new this week? And the answer should always be like, oh, I want something. No, let's go check it out. Right. Personalizing and changing your store is something very important. Moving products around is something very important. You want your store to look fresh and new. Every time that we kind of go back to it now, number seven is to create a lifestyle. It's not just a store.
+
+00:10:30
+So people don't just buy products, they obviously buy identity. So if your brand makes them feel like they're part of something bigger, a community by the movement, they'll keep coming back. But Christian, how do you how do you build this? How do you make this happen on the website? Well, you want to feature UGC content on your product pages, on your home pages, on your collection pages. You also want to create style guides or looks that show full outfits or how tos. You also want to post
+
+00:10:58
+behind the scenes stories. Brand Mission team spotlights, right? Building a community hub with branded hashtag, a discord group customer gallery. Right. Customers become addicted to brands that help them express who they are. You're not just selling clothes, you're selling confidence, belonging, style, purpose, all those things in one. I think Howler Brothers are good example of a store that just the sells the the lifestyle of the people who would wear their clothing. I have, I have a couple things,
+
+00:11:28
+but I'm not the guitar playing, outdoor, ziplining, Jeep driving guy, coffee drinking in the morning. But I can kind of identify, like I mean, it's also it feels like it's dad's, right. Like there's a certain esthetic, you know, to to everything that they have here and just within the imagery. Right. And how they're, they're talking about, they have a whole section called Howler Verse where they just have videos like they have a section of just videos. So with some of their drops,
+
+00:11:57
+they just, they like to do just a little sizzle reel, like a lookbook type. This one is a little bit more funky, but but they're having fun with it. Right. And how their music transmission like they actually have a lookbook. Speaking of look books, where again, it's not just the clothes, but it's the lifestyle behind the clothes. Hold up just one second. I just want to say that if you are a clothing brand owner, I want to jump into specifically a brand, how to grow it. We have a free 45 minute
+
+00:12:24
+strategy session that you can do with us. There are limited spots that you can go find that time right now. There's a link in the description below. Now lastly, I want you to obsess on the post-purchase experience. Most brands I think, dropped the ball after the sale, but if you want to build an addictive experience, the real magic happens on the post purchase. Number one, you want to send a beautifully branded order confirmation and shipping emails claim you post. Probably like all of these
+
+00:12:47
+can actually help you and also do a handwritten thank you note or surprise gifts in your box. I love, I don't have a hat here. Dad gang, they always, always, always send a bunch of stickers and a bunch of. Actually, I got some beanies for, for this Christmas, and they had a very specific beanie gift box, and it had a special note about that particular gift box that made it just a little bit extra special. Like, in the end, I was like, oh, whatever is just no. But like, if they didn't have that,
+
+00:13:15
+it wouldn't feel as special, right? As, as as if the, you know, didn't have that particular note. So all those things like, you may not think that they work or they do anything, but they truly do. Another way could be sending personalized follow up emails asking me if they actually liked their purchase, or how you can help them in any way. It's like, is that feeling of when you go back to a restaurant, right? And they remember your name, or they remember your order like, that feels a great.
+
+00:13:39
+And that's something that me and my wife need to do this year, just like become regulars at a restaurant. Like it's just a great feeling, right, to walk in and people know you and they know your order. Customers truly remember that. And remember brands equals revisited brands. If you pie three four of these strategies, your website will go from decent to dangerously addictive. It's all about removing friction, about adding delight. It's about making your brand unforgettable. So before you go,
+
+00:14:08
+I want you to tell me in the comments. What's the one thing? What's the one thing that you're going to implement? Not this. This week I want you to implement one of these things this week. Comment down below. I want to know. Don't forget to like subscribe. There's also a new feature called hype hype this video. Thank you I appreciate that. All right we'll see you in the next one.
+

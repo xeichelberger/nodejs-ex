@@ -1,0 +1,81 @@
+00:00:00
+If you're clothing brand website, it's supposed to feel like a premium boutique, But it looks like a clearance aisle with a megaphone. This is actually for you. Because here's the brutal truth premium isn't just a price point. I think a lot of people get hung up on that premium. It's actually a feeling. And your website either creates that feeling instantly or it quietly screams discount brand before people even scroll anywhere. today I'm giving you the three biggest things
+
+00:00:29
+to stop doing on your website. If you want to look premium and convert like it. First one stop screaming at people the second they land on your site. I'm talking about the instant 1,015% off pop up. The spinning wheel, the countdown timer, the sticky bar right, the little chat bubble that comes of the email capture, the banner that says free shipping. They're all just fighting for attention, like little toddlers and the back seat. And trust me, I know because I have two of them, premium brands don't
+
+00:01:02
+ambush you. They actually invite you in when I walk into a luxury store, right? Nobody tackles me at the front door and whisper, hey, bro, you want to spin the wheel for 12% off? Like, no. Like you don't get that vibe at all. It's a it's calm, it's confident, it's intentional. Right. So your homepage should feel like walking into a well-designed showroom. Not like opening 12 tabs of ads all at once. A bunch of pop ups flashing things everywhere, a bunch of call to action threats.
+
+00:01:30
+If your site's first interaction is a discount, you've essentially trained your visitor to do one thing wait. Wait for a better deal. Wait for code. Wait to leave and come back later. And worst of all, you've framed your product. That's something that needs a need to bribe, right? To be purchased. So the premium fix here is give them one clear message and one clear next step, one hero headline that explains the vibe and the value that you bring. And one primary call to action. Shop new arrivals
+
+00:02:06
+or shop bestsellers, or shop our latest drop clean navigation, white space. And if you want email capture, do it with restraint. A premium brand earns attention before actually asks for anything. Hey, I'm Christian Brian, one of the co-founders here at the branding specialize in helping clothing brand scale on line. I appreciate if you like subscribe so you don't miss any of our latest content. know, obviously something very practical that you can do. And I would say the majority of themes, right
+
+00:02:36
+when you first load them up, they will have a hero section by default. A lot of them may not call a hero. You may have a slight share, in the slideshow section, you can delete the slides or skip one single slide. Essentially, that will serve as your hero banner. And again, by default, majority of them will have some kind of headline and we'll have some kind of primary call to action. So, this one is just a fresh version of horizon, just installed. And like by default, it has this hero section
+
+00:03:06
+with headline and a single button in here. Now, if you are using, for example, email pop ups like Klaviyo claim is a super popular one. My recommendation would be to keep the bottom, I believe they call it a teaser. You skip the teaser there at the bottom with your particular offer that you're trying to do, so that you're not just necessarily streaming out to customers right away. And again, this is just if you still want to kind of follow the, the, the, the idea of giving the first time
+
+00:03:39
+customers some kind of incentive. I would say don't blast it out right when the customer gets there, maybe keep it as a teaser or maybe even keep it as an individual section towards the bottom of your homepage and product page. So it's a it's still kind of there, but it's not necessarily all in your face. For all customers to see. Now, the second point, number two, you got to stop using template looking design decisions like give away the fact that you're actually using a template.
+
+00:04:09
+And yes, I know you're on Shopify. Most Shopify brands are using a template. Even premium luxury brands are probably using a template that's perfectly fine, but premium brands don't feel like they picked a theme. They swapped out the logo and call it a day. They feel designed. They feel like there was some intentionality right in the typography that was used, and the spacing and the sizing of things. And here are some of the biggest, I would say template tales. And that's that absolutely instantly
+
+00:04:42
+just cheapen your site and your brand. And one of them is using too many fonts, like even right here within horizon, if we click on theme settings and we go to typography, like they give us options for body Subheadline headline and accent font right now, by default, is all set to enter. It's all set to enter, but I can kind of see some of them are different font weights. So even using the same phone, but a bunch of different weights can also kind of cause, cause some issues throughout the site.
+
+00:05:09
+So too many fonts. And if your site uses three different font style for different weights and maybe buttons that just don't match, everything just feels messy. So just think about premium is consistent and premium is controlled. You got to pick two fonts max a headline font and a body font. And what I would say Shopify by default does a pretty decent job at this. But once you get into potentially adding some apps, adding some custom coding, a lot of times these will kind of you know, switch out
+
+00:05:45
+some of the fonts and create some inconsistencies all throughout your website. So pay attention to those specifically, because they will change things on the front end. But like I said, you pick your headline, you keep, you pick your body font and then you build just a simple type system. You know, headlines are always this size. We always use this way for sub headlines. We always use the size of body copy. We always use this. The buttons should always look the same. Have this color, have this font,
+
+00:06:10
+have this curvature around them. And again for the most part Shopify will take care of this. But there are apps and random things that will cause things to start looking a little bit different. And then the other thing is the colors, right? If your buttons or some of them are blue, but then maybe your links are a different shade of blue and you have so badges that are neon green and your announcement borrowed is like bright orange, like you're not branding correctly, you're just coloring
+
+00:06:38
+and using colors all throughout the website in a way that just absolutely destroys any sort of luggage. Really feel. Premium brands use a very tight palette one primary color, one neutral base, one accent color that they can use sparingly throughout the website. And if you want, there's a there's a quick little test you can do. You can actually take a screenshot of your homepage. You could even do I know there's apps out there that can you can take a scrolling screenshot so you can take a screenshot
+
+00:07:04
+of almost like your whole homepage, right? And then just kind of blur your eyes and how you, you can kind of, you know, close one eye and then kind of just blur it and see it. That way if it truly looks like a rainbow of competing elements, it just is not premium. So if you look at your eyes and it kind of looks like a rainbow of a bunch of different colors and you have a bunch of competing elements and that just doesn't feel premium. Which brings us to point number three here, which is stock
+
+00:07:31
+looking visuals, photography. Nothing kills premium faster than generic photos either. Weirdly lit product images or lifestyle shots that just don't match each other. Premium photography is cohesive. Same lighting, same editing, same vibe. Even if you're a streetwear brand, your images should feel like actually belong to the same universe. And this is where I think a lot of clothing brands accidentally just self-sabotage a little bit. They at least spent thousands getting product samples.
+
+00:08:02
+May they shoot photos in a dark room and lose some iPhones, which is perfectly fine, but then they wonder why they say there's I just doesn't feel elevated. So your website is a store. Your photos are the product on the shelf. If the shelf looks messy, the product looks cheaper. So really, truly, the premium fix here is to create consistency across the entire visual system. We're talking about consistent font spacing, button styles, photo treatment. This is how you get that expensive feeling
+
+00:08:34
+even before someone reads a word on your website. And this is like one of those things where I'm talking about it so that we can we can collectively start seeing this a little bit better, because once you see it, you can't unsee it. Right? And once you start going to other clothing brand websites, you'll start seeing these things, a little bit better. You started used. You start seeing the consistency, the fonts. You'll pay attention to the color your stuff, paint into the photography,
+
+00:08:59
+and you start to learn and understand very distinctively. Recognize what actually makes this look this certain way. Something else I want to talk about too is your website needs to feel smooth, right? Nothing feels. Nothing feels premium when it's actually slow, glitchy or jumpy. And a premium experience is actually smooth. Your site loading fast within 2 to 3 seconds. That's what really speed matters more, to brand owners than they actually realize. Even small little delays can actually crush
+
+00:09:40
+conversion rates. And there are a bunch of studies showing that conversion rates drop as low time increases. And that's really the sweet spot for e-commerce. Like you want fast 1 to 2 seconds. And obviously premium customers expect things to work and they expect things to work fast. They don't tolerate friction. They bounce. So what usually causes heavy websites up, especially for clothing brands. Number one is going to be too many apps. And I get it. You know apps feel like growth hacks
+
+00:10:11
+or you know, upselling bundles. Sticky add to cart social proof countdown timers. Right. Like you want all the things. But you got to understand that every single one ads, code requests and clutter in the back end. And obviously some are very helpful and some are not. And premium brands are ruthless about cutting anything that hurts that experience. And obviously second to apps is actually unoptimized images and videos. I think Shopify now does a pretty good job of compressing, you know, any type of media.
+
+00:10:44
+But at the end of the day, there are still going to be, opportunities, right? Depending on on how big of a file you're actually giving, Shopify and especially with like a lot of premium luxury brands, they want to do video, they want to do motion within the website. I think that's great. But it's it's a matter of of having that sweet spot between, you know, having a 4K video or, you know, one minute 4K video or having 1080p, you know, for 12 second on the home page, like there's
+
+00:11:13
+there's a huge difference there. So aiming for that sweet spot of like, yes, we're still providing the motion, we're still providing video, but it's at a place where, we can do so we can still, you know, tell the story. We can we can say what we need to say. It's actually helpful. And useful is not just doing the video because it looks cool. It's actually helpful and useful for the customers. And it's not killing your, your speed on your website. And this is one of those things
+
+00:11:41
+where I always say, test it out, you know, like put up the video on the home page, run a page speed report, and do the before and after with the video, without the video. And you will see, you know, very black and white, how it's actually affecting your load time on your website. When you add things like that. Now going to give you a quick recap of what we just talked about. And at the end of this video, I'm gonna give you three themes that feel very premium without necessarily having to use horizon.
+
+00:12:11
+So if you want to get a huge head start into having that premium feel, then check out those three themes that I'm going to talk about here towards the end. Now, again, just to recap, number one, you got to stop screaming discount and pop up. The very second that people arrive. You got to make it calm. You got to make it confident. Make it one message, one next step number two, stop the template. Tales. Too many fonts, random colors, inconsistent buttons, mismatched visuals. Build a simple, cohesive design.
+
+00:12:38
+System number three stop making your site heavy and sluggish. Too many apps, too many unoptimized photos and videos. Cluttered product pages like premium experiences are fast, clean, and stable. Do those three things in your site instantly feels more expensive, more trustworthy, and more worth buying from, which is what we want. Now let me get into just gotta give you three quick themes that you can check out. If you're interested in getting your clothing brand to look more premium or luxury.
+
+00:13:09
+Number one is Primavera number two, stiletto number three broadcast. Now this video here, next we're going to recreate a premium luxury streetwear brand using the free horizon theme. Go check it out.
+

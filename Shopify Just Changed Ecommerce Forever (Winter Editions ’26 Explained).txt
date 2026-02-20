@@ -1,0 +1,117 @@
+00:00:00
+Shopify Win Tradition 2026 has just been released with over 150 different updates. Now, I'm not exaggerating, but this would have to be one of the most important updates and releases that Shopify has ever done in their entire history because Shopify is evolving. It's not just a website and you build a storefront anymore. This is the moment that AI and commerce finally come together. But I'm not just talking about a little helpful chatbot that sits on the side and tells you how to run your
+
+00:00:28
+store. I'm talking about real time integration of your products from your Shopify store directly into ChatCubt. So people can buy your products within ChachuBT and not even need to go to your website. This is the continuation of a seismic shift we're now seeing in e-commerce where your storefront isn't as important as it once used to be. People are buying directly within the platforms that they spend the most time in. Have a look at Tik Tok Shop. That is one of the fastest growing platforms
+
+00:00:55
+there are. And people don't even go to an e-commerce website. they just buy directly through Tik Tok. This is what we're going to be seeing inside chatbt in the coming months and this is the update that enables you to do it on your store. So, I've spent the last 6 hours going through every one of those 150 updates and I've picked out my top six updates. I've tested them in my admin. I've played around with them. I've got to understand exactly what they do and I'm going to take you through them right
+
+00:01:18
+now. If we're just meeting for the first time, my name is Brendan and I've been growing e-commerce businesses for the last 15 years. And every week I put out a new video that teaches people how to grow e-commerce stores. So whether you're going from side hustle to full-time or whether you're going from full-time and you're looking to scale, I got a video that's right for you. But you know what's interesting? I have over 45,000 subscribers on this channel. And 70% of the people that watch my videos
+
+00:01:40
+aren't subscribed. So if you're one of those 70%, why don't you become one of the 30% subscribe to this channel and you'll get notified every time I put out a new tutorial. To get a list of all the updates that have been released in this edition, you need to head to the Shopify winter editions landing page. It looks a little bit like this. It's called the Renaissance update. And if you hover over the word Renaissance, you're going to see that highlights the letters AI. Now, there are so many updates in here,
+
+00:02:05
+but really what the undertone is of all the updates is how embedded AI is into Shopify. Now, so I'm going to take you through my top six updates that are in this edition that you need to know about. And pretty much every one of them has to do with AI. And the last one, we've been waiting for this a while. And it is the biggest game changer that has come out since chatbt was released. Now, if we scroll down the additions, the first thing you're going to see is this guy here, and this is Sidekick. Now, if
+
+00:02:32
+you're new to Sidekick, I want you to think about Sidekick being like Catchupt and Shopify. They got married, they had a little baby, and they named it Sidekick. That's exactly what it is. It's basically Shopify's version of Chachu BT, but it doesn't just know all the things Chachi BT knows. It knows all the things about your business. It knows all the things about Shopify and it's like having an expert level e-commerce Shopify AI agent at your beck and call whenever you need it. And I've got a few
+
+00:02:58
+uh use cases that we're going to demo today that you're going to be like, "Where how do I live without this?" Right now, let's move into my first update that you need to know about and it's called Sidekick Pulse. Sidekick Pulse is basically the AI continually monitoring your store and trying to find you opportunities and suggestions on how you can make your store better. So, think about it like you've got an AI army of e-commerce experts that are looking at your store every single
+
+00:03:22
+second of the day. And they're looking for little nuances. They're looking at your data. They're looking at your traffic. They're looking at what you're selling. And they're continually providing you with ways that you can improve your business. And they're going to come up in little recommendations like this. So, you know, it will tell you whether or not you need to do AB testing or whether you need to do, you know, abandon carts or whether you need to, you know, set up different landing
+
+00:03:42
+pages or learn launch email marketing campaigns. It's going to basically look at your data, look at what you're not doing, and give you recommendations on what you need to do. Now, I think this is going to be a lot better than other AI recommendations that we see in other platforms because it knows your data, and it knows exactly what it is that you want to do. When you're given access to this, you're going to have a little card that sits inside your Shopify dashboard and it's going to get you to enable
+
+00:04:03
+pulse and then you're going to be able to look at all those recommendations. Uh, as of this recording, of all the hundred stores I've looked at, none of them have it yet. So, I think it's rolling out and hopefully we'll be getting it in the next few days. Be sure to comment down below if you've got it and what you're thinking about it. Now, for this second update, I'm going to demonstrate this directly in my store live to give you an example of really how powerful it is. So, we're going to
+
+00:04:23
+head over to my store. We're going to click the little sidekick icon here. And I'm going to expand this out so I can have a really good chat with it. What we're going to be able to do here is we're going to generate an image directly in Shopify using my product photos and then putting it in a AI generated environment, but it looks so real you can't tell the difference. Let me show you how we do that. So, we're going to click in here. I'm going to say generate me an image for my product. I'm
+
+00:04:48
+going to click the at symbol. I'm going to tag my product liquid instant coffee. Okay, we'll choose that one and put it in a Christmas scene with marshmallows. Okay, let's see what happens. Right, so I've been a tag my product, give it some insights, and it's going to go and generate this for me. Okay, so it's telling me exactly what it's doing. I'll generate the festive Christmas scene featuring your liquid instant coffee. Right? This is crazy because what the way I used to do this was I'd go over to
+
+00:05:17
+Nano Banana or I'd go into Chachi Beta and Sora. I'd have to upload my product image. I'd then have to prompt it and then I'd have to put it together, export it out, upload it into Shopify. And they used to take like half an hour to an hour. I've now been able to do this directly in Shopify. Let's just see what this uh what this does. Like takes a few minutes. Look at that. It's not only did it put the product in there perfectly, it's put it in a mug with marshmallows
+
+00:05:38
+in the mug and a little Christmas scene in the background. Right? And I can click save to files and I can use it directly in my theme editor. Right? So I click save to files here. I can now go over to my theme editor. Right? I can edit my theme and I could go in and I could change this image here. Right? Select from library and that image is right there. Nuts, right? That took me less than 3 minutes to do and it looks real. You can't tell it's AI generated and it's absolutely wild. All right, let's move on to update
+
+00:06:11
+number three. I'm going to demo this one as well, but let's have a quick look at the additions website to show you what it is. So, it's this one here, which is called voice powered mobile chat. So, currently in Sidekick, we'd have to type into the chat and we'd have a conversation with it using typing chat. But everyone knows how slow typing is these days. And wouldn't it be great if you could just talk to Sidekick with your voice and have it talk back to you? So, you can do that now, but you do it
+
+00:06:33
+on your mobile app. So, you open up the Shopify app and I'm going to grab it now and I'm going to talk out loud and I'm going to ask it some questions. >> Hey, Brandon. Great to connect with you. How can I help you with your store today? >> Could you please tell me what my bestselling product was over the last 30 days? >> Let me find that out for you. Over the last 30 days, your bestselling product was liquid instant coffee with total sales of $12,3796. Anything else you'd like to explore
+
+00:07:00
+around this product? >> Yeah, sure. Could you please tell me what the top traffic source was that generated those sales? >> Let's take a look at which traffic source drove the most sales for that product. One moment. The top traffic source for sales of liquid instant coffee over the last 30 days was social, bringing in $6,54627 in sales. That's the leading traffic driver for this product. Anything else you'd like to dive into? >> That's pretty nuts, right? I can just
+
+00:07:27
+have a conversation with uh with Sidekick there. But the other cool thing is he actually starts to remember your conversations. So, if I go back into Sidekick and I start a new conversation. >> Good morning, Brendan. Great to be chatting with you. We've already discovered that your liquid instant coffee is the top seller and that social traffic is driving those sales. What would you like to dive into next? >> So, that's pretty wild. Not only can it tell you what data, it remembers what
+
+00:07:50
+you're talking about and you can continue conversations with it. Now, he said good morning, it's the evening here, so I don't know which country he thinks he's in, but uh it's pretty cool. You can just have human level conversations and have human level explanations from Sidekick themselves. So update number four is a continuation of AI merging with Shopify and this time it brings in something called vibe coding. Now if you don't know what vibe coding is, it's basically prompting but
+
+00:08:16
+instead of generating text, it generates code and that means you can build any website, any app, anything you can imagine just by writing out a prompt, right? So that is now directly built into Shopify and you can vibe code your own apps. So let me show you what I mean here. Basically, you can go into Sidekick, and you can get Sidekick to build you an app. So, here's one. Create an app that checks returns and cancellations. You know, create an app that uh that does event preparation that generates discounted checkout links.
+
+00:08:43
+Create a bulk B2B app. You know, create a task tracker. Create an app that re recommends products. You can create anything. You know, I'm thinking about it. Creating an app that matches our batch numbers to our bottles that are tagged on the back of an order, so we know exactly which bottle from which batch goes to which customer. Typically, we'd have to go to the app store and try and find an app that gets you 80% of the way there, but it's usually 20% just isn't very good. Whereas now, you can
+
+00:09:08
+build your own internal apps for your own internal requirements directly in Shopify. Now, I don't know whether or not you can then publish these on the app store and make money out of them, but you can definitely build them internally inside your business and then do the the stuff that you've wanted to do. Now, in one of my Shopify videos, I talked about Sidekick. You'll see it here. And we talked about how you can code directly. You can code sections into themes. You can, you know, you can
+
+00:09:30
+ask it and prompt it and it does all the the backend coding for you. But this takes it to another level and it doesn't just do the theme design and the theme coding. It creates apps for you. So your imagination is the only thing holding you back for this update. Now before we move on to update number five and update number six, which is crazy town, I just want to take you through sort of the way you could look through this updates and get ideas for yourself. So over on the left, you're going to see you've got uh
+
+00:09:56
+you know the different types of updates that we have here. So, what I'd recommend you do is just spend some time reading through it and trying to understand, you know, anything that might apply to your business because there's so many here. There might be some that are really specific to your requirements. But typically, the way the additions work is Shopify, you know, take feedback from people throughout the last 6 months and they implement it and they they uh credit features in the store. So, often when you've been using
+
+00:10:19
+a store and you're like, I wish Shopify could do that. Usually in one of these editions, they do it. So, I just urge you to go through and read everything cuz every one of these is a different sort of update and assigned with every update is a help doc. So, you just click the help doc and you read through and it tells you how it works, right? So, as you get better and better at Shopify, you want to get better and better at reading these help docs, knowing the insights, knowing the updates and uh and
+
+00:10:41
+really making use of the platform. Most people that I work with in our elite program and mentoring program are only using like 10% of Shopify where there's a whole beast of things that you can do that make your lives easier. All right, let's move into update number five and this is where we can use AI to do repeatable skills and we can also use different resources within our Shopify dashboard. Okay, so let's get back to our store. We will open a new Sidekick chat. We'll expand it out. What you're
+
+00:11:06
+going to see here is you're going to see this little plus icon here. Now, this plus icon means that inside the chat you can use different resources. If you've been using Chat GBT, you can see that you can upload files and you can do lots of things in ChatGBT. You can now do it directly in Sidekick. So you can upload files, you can target different parts of the store, you can mention things just like I did with that product mention, but you can also create these things called skills. So skills are basically
+
+00:11:32
+predefined prompts that you can use repetitively, right? So let's just say we want to create a skill and this skill is going to be called best seller 7 days. So what we do here is we can predefine a prompt. We'll call this skill best seller. Cool. And then basically what we do in here is we prewrite the prompt that we want to call on when we do this skill. So give me a list of the bestelling products over the last 30 days and tell me how many units I have sold. So we can use this for repeatable prompts. We click save and
+
+00:12:13
+then now what we can do is when we want to use this prompt all we need to do is forward slash and write the prompt. Click there and then we click go. So this is a reusable skill. It's really awesome. So now it's going through and it's doing it for us. Awesome. So you can see it's given the results. So I'm just blurring a little bit out just so that you don't see my numbers. But overall like it's done a quick thing. So every week I can just pop in and do this. So this is great for reporting.
+
+00:12:36
+You can basically any prompt you can think of you can do there. So you just want to use this plus icon and find out what other little resources they have there. This target one is awesome. So you can choose target and it says select something. So we could select anything here and we can use that as our resource. So we could click discounts here and we could say how can I create uh BOGO and in theory it should go ahead link to that thing and basically tell us all about it right and you can see it's
+
+00:13:03
+pulling in the data. It is basically just doing everything you can think of. It is ridiculously smart. Like I said, Chachi BT Shopify had a baby and its name is Sidekick. But if you're excited by that, then update number five is the thing that changes the game entirely. It is one of those updates. It's basically like when Shopify launched and it changed everything about e-commerce. This one update is going to change everything about not only how you market your business, but how people shop and
+
+00:13:32
+buy products from you using AI. So that does take us to this update and it is called Aentic. So I want you to picture this. 12 months ago, maybe 18 months ago, when you needed something, you would go to Google or a search engine and you'd type in the search engine where to buy this thing, right? There's been a pragmatic shift the way people use the internet and now they go to ChatBT and they type in what's the best thing, what's the best coffee, what's the best trainer, what's the best hat
+
+00:13:59
+and they do it in chatbt and then chat gives a lot of recommendations. Now the problem is they then click and then you go to the website and then you go and buy. But imagine you could just click buy within chat GBT and not only that they could buy your product in ChatgBT. That's what Shopify is now enabling which they're calling Agentic storefronts. And I want to take you through how it works. I'm going to show you how to set it up so that when it's released you're going to have the best
+
+00:14:22
+chance of being suggested by chatbt. Okay. So Aentic storefront is this here. Basically can sell directly in AI chats with built-in tools. So, it's going to integrate Shopify to chatbt. People aren't going to even have to leave Chat GPT to make a purchase. And that purchase goes directly into your Shopify store just like this. So, there's a little video here. You can watch the video on your own time. But basically, someone places an order, goes into Shopify, dispatches out, and they don't
+
+00:14:49
+even leave Chat GPT. You get the money. Everybody is happy. It is super wild. So, in order to set this up, we need to prepare your storefront. I'll show you what you need to do. Go back to your store and I want you to go to the app store and I want you to search for an app which is called knowledgebase. I've already installed it here in my store but this is the app that you need to install because this is where we fill out all the information about our store that is now going to feed chat GPT. Not
+
+00:15:14
+only will it feed chatbt, it'll also feed your own AI inside uh Shopify. So that's going to help with places like Shopify inbox, messenger, all the things it needs to know. This is going to create a you know a technical schema markup in AI language so that when it scans your store it knows exactly the language it's speaking to. So in here when you get started it's going to scan your store and pull in all the information here. Right? But what I want you to do is start adding things into
+
+00:15:39
+this knowledge base because this is going to help you get found within chat GBT so that when storefront is enabled we're good to go. But in order for you to sell directly online you're going to have to enable it. Now enabling isn't ready yet. Uh you need to get notified when it's ready. So, I want you to go back to the winter editions page and click this get notified button right here. We open that and then I want you to put in your email address. Once you put your email address in, click submit
+
+00:16:03
+and as soon as a Gentic storefronts are live, you are going to know and your store is going to be set up perfectly. My guess is now that you've got so hyped about AI and Shopify, you're just going to go in and start playing with it and seeing what it can do. But before you go and do that, I've created a video on exactly how to use Shopify Sidekick on your store to get the absolute most out of it. And it's this video here. Cyrus suggests you watch
+

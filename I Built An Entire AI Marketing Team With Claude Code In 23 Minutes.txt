@@ -1,0 +1,150 @@
+00:00:00
+In this video, we're going to build an entire marketing team of just one person, and that person's name is Claude. We're going to use Claude code to build an entire marketing department for our new product at Linkberry because you got to know like building product that people love and get a lot of value from is really important. But marketing, sales, distribution is really where brands are made or lost. And I don't want you to be somebody who just falls in love with vibe coding and never does
+
+00:00:26
+the sales and marketing stuff. And so in this video, I'm going to show you exactly how to use Claude Code, the tool that you probably use all day, every day for building your products to build an all-in-one AI marketing solution. It's going to know everything there is to know about you, your brand, your product, your features, your customers, your ICPs, jobs to be done, and it's just going to do marketing for you. Okay. Hey, I'm Craig Huitt. Welcome back to the channel. We're calling this
+
+00:00:51
+series building with AI because it's not just product, it's companies, it's money, it's personal satisfaction, productivity, it's all that stuff wrapped up. AI is the biggest revolution I think in my lifetime since the internet and we're here to take advantage of it. Okay. Okay. So, here in cursor, I have a brand new project. I just called it LinkedIn Marketer. And we're going to build this from the ground up entirely together in real time. Okay. So, I'm going to open up the
+
+00:01:18
+bottom terminal here, and I'm going to type Claude to start Claude Code. So, if you don't have Claude Code installed, just go install it. Uh, I did upgrade to the super max $200 month plan because in building link and a few other projects I'm working on, I'm just using Claude code and Claude a ton, like hours and hours and hours a day. Uh, so 200 bucks is really very cheap for me to get whole employees worth of work out, which is what we're going to basically do here. Okay, so I have a couple of references.
+
+00:01:48
+If you followed along with the channel for any period of time, you'll know of like SEO machine. This is another Claude Code project that I created that does long form SEO research, strategy, writing, rewriting, editing for long- form SEO blog content. We're going to take this and have it be the basis for what this in-house marketing team for us does. But this is just going to be one pillar of things, right? because good marketing is like product marketing and website and copy and SEO may be one of
+
+00:02:20
+those and ads and email right uh it's all those things and so this marketing tool we're building is going to do SEO for sure and it'll take just basically a lot of the context we have here then we'll model this to create other verticals other sub aents you might imagine okay so we're just going to grab the URL here and we're going to go back to Claude and we're just going to give it a prompt that's pretty straightforward I I think and it will hopefully form the basis for how this
+
+00:02:48
+goes off and builds our marketing team. Okay, so we'll give it a prompt like this. I want to build an all-in-one marketing machine for my SAS product at LinkBerry. I have an entire repo on GitHub and on my machine that you can reference for things like tools and features and ICP and product related things. I also have a public GitHub repo for a thing I call SEO machine. SEO machine is a long form SEO research strategy and writing tool. I want you to use the kind of concept of how the cla code project in SEO machine is laid out
+
+00:03:28
+to create an entirely new marketing cla project. here. SEO will be one of the aspects of what this marketing tool does, but as will email marketing and paid acquisition like paid copy and direct outreach and social media, all these things, right? Uh I also will need to give you a lot of context about what link is, what its features are, who's its customers are, what they hire link to do. So maybe figure out a way to pull a bunch of context from the actual GitHub repo of the link application or I
+
+00:04:07
+can give you its website. But that's what we're building here. Let's do it. Okay. So it's a pretty long prompt and we'll give it this uh Okay, let's see what it does. Oh, you know what? Shoot. No, I want to I want to stop. I want to uh I want to be in planning mode. So, uh, if you don't know, uh, Claude Code has, uh, kind of regular just go mode and it has planning mode and we want to be in planning mode because this is a pretty big deal and we want to get this right. Okay, so I've
+
+00:04:39
+just copied the stuff from up here to down here and we're going to go into plan mode. So plan mode, I think of it like imagine you're like walking the dog and you're like, "Hey, I want to do a thing." And you just like fire off a text to somebody or a Slack message to a coworker or something like it it's probably going to get done and it's probably going to kind of suck. uh if you then come back and sit at your computer or you write something out on your notepad or something, you really
+
+00:05:00
+think about things and you bounce it off of an LLM or something like that, it's probably going to be a lot better. That's how I view plan mode. And now I'm using plan mode for every new feature that I'm building in LinkBerry and in in most of my content. So like I'm past the point of like this just has to work to where like this has to be good. And so I'm using plan mode to have Claude think through exactly what we want to do. And then it gives me questions like this. Okay. Do you have the SEO machine
+
+00:05:28
+repository cloned locally on your machine? Yes, I have it locally. Cool. So, it's going to ask me these clarifying questions to kind of guide it a little more closely to kind of what what we want to do. Do you have the linker application? Yes. What marketing channels are most critical for your initial launch? Okay. So, SEO is important, email marketing, paid, and social. And I'm going to say partnerships and influencer marketing. Cool. Okay. So that's good. Should this tool integrate with your existing link
+
+00:05:57
+product data? Ooh, super interesting. Hm. So this [clears throat] is why planning mode is so great. I had never even thought of this. Let's I don't know. I don't know the answer. And so I'm going to say not now, but plan a way to do this in the future. Don't handcuff ourselves out of this. Cool. Okay. And so given it the answers to its questions and it's you know so it's went away did some thinking for the prompt that I gave it uh and is now kind of coming back with a better formulated
+
+00:06:28
+plan. Great I can say you want all marketing channels and you want the architecture to support full integration with link berry in the future. However, I still need to know about local repositories provide the path to your local machine if you have it locally or should I wait for you to clone it like cool. Uh okay cool. So I hm how do I get this is uh okay so this is how you get the link to a project on your machine. So, I'm just going to have this come back over here uh and say linkberry repo
+
+00:07:10
+is here and the link berry uh and the SEO machine is the same but just let me just make sure what do we call it SEO machine. Okay, so it's almost exactly the same. So, it's just asking for the link or the route to the repos on my computer, and I just gave it to them here. So, now smartly, and I wasn't really sure about this to be honest, like I haven't haven't done this before, but what is cool is that this cloud code project can go reference and pull content from other cloud code projects. And so, like this
+
+00:07:49
+is not a like one machine to rule them all kind of thing. It's like, hey, this agent, because Claude code is an agent, can talk to this agent over here, can pull things in from this sub agent. Probably can dynamically do that. Like we could set up uh a job or an agent to say like, hey, when you see a new deployment on the link application, pull the latest stuff there and bring that new context back into the application. So, one thing we're going to maybe do with this is like for product marketing,
+
+00:08:13
+have like product releases that are triggered every time uh a new release goes out. It'll write a blog post, help images, all this kind of stuff. Do the same thing with help docs. Okay, I have everything I need. Let me analyze both. Do you want to do this? Yep. Read and just read. Also pretty secure, right? It's reading just locally on my machine. It might be sending it to Claude, but Claude has all my code anyhow and it's stored in GitHub. So like I don't know like my code's out there. Code is just
+
+00:08:39
+not that valuable, right? Like talking to somebody today, they were like code is the least valuable part of your SAS business these days. distribution is the most important and maybe a moat, which is increasingly hard to get. Um, which is why I'm glad to be doing this because I want to be able to show y'all who are mostly kind of technical folks how to do marketing. Uh, because it's the big unlock and the difference probably between like whether your business will fail or succeed. And we love using
+
+00:09:06
+Claude and you know, uh, programmatic ways to market. Uh, and so that's what hopefully this is unlocking. And what I'm imagining here is like you know in a typical marketing team you'd have like this is the content person this is the SEO person this is the product marketing person this is the email person or if you're in a small team that person is one person and they wear like five different hats but is it doing the same thing here in a single cloud code application and the thing that I believe
+
+00:09:30
+about claude code that is so unique versus if we were to try to build this in a standard web you know a python or a Laravel application or something is I just believe that clawed code can have so much more context availability than any kind of like uh segmented fragmented application can. Even if you just took all the same information into a web app, I just believe Claude Code does a better job of performing like I want and giving me the things that I want out of it. Which is why we're choosing to build this here because like
+
+00:10:05
+truth be told, I spent like all last weekend trying to build this in a web app and it's just not very good. And so I think it's going to be better here. Okay, so it has a plan. Let's go through the plan and see what we got. Oh my gosh, this is a big plan. Okay, so here's the plan. Let make this bigger so we can all see it. Oh, sorry. I someone in the uh in the comments recently said that I should make it bigger and so I'm going to zoom in. So my apologies. Uh okay, so okay, so here we have it. Build a
+
+00:10:38
+autoimmune automation system for link berry uh LinkedIn content creation SAS. Cool. So SEO, email, paid ads, social media and partnership uh structure uses cloud directory with commands and agents. So commands/comands are when you intentionally invoke something and an agent is something that kind of runs in the background. Cool. Uh it'll have context folders for brand voice features, writing samples. Yep. Amazing. Python modules for analytics like Google Analytics, data for SEO, readability,
+
+00:11:07
+scoring, etc. Yep. All accurate. Okay. So, cool. So, these are the commands and these are the agents. This is the these are the bits of context here. Cool. Okay. Awesome. Data sources. Uhhuh. Yep. These are so good. These are new. So, the SEO machine, which is like it's public. You can go check it out on GitHub. Uh link will be in the description, has all of these. It's an SEO tool. Now, we're building in uh email analytics, ad performance, uh and social media analytics. Cool. It will be
+
+00:11:40
+able to output these things, which is cool. So, the SEO part has a little more robust framework for like research, drafts, and publish. That's okay. We might add that to this later. Uh and then templates for uh like a better starting point. Cool. Create directory structure above. Extract link content from the application repo. Awesome. It will fill in this stuff, which is awesome. So, we don't have to do this. Adapt SEO machine for linkberry. Yep. Email marketing. Uh, I love how it says
+
+00:12:08
+week three. This will all take about an hour. Um, [laughter and gasps] okay. So, it's going to do the same thing for paid and for email and for social and maybe ironically like link will do all of our social, but I want a way I can go do this in Claude Code anyhow. And so, we're kind of duplicating some of the content partnerships and outreach. So, like who I should reach out to? uh you know like okay fine I probably will add to this later a research thing so like hey go find me 10 influencers or people
+
+00:12:37
+uh in this space that I can reach out to that but that's fine for today that's fine integration points uh to pull in link berry uh so we won't do this uh analytics yep yep yep all good multi-point architecture context driven everything future proof iteration make it okay so in a few minutes of kind critical thinking and a bunch of context because it gave it the entire repo for our application. We gave it our website which has just it's a landing page right now. I'll I'll show you the landing
+
+00:13:07
+page. This is the landing page, right? So, there's not like a lot here other than like there's some pretty good messaging here. There's not like a lot here that would be stuff that the AI Claude in this case can't get from the repo uh about like how we work and stuff like that. But in just a few minutes, we've kind of set forth the So, we're just going to give it like do whatever you want. Uh, in this I forget how there's a there's a suffix to a command you can give that's basically like yolo
+
+00:13:34
+mode. It'll just like do everything forever. Uh, I forget what that was, but we should have done that for this. And so, uh, I think critically what this does is it alleviates the need for you to fill in all the context because it's getting the context from SEO machine as an example and you can do the same. uh like hey set this is one pillar set up the whole thing just like with this as one pillar and then do the same thing for email and for ads and for social cool and because that's really like what
+
+00:14:00
+marketing is right marketing is like content I put out on like it's not YouTube we're not doing we're not talking YouTube and podcast which is like a whole different ball wax uh I may make a cloud code project for YouTube that'd be cool um if you want to see that drop a comment in below I have some ideas on that um but but if you want to do that drop a comment if we get enough comments I'll make that one and and so it's building all of the tooling and agents and slash commands has all the
+
+00:14:22
+context that's shared amongst all of them. So just think about like your employees, right? Oh, I need to know about the product and the positioning, the website and the customer reserve. Like it's going to know all that across the entire organization here, which is our cloud project. And then it's going to go execute on and it's going to be really good. And if it's not going to be good, we can build this continuous feedback loop to say like, hey, uh, this article wasn't great because of this.
+
+00:14:42
+Like please adapt what you're doing in the future to be a little different, right? And so what we can do here is we're going to put this in GitHub and we can train our team to access the GitHub repo, download this or clone it or whatever you want to call it uh and then run this extremely powerful marketing tool that's like world class of these five kind of pillars of marketing um with all the context that we have. So instead of them maybe not so efficiently going to freaking chat GBT and saying
+
+00:15:11
+can you write me a product release email and copy and pasting and uploading and all this kind of crap. It's going to be like hey everything that anyone who's doing marketing needs to know about our brand is in this cloud project. You can open this thing up and fire off a command for it to go do stuff and it'll go do it. And so I just want to build this mostly as an example of like what's possible. This is going to take about 30 minutes to build out. So, I'm going to pause. I'm going to come back and we're
+
+00:15:38
+going to execute this and see the results of what it comes up with. Okay. So, about 15 minutes for uh our LinkBerry marketing cloud project to duplicate the entire SEO machine cloud project and get context from our local application GitHub repo. Okay, I want to show you exactly what it did and then what it has planned, what it's going to keep doing after I tell it to get back to work. Right. So, it says, "Hey, I've completed uh the link marketing machine. Here's what's built. So we have
+
+00:16:06
+dotclaude folder with commands. So if I clean up my stuff over here. So we have agents and we have commands. So we have SEO optimizer agent and we have a research and a writing command. So we can type / SEO- write and then a topic and it'll write it on it. And we're going to show that in just a second. It has a context folder which is uh a bit about brand. So we have like messaging that and it just pulled all of this from our repo, right? Uh, it pulled all of this information about kind of who the
+
+00:16:33
+Linkberry brand is, what it stands for, results over vanity metrics, uh, ghostriter quality at AI speed, right? I I literally just I went and made a coffee while it was working. I didn't have to do anything. And so, like, that's like a lot of things. This is like 90% right. And so, you'll want to go through and like look at this, be like, "Yeah, that's not quite right." Or, I want to add a little bit here, or I want to add examples of other content that I've written about this, or I want
+
+00:16:56
+to pull in call transcripts from like I've been doing early access calls. I'm going to pull in those call transcripts uh to give like actual voice to the customer stuff. Like that's the kind of stuff you should do is put as much context in here. So the application knows everything there is to know uh about you and and your customers and your brand. Okay. So that's uh brand here product. It knows product features cuz it has access to the GitHub repo. It has a LinkedIn integration obviously. It
+
+00:17:23
+has analytics and performance track performance tracking. Uh it has a trial system, multi-authentication, but it also has like voice-based profile. It has a concept of like interviews. So the link berry as a system will interview you just like a ghostriter would uh and then pull bits from the actual words that you're saying to create your authentic voice as content calendar and scheduling all this kind of stuff. So right ICP, positioning, use cases, value props, all done for us, right? And then
+
+00:17:49
+it's smart. It knows how SEO works. So content topics and clusters and pillars like the hub and spoke kind of model, right? Uh it knows all about all of this stuff. So when we go to like research and strategize and write, it's not just writing some dumb piece of content. It's like, hey, this is uh the article I want and how does this fit in with like this larger piece of content, this cluster. So it did all of this stuff. It did all this in about 15 minutes while I went and got a coffee. It has a detailed
+
+00:18:18
+readme which is like uh you know cool. Um I can start creating uh SEO content which we'll do in just a second. Uh and so we'll do SEO/ressearch. I don't have data for SEO hooked up yet which is just a data service kind of like hrefs to show like where other things are are ranking. I don't have those. They should be like environment variables. I don't have that service hooked up but we can we can do the SEO right and we'll do that here in just a second. Uh, so to customize, update this and these two to
+
+00:18:47
+make sure they're accurate because they tried best it could and in about 15 minutes it's pretty darn good. Um, but we'll want to customize this. And then these other pillars, if you will, of marketing, these other marketing agents aren't done yet. And I think it's just cuz it ran out of context. It knew it was going to run out of context. And I ran SLcontext and I saw like, okay, gosh, we're really close to compacting this conversation. I don't want to do that because when you compact a
+
+00:19:10
+conversation, you lose some of the context. So what I said is build a comprehensive product roadmap for the features we discussed and are planned but not yet imple implemented. This is for cloud code to reference in the future and so it made this and the SEO foundation is complete and now it's going to go build these and it knows all the stuff right it pulled this from the plan document probably the plan bit of context and put it here in a safe place for it to reference later. So I can go wipe out the context window here, which
+
+00:19:40
+I'll do in just a second. And have it go build the next step. And I don't fear that like, oh, this is lost forever, right? So we're going to clear the context. No big deal, right? Cuz it's all right here. Like everything is right here. Uh, and we're going to test the SEO, right? Uh, so I'm going to slash SEO, write optimize LinkedIn profile. Oh, gracious goodness. Why is that not uh uh I think sometimes you have to quit cloud code and come back. Let's try that for slash commands to work. I run into
+
+00:20:15
+that slash SEO. Yep. Okay. So, if you're into that, just know that sometimes you have to uh SEO writes. Oh my goodness. Why do why do I have caps lock? Why am I yelling? Uh uh so how to optimize your LinkedIn profile. Cool. So, didn't hook up any of the research stuff, so I can't show that off, but I can show off how to write, how it's writing. Uh, look, it's reading brand voice, product features, product ICP, value, props, messaging. Amazing. Just like any good, you go hire a
+
+00:20:45
+thousand article writer, it's going to do these things. It's like, hey, who are you? Who's your company? Why do you matter in the market? What lens should I write this piece of content through? It's doing that. Super smart. It's thinking. It's going to go away and it's going to outline first and then it's going to do all the like metadata stuff and it's going to write each bit one part at a time. And like I honestly I won't be surprised if this is like a B
+
+00:21:09
+if I if I I'll give it a B, I bet. But it's going to I'm going to give it a B cuz I haven't done much work at all in telling this how to write. So it's going to write this. It's going to have my brand voice keywords naturally. It's going to go do a brand brief which we didn't build. Uh but that would be smart. Like that's how any good work is done. You plan it first. It has a hook, a problem, a promise, and credibility. That's cool, you know. So like it did a
+
+00:21:33
+lot of this good like this is typical like best practice stuff naturally mentioned in linkberry use cases and CTAs problem solutions. So like out of the box, not surprisingly, it's pretty good. But you know, I might come in here and tweak things. Maybe this isn't exactly on brand for me. This is not enough internal links or too many or external links. A conclusion, maybe I want it to be shorter, longer. I I don't know. But like in 20 minutes, we built a really good starting point for a lot of
+
+00:21:59
+the content and the marketing that we want to do. So, we have content basically done. Just waiting for this to output its first piece of content. Then, we're going to have email and we're going to have ads and we're going to have social uh and we're going to have partnerships in about an hour. Right? So, once this is done, I'll just say go make the rest of the stuff on the road map here and it'll do it. And it's 3:00. By the end of the day, I'll have an entire marketing department that's done
+
+00:22:26
+and ready for me to start using. And I can share this to my team. I can put it up on GitHub. They can pull it down. They can play with it. They can optimize it. They can enhance it. Uh and it'll be great. Okay, cool. So, this is done. Do I want to allow edits? Yeah. Uh and so this is in the output area. Uh let's see. Drafts. Yep. How to optimize your LinkedIn profile. Complete 2025 guide. Yeah, like this is good. This is good. I mean, I think this is the state of of like content and SEO these days, you
+
+00:23:03
+know, like you're not paying $1,000 an article anymore. Okay. So, here in about 20 minutes, we set up the infrastructure at least for an entire marketing department for our business and the ability for anyone on your team to orchestrate this. They just have to know how to use cloud code and stuff. And so if you're using cloud code, this is absolutely accessible to you. You just have to give it some examples, which you can in the SEO machine example. It's open source. You can take a look at it
+
+00:23:27
+and then describe what you want it to look like. And then marketing is at your fingertips right here inside Claude Code, which is the most powerful AI tool on the planet these days. I'm Craig Hwitt. I hope you enjoyed. If you did, please like, subscribe, smash the bell. We'll see you soon.
+

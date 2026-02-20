@@ -1,0 +1,147 @@
+00:00:00
+Does the word clawed code or terminal still scare you? Well, if you're a marketer, content creator, or business owner who's not very technical with AI, this is going to be the perfect video for you as I'm going to show you step by step how to set up clawed code for people who are non-technical just like myself and then also show you a realworld use case after setup. So, be sure to stick around for this full video. And if this is your first time to the channel, welcome. My name is Ryan. I
+
+00:00:29
+appreciate you being here. And if you want to know my favorite AI tools, prompts, automation templates, and even my Clawude skills coming soon, be sure to get my free AI marketing essentials guide. You can find the link for this in the video description or pin comment below. I've also opened up my AI community for free with a ton of excellent resources in here. So, if this interests you, you can find that link in the description below as well. So before I uninstall everything and set up Claude
+
+00:00:58
+Code from scratch, I first want you guys to realize that the term Clawed Code is very deceiving, right? It makes it sound like you have to have some coding or technical background in order to use this tool, but that is not the case. And I'm starting to use this every single day for realworld tasks like copywriting, when it comes to content creation for social media or emails, when it comes to creating AI images, pairing it with NanoBanana Pro via API, and generating YouTube thumbnails just like this one. And I'm going to show you
+
+00:01:29
+exactly how I did this later on in this video. But I first wanted to tell you guys that if you're scared of the word code or terminal, don't be afraid as you really don't have to have any technical or coding knowledge in order to use clawed code. So the very first step in setting up claude code is installing what's called an IDE, which stands for integrated development environment. You can think of an IDE as kind of an all-in-one workshop, which is much e easier to use cloud code versus just
+
+00:01:59
+pulling up a terminal on your Mac or Windows PC and trying to manage everything through a terminal. Now, VS Code or Visual Studio Code is a popular IDE, and that's what I use for claw code. You can also use cursor. You can also use Google's anti-gravity, but just from my experience, I found better results working through VS Code when it comes to just clawed code. So, I would recommend doing that. I will leave a link to VS Code and everything else in the video description below. So, I'm on
+
+00:02:28
+a Mac. I believe it's the same process if you're on a Windows PC. So, I'm going to go ahead and click download for MacOSS and I'm going to go ahead and download VS Code and then come back once the application is downloaded. All right. So, after installing the VS Code app and then launching it, your screen should look something like mine. Now, the next step here is we need a folder to use within our workspace. So, what I'd recommend you do is just simply create a new folder on your desktop. I'm
+
+00:02:55
+going to go ahead and rename this uh we'll do YT for YouTube cla demo. So, just create a folder. I'm going to put that screen back where it was. Now, what we want to do is click open folder on the left menu here and let's find that folder that we just created. So, here it is. YouTube Claude Code demo. I'm going to click add. And now you'll notice that folder is added inside my work workspace, excuse me, with VS Code. But we haven't actually installed Claude Code yet. And there's a few ways to do
+
+00:03:25
+this. You can install it through the terminal right here on the right. Or what's nice about VS Code and other IDEs is they have what's called a Claude Code extension. So if you click extensions here on the lefthand menu, let's search for Claude Code. So I'm going to type in Claude Code. Now, very important here is there's a lot of I would say copycats or fake extensions of Claude Code that we don't want to install. Make sure that you install the official Claude Code for VS Code extension by Enthropic. So, go
+
+00:03:56
+ahead and click install. And that's it. Now, we've installed Claude Code on our device. And you'll notice an icon here with the Claude logo. So, go ahead and click that. And you'll notice we've now installed Claude Code and we can start using it within VS Code. Now, if you want to also install Claude Code through the terminal in addition to using the extension, which I would recommend you do, you simply want to come to this page right here, which is just Claude Code overview. I'll leave a link to it in the
+
+00:04:25
+description below. You want to find the correct command. So, I'm on a Mac OS. If you're on Windows, you would obviously install a different one. I'm going to go ahead and copy this command right here. Let's go back to VS Code. Make sure you click terminal on the right hand side. I'm going to shrink this screen right here so you guys can see what I'm working with. And then once you open the terminal, I'm simply going to come in here and paste that command. Click enter. And then this will install Claude
+
+00:04:50
+Code on the terminal. And so what's, you know, what's good about this is you can open up multiple terminals at once in addition to the extension and have Claude Code working on several tasks at the same time. As you'll see here, installation complete. So, I've now installed Claude Code both on the terminal and as an extension inside VS Code. I also forgot to mention too that you can install Claude Code through the Claude desktop app. So, if you wanted to install that and that way you can use
+
+00:05:21
+what's called Claude Co-work if you wanted to try that without using an IDE like VS Code, which I wouldn't recommend, you can do that as well. I'll leave a link to the installation in the video description below. Just wanted to call that out before I forget. So, after you've installed the Claude Code extension or set it up through the terminal, the next step here is we need to pair our Claude subscription or you can set up an account through Enthropics Council if you want to pay as you go
+
+00:05:47
+with APIs. I would highly recommend you don't go the Enthropic Council route. That will end up costing you a lot more in the long run versus just getting a paid Claude subscription. And speaking of paid Claude subscriptions, you have to be on at least Claude Pro in order to use Claude Code at all for 17 bucks a month. But I'm going to be brutally honest with you guys. In order to get the most out of Claude Code, you need to be on the Max plan, which starts at $100 a month. That's the plan that I'm on. Or
+
+00:06:17
+you can do the $200 a month Claude Max plan, which gets you 20 times more usage than the Pro plan. So once you have a paid Claude account, you want to come back here and click Claude AI subscription. Go ahead and click open once you get that message. And then I'm going to go have to head and pair. Yeah, you're going to get a message here that says Cloud Code would like to authorize. So go ahead and click authorize. And then this should authorize my paid Claude subscription within the VS Code
+
+00:06:45
+extension. Yep. And as you'll see here after a few seconds, it says build something. Great. You're all set up for cloud code. Now you can close this window. So, I'm going to go ahead and minimize this window. And here I'm now successfully logged in to Claude Code within VS Code. Now, before we go too far down the Claude Code rabbit hole, there's a few settings and preferences I'd recommend checking on before we just start doing some work. So, I'm going to go ahead and click the slash button on
+
+00:07:11
+my keyboard. And for those who have already been using Claude Code, you're familiar with all the different slash commands that you'll see right here. But first, I would just start simple. I would go under model here and click switch model. And I would just leave this on default, which is Opus 4.5. I think that's arguably the best AI model right now. It's my daily driver for all sorts of business tasks. But I just wanted to show you where you can change the model if you're concerned about
+
+00:07:36
+usage or maybe you want to try sonnet, etc. Now, in addition to that, I'm going to go ahead and click the slash button again. Thinking. So, by default, extended thinking mode will be on. I'm actually going to turn this off as most tasks that I'm working on, I think extended thinking might be overkill. Now, you can test it, turn it on and off and see what you get for the results here, but that's also going to drain your usage a lot faster versus having extended thinking mode on. For account
+
+00:08:02
+and usage, if you're worried about when you're going to run out of credits and whatnot, this gives you a good overview of your current session, how much usage you have, usage, excuse me, you have left, your plan, etc. And you can also go down and look here at some of the advanced settings like MCP servers, output styles, agents. This is going to require you to open up a terminal and configure it through the terminal. And then we can also start getting into the weeds of slash commands. I'm not going
+
+00:08:27
+to cover any of that in this video. If you want to log out, you can click switch account, view help documentation, etc. I just wanted to show you that first before we get too far down the claude code rabbit hole. So, I know I told you guys at the beginning of this video to create a brand new folder, which if you're starting from scratch, you definitely have to create a new folder and then open it within your workspace. But the more I thought about this, I figured it would be more beneficial in this video to show you
+
+00:08:54
+guys my Claude code setup here and explain why I'm doing the way I've structured things, just what I have going on, and maybe that'll spark some inspiration here. Now, keep in mind I run a marketing agency and I'm also a YouTuber of course. So, that's the reason behind my structure and just like anything else in AI or file management in general. The more organized you can make your structure here within cloud code when it comes to folders, subfolders, files, uh markdown files
+
+00:09:23
+with different skills, it is going to make your life much easier. Trust me, I've spent probably hours thinking about how I'm organizing this setup all the time. So on the top left here, you'll notice I have a main folder for marketing. So whether that's a client, so I have a client subfolder, email marketing, SEO, social media, etc. I also have a skills folder. So this skills folder holds all of my different skills, which I'm going to talk about that in a little bit, where all these
+
+00:09:51
+different skills for designing emails, designing images, um you know, anti-slop skill, YouTube SEO packaging, different client skills, paid ad skills, etc. And then I also have a folder for my school community. And then I also have a folder for my YouTube channel. So I have a subfolder for my podcast. And then I also have a subfolder for thumbnails. So generating YouTube thumbnails. I have, you know, different skills and then different files inside this subfolder. But this in general here is how I'm
+
+00:10:20
+structuring my entire Claude code setup. Now, I know there's a ton of nuance here as my Claude code setup is going to be very different than what your setup is depending on what you're working on, but I just wanted to show that from a high level. Next, I'm going to get into Claude skills a little bit here. I'm going to be making a dedicated video on Claude skills at some point in the near future, but I just wanted to quickly show you how to create this and why this is making me use Claude Code every day.
+
+00:10:48
+Skills are super super important here. So notice I have several different skills for various tasks that I'm working on. And so in this example, what I'm going to do is I'm actually going to create a skill very quickly. Now, there's more advanced ways to do this, but I'm going to create a skill very quickly based on existing content or a project that I already have. So inside my Clawude account on the web app, I have a Ryan Dozer personal brand project. Now, you can apply this exact
+
+00:11:17
+same thing if you're using a custom GPT or a chat GPT project. And I'll leave this prompt in the video description below. So, essentially what I did here to create a skill is I found the best practices for creating Claude skills with Claude's API documentation. So, I literally came to this page, clicked copy page, pulled up Claude, used Opus 4.5, pasted it right in here, and then I also gave it the following prompt. Based on the Claude skills documentation, I want you to create a skillmd file that
+
+00:11:49
+mimics my writing style for Ryan Dozer. So if you have a project or a GPT for writing emails, writing blog posts, uh maybe generating YouTube SEO packaging, I don't know, whatever the task is, you can come into that project or GPT and follow the same process that I'm doing here. Refer to my recent chat history instructions and files in this project to help you create a skill. And then I gave it some of my main tasks. And then after about a minute or so, it went ahead and came up with this skill right
+
+00:12:19
+here that's in markdown format. And so what you can do here is you can click copy. And I'd recommend just doing it this way. Opening up a brand new Google Doc. And then we're going to go ahead and paste it inside a Google Doc. Now, what you want to do is click file. This is important here. Actually, we'll name it first. Let's do, you know, Ryan Dozer. Let's just do demo skill. We'll just name it that for this example. So, make sure you name it, click file, download, but make sure we're
+
+00:12:47
+downloading this in markdown format. As you'll see here, it's now downloaded in markdown format. So, I'm going to find that download here. Drag it off to my desktop. I'm going to minimize this window for Google Chrome. And then here is my skill. And all you need to do to add a skill inside Claude Code is simply drag it over to whatever the relevant file here is. So, here I have a skills folder. I'm going to drop that in. And then here is that Ryan Dozer demo skill. And if I click on it, notice the content
+
+00:13:17
+here inside Claude code. It's showing me all the different contents of that markdown file. Now, very, very important here. I'm not saying that you should just use this verbatim based on the reply that I got from Claude and start using this skill. You want to make sure that this obviously is correct. The better inputs that we can provide, the more context we can provide, the better outputs that we're going to get. This hasn't changed. This is the same with chat, GBT, Claude, Google, Gemini, etc.
+
+00:13:45
+And what you can also do if you want to view this in a cleaner interface, per se, is you can come up to this tab, rightclick, and then click open preview. This will open up a new tab and I would say a cleaner layout of what that skill or markdown file is all about. That way, if you want to come in here and easily change something or just get a better highlevel overview of what this skill accomplishes, viewing it in preview is a really good way to do that. But now let's quickly test this skill here. So
+
+00:14:12
+what I'm going to do is come over to the chatbot and I'm going to do the following. Draft a social media post for LinkedIn about the trust recession and how AI is destroying trust. And here is the important part that I want to call out. I gave the exact names of the skills that I wanted Claude Code to find within my files and actually use that to help in its output. So notice here it says read Ryan Dozer social media.mmd. It read my social media skill. read anti-slop.md. So, it's reading my anti-slop skill. And
+
+00:14:43
+here at C, you came up with a basic social media post for LinkedIn. Now, you might be wondering, well, Ryan, how is that any different than going to Chad, GPT, or Claude and getting a social media post like that? And it's not. But here is the magic of Claude code. It's an instant feedback loop. I'm going to reply and say don't ever use m dashes in your outputs and make the hook more scroll stopping but more importantly update the Ryan dozer social media MD skill so you don't make these mistakes
+
+00:15:12
+in the future. I'm going to add skill right here. Click enter. And then what this is going to do is it's going to update that skill markdown file in real time so it doesn't actually make those mistakes ever again. So it came back and it came up with a new hook and whatever. But this is the important part right here. Notice that little line highlighted in green where it says never use m dashes. Use periods or commas instead. So clawed code automatically went in there and it's highlighting the
+
+00:15:40
+change that it's making inside my markdown file. So I'm going to go ahead and click yes. And then it should go on to say that the skill is updated. I'm going to skip ahead and wait till this is complete. All right. So here again we have another edit request as it relates to the hook because remember that's what I came back with. if I wanted it to edit that hook and make it more scroll stopping. So in red, this is what I currently have right now on that markdown file. And then in green, these
+
+00:16:05
+are the suggested changes. So I'm going to click yes. Again, I hope by now that you guys are seeing the power of this and how this is so important at scale when you're dealing with a lot of different skills and you want to constantly update them to get the best results possible. So now let's explore a more advanced use case of claude code, which is generating YouTube thumbnails. It's obviously a very realworld application for not only myself but a lot of marketers, content creators, etc.
+
+00:16:33
+And so you'll see I started fresh. So all I did was close out those tabs. And to start a new chat in Claude Code, simply click this plus icon to start a fresh session right here. So what I'm going to do is prompt it with the following. Generate me a YouTube thumbnail for the video titled I quit Chad GPT in 2026. That was a very recent video that I did. basically letting you guys know why I'm canceling chat GPT plus. I'll leave that in the description below. But let's say I want a brand new
+
+00:17:01
+thumbnail for this and I can use Claude code to help me create it. Use the skill YouTube thumbnail designer.md. So I have a skill that's dedicated for YouTube thumbnails. So you need to make a skill first and you can't just say make me a thumbnail. You have to have a reference and context so it knows what it's doing. And I said I also refer to my YouTube thumbnail assets folder for past examples. That's a very important point here. So if I click the drop down on my YouTube folder, you'll notice here I
+
+00:17:29
+have a YouTube thumbnail assets folder where I have head shot, logos, thumbnail examples, and UI elements. So here I have five of my best head shot for YouTube thumbnails that I actually got this prepared. So again, it knows all the context about me, what head shot I like, what logos I like using. So in the logos I have Enthropic logo, Chad GPT, Claude Code, Deepseek, Gemini, etc. So it knows where to pull those logos from. And then for thumbnail examples, I've uploaded all sorts of different
+
+00:18:01
+thumbnails from my channel of what I would call highquality thumbnails so that I can have something else to reference from. So I'm adding all of this context and reference to let Claude Code better understand what a highquality YouTube thumbnail looks like. So notice here I said YouTube thumbnail assets folder for past examples. Give me two variations of thumbnails. Use my Google API key for NanoBanana Pro from Open Router which you should have saved. And that's a little more technical detail here. But
+
+00:18:31
+what I've also done is I've created a skill called Nanobanana Pro API best practices. And all I did to create that skill is I found the official documentation for Google's Nanobanana Pro image generation. copied this entire page and said, "Generate me a skill mimicking best practices of this API documentation." I'll leave a link to this in the video description below. And then once you have that skill, what I also did, and you need this in order to generate thumbnails like I'm about to
+
+00:19:02
+show you, is generate an API key. Now you can do this in Google AI studio if you want to generate an API key that way or you can use a platform like open router if you want to generate an API key through open router. This also works as well and that's what I've been using. And so what you want to do and I'll leave open router in the video description below if you want to create a free account add some credits. You would click create an API key. So you have an API key dedicated for Claude
+
+00:19:30
+Code. And then what you would do is obviously insert that into Claude code in order to know exactly what it's pulling from. So I know that sounded like a lot here. I'm going to go ahead and click enter and then I'm going to skip ahead and wait till Claude Code responds. All right. So in about 60 seconds, Claude Code with Google's NanoBanana Pro API generated these two YouTube thumbnails right here. And before I show you the results, notice all of the things it was doing within this process, right? It was looking at
+
+00:19:58
+all the skills. it was referring to my open router API key. So you can go back and see exactly what it was doing to come up with this output. So let's look at the exact image files that it created. And so I have a folder titled generated thumbnails, which again goes back to the importance of making sure you're organized. So every time a thumbnail is created, it should go in this generated thumbnails folder. Here is the first thumbnail that it created. Not a bad start. Obviously, I want to
+
+00:20:25
+add text, a headshot, maybe some other logos in there. And here is the other thumbnail that it created. Again, not bad either. And so what we can do is again reiterate and refine. Add bold white text on the left that reads chat GPT sucks. Also add my headsh shot on the left using this file. And so what I did is I told it to reference an exact headshot. So if I find my head shot folder, here is the headshot that I want it to reference. And so now we're going to come back again, hit enter, and then
+
+00:20:55
+see what this new thumbnail looks like. All right. And here is that revised thumbnail from Clawed Code. And by no means is this perfect. It's definitely not bad. And you can keep refining this to get the final output that you want. One thing that I've started doing, too, is that sometimes it can get a little iffy when you start using head shot and having Claw Code generate that way. What you can do is maybe just give it the background or even the background with some text like this where it generated
+
+00:21:22
+the text, the background, the logos, etc. Pull that up into Canva or Photoshop, have a list of headshot PNG files ready to go where all you need to do is drag and drop those head shot, save it, and then you're done. Yes, it's an extra step there, but that takes 30 to 60 seconds and it looks higher quality versus sometimes going back and forth with clawed code and the head shot won't always be there. Now, the important caveat here is if as Google's AI image models continue to improve,
+
+00:21:51
+remember this is Nano Banana Pro. This isn't clawed code. So, as those image models continue to get better, this process will only continue to get better. And the best part about all of this, if I look at my activity in open router, it costs only 14 cents per image to create. So if you think about this at scale, once you get those SOPs dialed in, once you get those skills dialed in, right? This is a very efficient process at scale versus hiring a thumbnail designer potentially or opening up
+
+00:22:22
+Gemini in the web app and going back and forth and waiting minutes if not hours to get highquality thumbnails or pulling up some confusing NN automation to generate thumbnails where if one of these nodes breaks well then the whole automation falls apart you're troubleshooting etc. I hope you guys are starting to see the value of Clawude Code for a use case like this of generating YouTube thumbnails. And this is just one of many use cases and I'm going to start covering more of this on my channel in the near future. And so if
+
+00:22:51
+you've made it this far into the video, I truly appreciate you. And if this video also helped you overcome that fear of learning Claude Code for the first time, let me know in the comments below. Give me a thumbs up and also subscribe to the channel. But most importantly, I hope you all have a great day.
+

@@ -1,0 +1,150 @@
+00:00:00
+If you're still using bid caps, cost caps, or interest targeting in 2026, your ads are, as the kids say, cooked. We've helped 300 clothing brands generate over a $100 million in the last 12 months using a totally different setup. In this video, I'm going to break down our threepart scaling system and show you what it actually looks like inside of Ads Manager. So, now I'm doing this backwards. All right, so you can see inside of Ads Manager, doing this a little bit backwards so I can show you
+
+00:00:25
+the end result. And then let's go back to the beginning to find out exactly how we got here. To give some context, this is maximum. So it says 2022. This is actually only a brand that has been around for roughly 12 months. $34 purchases. As you can see here, some purchases over 2,000 at this particular campaign. $12, $23, $23, $12, $21. All right. It has made a lot. We have spent a lot. So essentially right here, we have 109 purchases. is I can sort this by total purchases. 3,000 purchases,
+
+00:00:57
+2,000 purchases. Essentially, what this is saying, it's kind of a weird new metric. Maybe you have it, maybe you don't, but basically this is the rorowaz return on ad spend 4.35. It's saying value and purchase here. I guess maybe to make a little bit more sense here. On average about a 4x return, spending hundreds of thousands of dollars. So great, we'll we'll get into this. We'll talk through the setup, the campaign, and everything that matters here inside of Ads Manager, especially in 2026 as we
+
+00:01:22
+started to make these changes and see the results and as we scale. But I'll get into those. But before we get into all of that, all the results, I just want to say a quick hey, howdy, and hello. So, if you're new here, my name is Aaron and alongside my business partner, Christian, we built this channel for you, the frustrated brand owner who wants to build something bigger for themselves and provide for their family. So, we're here to help you optimize your clothing store. Please make sure that if you have found any
+
+00:01:48
+value at all, that you make sure that you hit that subscribe button. If you do it in the next 3 seconds, I'm going to share with you a book that you should read this year, no matter what. It's very short, but it will actually help you grow your business and it will help you in your personal life, too. It's a book called Who, Not How. If you've never read it, check it out. Promise you it is an amazing book. It is by Dan Sullivan. Go check it out. Who Not How. Now, before you launch another ad, ask
+
+00:02:11
+yourself, do you actually know who you're selling to? We're going to jump into these documents. I also have a GPT. We may pull that up here as well that you can use, you can copy. Same thing for these documents. I will show you how you can get them and take advantage of them. I'm not just going to show you on the screen and then just assume you know how to grab this stuff. You can actually have those documents. The biggest mistake that I see from every single brand, whoever does not make it, is that
+
+00:02:37
+they make assumptions about who their audience is versus letting data driven results actually guide their business. So, you're going to focus on the struggling avatar. This is a box over here. This is your struggling avatar. Then you will go through and we'll talk through these other sections as well. But everybody starts with a struggling avatar. There's a problem. Okay. So the struggling avatar is focused on what is the problem. If there is no problem, you will not get sales. How does that affect
+
+00:03:09
+meta ads? Well, a lot. Okay. This setup is going to make sense here in a second. I'm also going to talk through content creation and the actual structure inside of your campaigns. But if you get this part wrong and you're getting ready to skip to the end, you will not make money. You may make a couple of dollars, but you will not be able to grow and scale. Most brands who get to seven figures or eight figures per year, they have figured this part out. A struggling avatar is somebody who understands the
+
+00:03:35
+problem, which is why I'm a big fan of if you have a skateboarding brand or surfing brand, you have skated, you have surfed. If you're a Christian clothing brand, it's probably better for you to be a Christian because you actually know that audience. They're the struggling avatar. We go through your core values, your identities, your experience, your past struggles, right? And then you realize that you are the struggling avatar. And once you understand that, everything else becomes a little bit
+
+00:04:00
+easier because you can use your stories or adjacent stories to dive deeper into your audience. And some of you guys may say, well, I'm just going to set up a flatlay of my product and let it do the selling. And yes, you can make some sales that way. But again, we're not trying to just make some sales. I'm trying to build a brand. There's a big difference between selling products and building a brand. So, if you're here, it's because you probably want to build something that's going to make a little
+
+00:04:26
+bit more than a couple thousand dollars per month. Struggling avatar moves into what we consider a unique solution. So, the unique solution, this is your product. Okay? This could be a t-shirt. This could be a sweater. Most people think that this has to be something technical like this is a moisture wickening shirt or this has to be like sweatproof leggings. That's not the case. The unique solution can be the identity that somebody embodies by wearing your product. So in this document, go through unique solution. Um
+
+00:04:57
+you'll find out right through a series of these questions what it is that helps you stand out. So go from here to the unique solution and then you go to what we call a future pace hero. Basically, what is life like afterwards? And over here on this document, I have a smiling guy here, but basically what is the outcome afterwards, right? What is their life going to be like afterwards? Some brands that do this really well, right? So, if you want to buy a Louis bag, they are selling the fact that if you get
+
+00:05:31
+this Louis bag, you're going to look like you have more money. you're going to be perceived as somebody who has more money and then you will walk higher. You'll have your chest out. You like feel better about yourself because you're in a different class. You know, the funny thing about people who buy Louis bags and there's different levels also, right? Chanel, etc. But the people who buy Louis bags actually have way less money than than most people. It's because they are aspiring to want and
+
+00:06:00
+let other people think that they have money too. But truly they don't make a ton of money. They're just aspiring to. Right? So this is the aspirational identity that you are helping create. So what is the problem? What is the unique solution that you can explain to your audience on how your product is different? And then what is life like afterwards? Again bringing this all full circle here. You have to understand what it is that you offer to the marketplace so that you can then create content. And
+
+00:06:30
+I will again talk through content as a huge driving factor here because without content it's very difficult to run ads on meta on Facebook. Okay. So you've got to have a problem to be able to solve. You've got to have a solution to that problem and then you have to be able to create content around that. It's what we're going to talk about here in a second. So your audience shouldn't feel like your ad was made just for them. That's how you scale. The more specific you can get, the better your results.
+
+00:06:56
+For example, let's just talk real quickly here. If you are a new clothing brand, you're probably trying to figure out how do I set up my website for conversion? How do I drive traffic to the site? How do I create ads? For example, maybe you're doing that now for a brand that's doing 50, 100K, 200K per month. You're now trying to set up systems in your brand. Maybe you're trying to figure out, do I move to a 3PL? I've been doing it out of my garage. How do I increase profit? How do
+
+00:07:21
+I get customers to come back? If you're trying to do your first million-doll month, it's a volume play. How do I build a team? How do I make sure that my systems are in place at scale? How do I make sure that I'm creating content? How do I know that I'm building an actual brand? Like, there's questions you have to ask at every single level. And the more specific you get, the better your results. Let's review the types of content here, okay? Because if you have this struggling avatar, the unique
+
+00:07:49
+solution, your future pace hero, and you know who your customer is, then you can then create content for them. We use a tool internally called stands for OSOs. This is optimized store owner. This is our program for clothing brand owners and we use what's called a content scaling strategy. Just a fancy phrase for basically saying here are examples of content. You have before and after. So one of the brands that I have worked with for a long time, she's a good friend now. She has an athletic line and
+
+00:08:18
+she compares herself to and one of the most popular videos is Alo Yoga, Lululemon, etc. So her brand, right, versus Lululemon, Alo Yoga, and because those brands are an anchor and is seen as high quality, high perception, she's comparing herself like, "Hey, look, I'm just as good, if not better. And also, by the way, my price point is significantly more affordable." You can do us versus them. Uh, before and after, I love it, too. So, before you can use very directly your struggling avatar,
+
+00:08:49
+your future pace hero, like what was life like before? And after bullet points, you see this a lot. We'll show you some examples of those. I've got boards for all of them. By the way, this is bullet points or variation of bullet points. You've got stuff from like Figs. You got stuff from Mottton Bow, um, Mottton Bow, sorry. You've got different types of brands here. And like I said, I have a whole list of like things that are kind of like trending that are going on here that you can copy and paste as
+
+00:09:16
+well. But carousels, features and benefits, founder stories, text, graphics, headlines is probably where most people think. And probably if you skip to this part of the video, you're like, I don't need any of that. I don't know who my need to know who my customer is. Let me just give you a t-shirt on a back on a background and call it good. That is not the case. You need to actually have words that matter, that resonate with your audience. Because right here, the beer belly t-shirt, do
+
+00:09:45
+you think that person actually knows who their customer is? Do you think that person knows who their uh what the problem is for their customers? I mean, it's it's very straightforward. They know that their customers are a little bit heavier than what they want to be. How do we make them feel good? How do we give them back their confidence? They know who their customer is. They know what that problem is. We use the content scaling strategy document. We create content from this. We create iterations
+
+00:10:11
+and variations, which we'll talk about here in a second because you have to meet your customer where they're at. If this is starting to make sense, you're seeing kind of this kind of come together, but you need a more personal approach or to talk to a real person about your brand and the next steps. You can schedule a free 45minut strategy session with us. Just check out the link in the description down below. It is free, but spots are limited. So, go do that right now. Structure isn't just
+
+00:10:37
+about scaling. It's about protecting your margins. So, build out ads campaigns in your ads manager. Okay. So, let's go over here and go back to ads manager and let's actually build this. Couple of things here. If you got to this part in the video and you do not know who your customer is and you do not know the problem that you solve and you do not know how to create content, this part does not matter. I see so many people create videos on the internet and they just basically copy and paste what
+
+00:11:05
+other people who are running ads do. Okay. Okay. So, over here in Ads Manager, we have two different types of campaigns. I do not want you to do a one of these campaigns. If you're not spending at least probably $100 a day, if you're spending less than that, just focus on the latter one here. This this to sales, there's a DPA that we set up and we just let it run forever. As you can see here, it's making about two and a half times its money in the last 30 days, which does cover the Christmas
+
+00:11:30
+period and a sales period. So, it does fluctuate, but the best we've ever gotten it to, I think it was like a four, five, and it just stays steady. The worst has probably been like a 2.1 2.2. So, it does really well and it's consistent over time. Okay, so let's go ahead and look at that. And I'm going to show you the setup for this. It's very straightforward, but set up, it's campaign budget. I want this to be distributed. If we're drawing this out, right, this means that I have an adset
+
+00:11:59
+that I could have two different adsets here. The budget could go between either one of these. Okay, I'm going to let Meta decide. Talking to a brand yesterday and they're like, "Well, somebody suggested to have a top of the funnel, middle of the funnel, bottom of the funnel." I was like, "Why?" Meta literally doesn't even suggest that, right? They say that the targeting is done through the creative, right? And diversification of the creative. What does that even mean? Right? Variations
+
+00:12:26
+of creative like we talked about earlier. That's the the us versus them, the the founder story. That that's what they want. And the creative does the targeting. So if you create content that is more middle of the funnel and you create content that's more top of the funnel or content that's more bottom of the funnel, then the content will do the targeting. There's no reason to set up the campaign. You're making the campaign inefficient. So, campaign budget optimization, not worrying about an AB
+
+00:12:51
+test, not worrying about anything else. We do have an engaged audience here. Website 180 days. How do we do this? We're just pulling traffic from our site because we have a lot of people who go to the site. If you don't, you can still do this. 180 days is a long time. We're just giving it a little bit of information. We also had existing customers, right, who purchased. So, we get a list of the people who like our products. If you don't have that, again, this can work. the targeting can still
+
+00:13:18
+make this make sense. Don't worry about any type of categories. We're good there. So, let me go over to the ad set level. Okay, we have multiple of them. We have several that are going on. Now, with a DPA, you will see how I have them labeled. I do not want your full collection DPA, dynamic product ad. That's what DPA stands for for those who do not know. We have it set up based off of specific areas. For us, we had different categories. So, it could have been just basketball or just a city.
+
+00:13:48
+Could have been all of our new arrivals. Could be a specific team. We have our best sellers. And then we have one that does hit the majority of our products. The more specific that you can get here, the better because Meta is able to read and understand the products and find categories. Let's say, for example, you have two different types of products or for athletes. So you got a product that's like very beginner like leggings, somebody who probably does very little running or very little like yoga or
+
+00:14:18
+anything like that. It's like it looks cool, it looks cute, but it's not as sustainable as kind of the lower-end model. That's a completely different customer than somebody who runs or does yoga every single day. And so the product materials are going to be completely different. Maybe the designs are going to be different. Maybe somebody is more minimal. And so you're going after two different audience types. So putting those people into the DPA, even though Meta is very smart, it
+
+00:14:40
+could probably figure out a lot of this, it just makes it a lot easier. Meta is so much about giving it the data that it needs, which is why you should simplify, which is why you should create very specific type of content, which is why we went over the struggling avatar, which is why we went over the content. Because if you have a customer who has never heard of you or your product, giving them an entry-level product makes a ton of sense versus trying to sell everything to everyone. So, we categorize differently. Obviously, up
+
+00:15:10
+here, this one is dominated and there hasn't been much spend yet because these are newer. So, this has 344 purchases, $22 cost per purchase. Very profitable for us. We really like to keep it below 40 bucks and we make money. Our average order value for this particular brand is about 90 85 to 90 bucks. So we go over to the ad level. Pretty straightforward. So you'll have this. I know I've got this kind of blurred out, but this is all normal setup. We let leave the multi-advertiser ads on. Okay. Mo uh
+
+00:15:43
+manual destination. We're really just trying to get to the website. This particular one we are going for all. Okay. This is how it's labeled. Single image. pretty straightforward. The biggest selling point to you and for you would be that all of the products in the category and this is the big plus for you on the website too is just let the product do the talking here in DPA. Just don't get fancy with it. We also do put the price. So ours, we would rather the person who clicks much more likely to
+
+00:16:12
+make a purchase if they know the price. That's just a theory that we have had and it's been proven now here. Somebody gets there and they think it's going to be a $25 hat. They get there and it's 41. Less likely. So, we're sending the right people. So, clean background, no distractions. Don't put any of this type of stuff. Like, this wouldn't be a good background. Actually, this would be a good background because it's all kind of black, but like all of this and then
+
+00:16:33
+putting the lamp and everything else, I wouldn't do it. But this type of u this sweatshirt, if you just had this flat on this black background, probably would look okay. All right, so that's the DPA. Pretty straightforward. There's not a ton there. We're going broad. Age, gender, location. Don't think too much into this. So, let's go over here. Performance goals. I'm going for maximizing the conversions. I'm going for purchases. Advantage plus audiences on. That's pretty much it. I can further
+
+00:17:04
+limit it, right? And I can change some things. We don't even do that anymore, right? Leave it how it is. We leave the minimum age. Do not touch any of that. There's no point. So people who are selling that the the setup for the ads manager matters a lot and you got to do this cost cap and bid cap and whatever else they are just literally trying to confuse you to make more money for themselves at the end of the day. You can set this up. You can follow this process right here. This brand to give
+
+00:17:32
+context you guys are probably like well this brand's making a lot of money now. Yes, you're right. It is. It is a more than a sevenigure brand now. Awesome. Nine months ago, 10 months ago, it was not. It started just like you. The brand literally I think the first month is like three or 4 hundred bucks and this was nine 10 months ago. This is not a brand that has been around and it's established and everybody knows about them. They were right where you were or if you're a seven figure brand right now
+
+00:17:57
+it's and you're not as profitable that this is what's going on. Okay. So if you want to scale up that's what I do there. Now this second campaign is one that I think everybody should run. It's the advantage in the marketplace for you. The advantage is creative. But if you don't have a product that looks great, let your audience decide. However, if you can resonate with an audience, for example, people care a lot or or much more h affinity towards sports teams, faith, religion kind of stuff,
+
+00:18:27
+political, even if it isn't as great, but you have something that's unique and you're like, look, heck yes for the red or for the blue or heck yes for, you know, the Chiefs or the Cowboys or whomever, you're going to get people who are going to be dieh hard for it and you'll make some sales from it because of it. And the design doesn't have to be up here. But if you have a great design and you're good, right, and the market decides your creative is good, you can make a lot more money. You can spend
+
+00:18:53
+less money and reach more people than people who have more money with bad creative. This is a very simple setup as well. So, we just label it as our top of the funnel sales. We're only focused on top of the funnel. It's really all it is. Campaign budget. Uh, and when I say that, let me clarify. Meta targets at all different levels. That's why you don't need a middle of funnel or bottom funnel. It does, but we focus on reaching the majority of people through paid ads as new customers who have never
+
+00:19:19
+heard of us before. So, just want to clarify. All right, so this budget is actually down a little bit. We're spending $600 a day coming right off the holiday campaign budget like previously. And that is pretty much it. Again, this engaged audience is here. You do not need to have that. We previously did not even have this. We just literally put this in here, but you don't need it. The next thing over here, different ad sets. Okay, if you're spending $50 a day, probably could do one ad set, maybe two,
+
+00:19:49
+five to 10 creatives in each one of those. And that may be a lot. Okay, and by creatives, I mean different ads. So, if I'm looking over here and I uh go over to the ad sets, this is I'm going to label this as like a concept. So, what is a concept? This could be the us versus them. This could be like in this second concept over here. This could be a founder story. And then inside of there, you could have multiple ads that are all explaining. So it could be you versus Aloe. It could be you versus
+
+00:20:20
+Lulu. It could be you versus Viori. That would be an angle, right? A different position of who you're going after comparing yourself to these. And then that is one concept. So you can have a campaign, a concept, different types of creative that are comparing. If they look too similar, Meta through Andromeda will probably only spend on a couple of these. So if that's the case, you get rid of the one doesn't spend or has the highest cost per acquisition. You leave that one. You create iterations of it.
+
+00:20:54
+And then you launch a new ad set with a new concept. Pretty straightforward there. Okay. So, with this, we have all of these labeled, and usually we do like a 101 or 102 or 103, and we label it that way. You can do it however you would like for each adset. You just need to know we have them labeled. So, we're doing stuff targeting some NFL things. We're doing some stuff that's targeting best sellers. We're repping different cities, right? Depending on where you're at, Dallas, Kansas City, LA, New York,
+
+00:21:25
+Jersey. Then we've got some stuff that is based off of product, but each one of these is based off of a different concept and going after a different angle or different type of positioning out there. And then the ones that are off and on, right? You can turn off campaign or turn off adsets if you'd like. So we got to the ad level. We have ones that are more of a headline graphics. We have ones that are more product focused. Ones that are focused on UGC, ones that are focused on flatlays. There are different concepts,
+
+00:21:54
+different angles. There's nothing crazy special here. The creative is very simple here. Okay. So, to make this very easy for you, you are going to do if you got a decent budget, you're going to potentially have two campaigns, right? So, you're going to have a DPA that's basically selling all of your products. And then you're going to have a regular sales campaign that is based off of single images. The setup for that is very simple. DPA broad concept sales campaign with single images.
+
+00:22:29
+Again, going broad and then have a concept and then add angles. Do not over complicate this. The new way to run ads this year, 2026 and beyond, is simplifying, getting rid of any type of interest targeting, getting rid of any type of perception that the creative setup matters more than the creative angle. Your positioning, your content, knowing your audience will matter even more. The more specific that you get, the better your ads will be. Also, here's the numbers inside of Shopify to give you some full context
+
+00:23:10
+into what's actually happening in side of the Shopify numbers versus just inside of Ads Manager showed to you that this is a real brand. It made real money, almost $1.5 million for a brand that has not been around. Okay, so now you know how to run Facebook ads in 2026. Go watch this video on how to set up profit optimizers for your brand right here next. Thank you so much for watching. I'll see you next time. And uh PS, make sure you subscribe.
+

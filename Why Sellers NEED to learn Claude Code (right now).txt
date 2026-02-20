@@ -1,0 +1,273 @@
+00:00:00
+Cloud Code is the best AI tool for sellers, but most dismiss it because they think it's just for developers, and I did too until I actually used it. I've been in the e-commerce space for almost 10 years, and let me tell you, this is something we've all been waiting for. AI that finally acts like a real employee. Let me show you what it looks like. So, he just asked me, "What's on my to-do list today?" And I told him all the things I have to do from competitor analysis and supplier research and
+
+00:00:27
+sending bunch of emails. and he literally tells me where he fits in and how can he help me. So he we flipped the script because now I'm not telling him what to do. He's telling me how he can assist me with all of these tasks and how is he going to do that and how is he going to save me all that time. And the beautiful thing which is quite insane is that we can spawn multiple sessions of clot code and tell him to begin working simultaneously on all of these things while I go sit back and have a coffee.
+
+00:00:54
+Before we dive into cloud code, let me briefly explain how it works, what makes it special, and why it is so much more powerful than your regular AI chatbot. And by that, I mean your chat GPT, Gemini, or even Claude on the website. If you're like most sellers, this is your experience with AI. If you need something, you let's say hop into your Ced GPT and you send a prompt describing what you need. Maybe you need a new email draft or some research and the large language model gives you a
+
+00:01:21
+response. But all of this is quite isolated and happens within the chat because realistically all of this is just text. There is no real action which means that AI serves only as an adviser. And don't get me wrong, this is still extremely powerful but it is really far from an AI employee because you are still the one doing all of the work. And this is where clo is different because cloth code was designed as an agent. He actually wants to go out there and do things. So on a high level it still
+
+00:01:52
+works exactly the same way. We interact with the large language model through prompts. We are talking to him and we are getting responses. But in this time the cloud code actually has access to our files and procedures. So not only the business knowledge. So he understands us, he understands our business but also procedures where we can sit down with him and define procedures about how we do things. And more importantly, cloud code can also interact with the external world using MCBs and APIs. I will explain this later
+
+00:02:24
+how it works. But what it actually means that he can take actions in other software and on other websites. Maybe your Shopify, maybe your Google Sheets, maybe on notion, Slack, he can take action there. So if you put all of this together, the orchestration from cloud code actually means that you talk to him. He can find an SOP, a procedure on how to do something. He understands your business as well. So you don't have to manually copy paste all of the context and he can go out there and actually
+
+00:02:52
+take action, create spreadsheets, do research, search your Slack, go to your Shopify, create listings, scrape reviews and then bring it back to you and give you response or tell you that the task has been done. So this is this is basically turning AI from a chatbot from an adviser to an agent to an real employee. So when we talk about standard operating procedures for our AI, these are essentially called skills. And this is what it looks like in practice. Let's say you sent a prompt to your AI. Hey,
+
+00:03:24
+help me analyze competitor reviews. This is their as on Amazon. So the large language model can think about it and scan whether he already has some procedure on how to do this. So these would be called cloth skills. So he has plenty of these, right? He has competitor review analysis, inventory forecasting, supplier outreach. He quickly identifies that since we want to analyze the reviews. He can find a skill competitor review analysis. This is a skill we can create with him, right? So we specify first what it should look
+
+00:03:55
+like, then he saves it as a procedure and then he can act uh following the procedure. So basically like an employee, right? And the procedure tells him which tools he should use and what are the instructions like hey do these steps. But more importantly as I said he can interact with the external world using the MCPS which essentially allows him to take action somewhere else outside of the conversation with you. In this case he can for example use Aify which is a website scraper which allows him to go on Amazon download reviews and
+
+00:04:29
+then analyze them. And once he does that, he follows the procedure, does it exactly the same every single time, then he returns you the response and tells you like, hey, the analysis is complete and it's saved in notion. Because of course, in the procedure, we specify that he should save the analysis to notion. So again, exactly like your employee. So we don't have to care about what happens in the back end. We don't have to care about how he actually does this, you know, how he sends the code
+
+00:04:56
+and how he actually gathers the information. The important thing is that it's like talking to your employee like hey help me do this. He finds the procedure he does it and then he comes back to us and say task done. Right? So that is on a high level how the skills work. And really the beautiful thing about this is that he can also help us develop the skills. So we don't need to know exactly how we do things. If you have the procedures you can upload it there and tell him do it exactly like
+
+00:05:22
+that. But in most cases you don't have a procedure right? If you're like most sellers, you don't have procedures, but it's not a problem. Otherwise, I would just tell him like, "Hey, I know we don't have a procedure for this. Help me create it. How would you do this?" Right? And you will see this later in the video how powerful this can be because we don't even have to know how we would do this. He will tell us and you will see later on in the video how this works. So now the most important
+
+00:05:46
+part here is that he can take actions in the external world. you know interact with your seller central your Shopify your Google sheets notion slack whatever you can think of right pretty much everything can be interacted with through MCPS or APIs so I don't want to get too technical but it's important to understand these two on left side we have the MCPS which are model context protocols these are essentially your connectors you've probably seen these in chat GPT or your cloud where you can go
+
+00:06:13
+and connect your let's say notion and your AI can then interact with it you know find pages or maybe create a page and so on. And these are mostly plugandplay, you know, these are like pre-built connectors where you just press a button and suddenly your AI has access to it. And this is extremely powerful, very simple to set up. But what clot code can do which your regular clot cannot is to actually send custom API calls. And APIs is how our AI can interact with other software. It's nothing new. This APIs, it's been here
+
+00:06:43
+forever since it's essentially how one software interacts with another. It is through code but we don't need to understand this because we have cloud code on our side and he writes the code. So we we will only tell him what we need to do and what we want to do and he will figure out how to execute the code and this basically allows us to do pretty much anything in other software. So when there is no MCP essentially a standardized way to interact with it we can create custom API calls that are
+
+00:07:11
+then built into the procedures. Let's say you could have an API call to download an inventory report from your Amazon seller central, right? That is a specific action that is built into the skill which I said is the procedure. So the first step could be call Amazon, download the report and then do these five steps. Maybe forecast my inventory and prepare a purchase order. Right? So that would be the procedure that also integrates the API calls. And again, I understand that this may sound intimidating, but don't worry. It is
+
+00:07:39
+actually very simple once you get into it and you realize like, hey, I'm just talking to him. And literally, we just tell him like, hey, I want to do this. Tell me how. And he will do that. So, this is how we will be creating our procedures. you know, we will be connecting our MCP so you can interact with our uh with our tools or potentially we will be also creating custom API calls for software that might not have the official MCP server. Right? So again these are more universal, these are more custom but both of them very
+
+00:08:11
+easy to connect, very easy to use uh since we are using our cloud code agent. Now on a high level the main difference what we are looking for is to save time and use cloth code as the middleman because realistically when you work with the chatbot you still use it as an adviser you are the one doing the work. So maybe you want to do competitor analysis, you know, maybe you want to update your listing. So you will tell him these are the reviews I downloaded, help me analyze them, help me write listing title, you copy it, go to seller
+
+00:08:40
+central, you have a report inventory, you upload it. So manually still managing the context and here you are the middleman, you know, between the AI and actually doing the work. So you do all the work but realistically where we want to get is that cloud code should be essentially our AI employee and suddenly he is the middleman right I'm talking to him I'm telling him what I want to do and he's the one executing and I'm just sitting there and watch him work essentially I'm not going to tell you
+
+00:09:09
+that he can do everything for you realistically he can save you you know 40 50 60% of your time and you can multitask because as he's let's say gathering reviews or doing competitive analysis. You can also assign him a task to draft emails, do supplier research and all of this I will show you later on in the video. So now you understand that essentially the AI here will become the middleman. We will talk to him and we will take action for us. So now since we understand the basics, we are ready to
+
+00:09:42
+actually set up clot code. And I understand this now might be a little bit intimidating because at the end of the day, COD Code was made for developers. But nowadays, since it's all easy to work with him and he can handle all of the coding, he can handle all of this. It's literally just about the setup. Understand that maybe it will be intimidating for 10, 15 minutes, but realistically if you use it for an hour or two, you will realize it's not as hard to actually use it and get used to
+
+00:10:09
+it. But you will unlock all of these superpowers which your current chatbot simply doesn't have. So let's take a look at it. What we need to do, if we go to clot code, we will realize that there are a few ways to actually use it, right? If you go to cloud code website, you will see use cloud code where you work terminal IDE and VAP, right? So if we use at the terminal, this is probably the most intimidating one, right? That will be your terminal here and you would be using the AI here. That's way too
+
+00:10:37
+overwhelming. I don't want to do that. The second option is to use something like claw desktop. So I would click code here. But realistically, this has a nice UI. You know, it feels familiar, but it is still a little bit too limiting. We really want to unlock all of the superpowers. And as I said, spend 1 hour maybe a little bit intimidating, but then we will be able to do everything we want to do. So I'm not going to explain what are the limitations here. Simply go to the best uh best way to use this,
+
+00:11:04
+which is an IDE. And as I said, now this looks very intimidating, but don't worry, I will make it simple. We will follow this step by step and you will be able to use this after watching this video 100%. Trust me. So ID you might have heard before about cursor anti-gravity or in this case VS code. We are going to use what's called Visual Studio Code. It is free open-source AI code editor. So we are going to download this and install it on our computer. So now I will show you what it looks like
+
+00:11:37
+once you download VS Studio which is what we are going to use to interact with Cloud Code and how to actually set it up. It's pretty simple. So now I downloaded my VS code and I launched the software and now I'm looking at this and as I said this might look a little bit too intimidating but don't worry it's actually quite simple. First what we are going to do we want to have claude code here. So we are going to extensions and search the marketplace for claude code and then you will see that after it
+
+00:12:09
+searches we will see cloud code for VS code. Right? This will allow us to actually interact with clot code from VS code. So there are many extensions we don't need to care about those which you want is the official one from entropic and you will install it. Right now we will have cloud code in our VS code. So once I click this little button at the top cloud code I can open it right here. And as you can see now it's starting to feel quite familiar right here. I have one window other window. So I'm going to
+
+00:12:38
+close this window from the extension because the software allows me to have opened windows next to each other which you will see later on that it is actually quite powerful because we will be multitasking assigning multiple tasks to our agent. When you open this window for the first time you will have to log to your subscription right to your cloth account because they are connected with your cloth on the website and cloth right here. So there will be a button to authorize it. So, of course, you need
+
+00:13:04
+the plus plan. You know, it's like $18 per month. Very well worth it. So, you will click it uh select your account and log in. Once you do that, we will you will be looking at this. What we are going to do next is that we are going to click on the explorer because one of the main differences from your regular cloud and the cloud code is that cloud code works with local files on your computer. And this is very very powerful because we keep everything on our computer uh like all of the procedures you know all
+
+00:13:32
+of the files we can also upload them into the cloud but don't worry about that for now um because he can then work with all of these files that we will create and as you can see it says you have not opened any folder. So what I'm going to do actually I'm going to go here into my AI workspaces on my computer and simply create a folder uh called clot demo right simply created a folder and now I will go into open my folders go into my drive uh AI workspaces uh cloth demo and select folder.
+
+00:14:07
+Now I will see hey I trust the authors because it's my file on a local computer so I don't need to worry about it. I'm going to turn off all of these little windows that opened uh the welcome window. Now I don't really need. I will open again this button cloth code open. So I see my chat with him again. Closing this other window. And now this is it for the setup. Right, we have our folder where we can create files and subfolders and we can talk to clot code right here. And by the way, I'm using
+
+00:14:40
+something called whisperflow. I will leave a link in the description that allows me to talk to the AI. So, uh, if I say, "Hey, Claude, how are you?" So, pretty much it just writes the message and it allows me to interact with it very quickly. And also, as I said, now it really feels like talking to a real person, right? So, I can send him messages and interact with it right here. Right? This should feel familiar because this is now the same as you would look at, you know, in your uh chpd
+
+00:15:08
+or your cloth on the website, right? There is a chat window and he will reply here. But before we actually interact, you know, I can I can tell him, hey, how are you? And he will reply, hey, I'm doing well. Thanks for asking. So, this is now talking to Claude code. But what we are going to do, what's very important, the first thing you need to set up with cloud code is to actually create its system prompt to tell him what are we going to work on together, right? To tell him who you are, how we
+
+00:15:34
+work together, what are the files we have available and so on. And actually for this I will have a demo demo of this workspace that I will open. But before we do that uh we create a new file. So I click here new file and I say cloth.m MD. This is what the system prompt needs to be called. You know cloth because it's cloth and MD actually stands for markdown file. And markdown file is essentially very simple because this these are the files that when you interact with AI you create system prompts or you create procedures and so
+
+00:16:08
+on most of these files will be markdown. And if you've seen these files it's essentially a style of formatting for the AI when they essentially use hashtags to separate headlines and so on. But at the end of the day it's just regular text and I could write it here. It's like hey uh you are my assistant. So this would be his system prop that he always automatically loads for every interaction. But of course I'm not going to create this manually. Right? So as you can see now I have this window open
+
+00:16:37
+here our chat. And here on the right side I have um our system prompt but I'm not as I said I'm not going to create this manually. I'm actually going to use AI to help me create the system prompt. So it includes everything it needs you know describing uh how we are going to work together and in order to do that I can just talk to him and when I click on this window to talk to him as I send him the message hey clude how are you you can see that there is something different what we don't have online it
+
+00:17:08
+says ask before edits you know if you work with the cloth on chat GPT you don't have this in the chat so ask before edits if I click on it it says edit automatically or if I click again it says plan mode and this is actually what's different because he will be taking action he will be doing things on our computer he will be doing things through MCPS and MC APIs online so it depends which mode we use he will act accordingly if we have ask before edits so he will always ask us hey can I do
+
+00:17:38
+this can I do that it's very safe but also sometimes it's very annoying to actually approve every single action he's about to take every file to interact with every file to create and so So for that we have edit automatically. Once we create the procedures we will let him like hey do your thing I trust you right. Uh and then we have the plan mode. This is especially valuable when we have a more complex project or maybe we are creating a specific procedure. We tell him like hey let's talk about it. Let's figure it
+
+00:18:05
+out. Let's lay it all down there and see what it should look like before we commit to action. Right? So this is important to understand the modes. But for now, I actually want to keep it simple. And to show you how this works, I will tell him like, "Hey, help me prepare my uh system prompt for uh for this project." So, let's talk to him. And hey, I would like your help to help me set up the system prompt for this project. Keep it very simple. This is just a demo for a video. So, just
+
+00:18:36
+populate it that you know, you are my assistant and you will be helping me with files on my computer now. So everything I said I'm just going to send him the message and he's going to think about it and then he's going to tell us okay let me read the current file first. So what he does you can literally see what he's doing. He opened the file which says you are my assistant you know that's kind of you know vague. So he said I'll update a simple system prompt for your demo. And then you know
+
+00:19:04
+we can literally see the actions. He read it. He did some thinking and then he wants to edit and now he's asking me if he can make the edits because we selected you know ask me before edit and I say like yeah let's allow edits for this session and as you can see he edited it and now suddenly project instruction you are my personal assistant for this project you will help me manage work with files on my computer so he said done I've updated cloud MD with a simple system prompt that identifies me as your assistant for
+
+00:19:32
+working with files and as you can see the MD is right here so I can close it And I have the file right here. I can always open it. And as you can see now there's the hashtag which means that it is um a headline. This is not how we like to read the document. So if you have then documents and plans what you can always do is to rightclick and say um open preview and suddenly you see it as a proper file you know with the formatting like so this is how we prefer. Of course, this is a very simple
+
+00:20:00
+file, but suddenly when you have a lot of text and so on, it it often helps to open it in preview. So, as you can see, we already interacted with the file. He prepared the system prompt. Of course, this is a very very simple one. But now you can see how it works. He actually we see all of the steps he takes. We just talk to him, literally talk since I'm using Whisperflow. And now he does what we told him to do. And this really will unlock so many opportunities because we can do pretty much anything. And you'd
+
+00:20:29
+be surprised what this can actually do. But in order to make this preview fast, I actually set up a proper workspace for us. We are going to work with I will share the link in the description to give you access for this workspace because it is already set up for you to get familiar with clot code and do everything we are going to do in this demo. So what I'm going to do is I'm going to open folder and here we have cloud code workspace. I'm going to select the folder and now it's going to
+
+00:20:57
+load and we see exactly the same thing as before. Right? We have our clot chat here. We can talk to him. But here on the left side we have cloud code workspace. And now we have a lot of stuff here. Right. I'm going to close it and briefly tell you what we have here. First of all we have the cla MD the same file as we had before. And as you can see now there is way more stuff than before. So what I'm going to do actually let me put it right here. Um I'm going to open preview so you can read it as a you know
+
+00:21:27
+in a normal way and suddenly you see all of this we have here. So it is an e-commerce workspace you know it tells him it's a living document. It tells our preferred communication style. It tells his role you know you see between human intent and execution read instructions make decisions use tools handle errors. So this is essentially telling him how to behave. operating principles before he's doing anything new, he will always check the skills he has available. Now remember when we looked at that um file
+
+00:21:56
+at that visualization how he works with the skills. So this is telling him like hey don't forget we have skills you know we have procedures that you need to see self-improve when things break this is what makes it different from let's say N8 and automations because if something goes wrong he can fix it which is beautiful because uh we want him to be independent you know do things on his own update this document as you learn keep context files updated so we have something called context files uh so
+
+00:22:22
+here we have another MD files that are like further context about our business about us about projects we are working on. So remember I told you that he will have access to everything to really know us. So we don't always have to explain hey I'm Michael you know this is me. No everything is saved here and he's instructed when you need you know uh some business info which products we sell which market details. There is a file called empty business for now it's empty but on the first sitting I would
+
+00:22:50
+uh sit down with him and actually fill this in you know profile who am I projects I'm working on and so on. But for now uh let me open this in preview again. But for now he has all of this here. Do this automatically. Don't ask for permissions about small additions and so on. And then the folder structure right. So this is kind of like a visualization and explanation of everything we have here. The clot MD this file clots re first there is explanations for us to understand. There are API keys if we're going to do API
+
+00:23:18
+calls. There are MCP server configurations you know. Um then we have cloud where we have all of our skills. So in this workspace we have a few essentially meta skills. We have a skill for creating skills. So when we want to create a new skill, claude reads how to create a new skill. Essentially how to create a procedure saves it into the folder. How to build MCPS. Again you don't need to understand too much about it. Just tell him what you need to do and he will tell you how to do it which is the beautiful thing about it. Uh and
+
+00:23:46
+then we have two procedures which I will show you later on. Daily prep and automation discovery interview. uh the context and then of course output since he will be doing research, competitor analysis, he will be gathering product data, scrape info. So we have outputs here. Um and essentially that's everything he comes up with as we work together. He will create spreadsheets and so on, he will put it uh right here and then we have the skill routing. Uh if we have any MCB servers so every time
+
+00:24:13
+we do a new skill, he will adjust the system prompt automatically. That's essentially like a guidelines for him, you know, like the the the meta instructions I would say. Um, and that's pretty much it. You know, that is our workspace. So, just to summarize everything we've covered so far, we have a workspace on our computer where we have a system from that tells AI how to behave. We have a chat with cloud code right here where we can select how we want him to act. Do we want to plan? Do
+
+00:24:42
+we want to ask before edits or edit automatically? We have a file where we have all of our skills that is a folder right we have our all of our context and then we have a folder for the outputs if you want to see specifically what the skill which is essentially a procedure looks like it's again an MD file that markdown file I told you that's essentially uh like a modular prompt right so it tells him like hey when we do this this is what the skill looks like so again let me open in a preview
+
+00:25:09
+and you know skill creator that is the meta skill you know whenever user says create skill new skill skill build scale. This is what you do and just follow this and we don't need to remember it. We create a procedure once so we can then follow it exactly the same way as with your employee. Now with cloth code the what we can do it's really quite unbelievable and even today I'm still most of the time surprised how well it can actually execute and the things it can do I had no idea. So
+
+00:25:39
+rather than me sitting down and figuring out, hey, what am I going to use it for? What what procedures, what is MKL talking about, right? I created a skill that's called daily prep where it's essentially a simple way where we say, um, hey, let's start our day. And he tell him, let's start our day. Imagine you do this in the morning. And what he's going to do is that he found that he has a skill called daily prep which I just told you. And the skill instructs him first of all to read all of our
+
+00:26:13
+contacts which currently is empty. Don't worry. Uh we would normally populate it but for this scenario it's not a problem that it's empty because he tells us like hey I see this is a fresh workspace. Your context files are still templates. That's fine. We will fill them as we go. What's on your to-do list today? just share whatever task you're tackling, work stuff, business task research. I'll show you exactly where I can help you and how much time I can save you. So, we
+
+00:26:39
+are flipping the script instead of me sitting here thinking like, hm, what can it do? I I don't really know. No, he is asking me what I'm going to do today and he is going to tell me how he's going to help me, how much he can take off my plate. So I literally would just sit down and I will tell him let's say my to-do list for today and he will tell me where he can help me what he will do and how much time is he going to save me. Right? So flipping the script we don't no longer have to even think like what
+
+00:27:08
+can this do he's going to tell us. So now I'm going to sit down and actually tell him um let's say my plan for today. Okay. So where to begin? We have a lot to do today. uh we are actually expanding to a new niche for champagne glasses. And first of all, what I would like to do is uh to do competitor research to actually see what's working, what's not working and what uh customers like about our competitor's products on Amazon, what they don't like, and essentially map out the market and fully
+
+00:27:38
+understand how to differentiate, how to stand out, and what makes a good champagne glass. uh these glasses will be crystal handb blown glasses right so I'm going to do this research on Amazon and once I do that once I kind of map out the market what we need I want to go out there and do like initial search of suppliers probably on Alibaba to kind of map out the price points you know to have a uh list of suppliers you know the basics understanding uh their pricing understanding their payment terms you
+
+00:28:13
+know their reviews on Alibaba and so on. So, we will probably have to go to Alibaba and scrape it. And lastly, I would like to draft emails to like top 10% suppliers to reach out to them to start getting quotes and get this project moving. I know it's a lot, but that's why I'm going to work with you. So, uh we have this long prompt, so me talking for a bit. Uh, and then I'm going to send it over to him explaining what we are going to do today and he's going to think about it and tell me how
+
+00:28:50
+much time he can save me and how much effort he can put in to essentially replace me and do this for me because as I told you now he serves as the middleman. I don't want to do the thing. So I'm telling him what I'm going to do. I don't need to even understand how is he going to help me but he's going to give me a detailed breakdown. So today's task quick overview, Amazon competitor research, Alibaba supplier mapping and draft supplier outreach emails. So how can I help? He can do the heavy lifting,
+
+00:29:14
+heavy lifting and draft supplier outreach emails on full autopilot. He can save me 6 to eight hours of work. So let's see how you're going to do that buddy because that sounds very interesting. So detailed breakdown Amazon competitor research. Here's what I can do. He can search Amazon for top selling champagne fluids. Uh crystal hand blown pool review data. what customers love, what they complain about, identify gaps, common complaints no one's solving, met price points, best seller rankings, feature comparisons,
+
+00:29:43
+and create a competitive landscape dog with differentiation opportunities. You'll need to review findings, make strategic decisions on positioning, right? So, he even tells me how we are going to work together on this, but he's going to do the heavy lifting. Then we have Alibaba supplier search. Again, he's going to search Alibaba pulk key data organized in the comparison spreadsheet. So, uh, we'll just need to confirm my criteria. Uh, and then draft supplier emails. He can do that. Drive professional inquiry
+
+00:30:09
+emails. Include your requirements and ask the right questions. Create two to three email variations for AB testing. Quick questions before we start. MOQ comfort zone. And he already gets to work. And this is the different he wants to go out there. He wants to do things. And he can interact with the world because he can scrape Alibaba. He can scrape Amazon. He can create spreadsheets. And I'm not going to go into every single task today. We are going to do the Alibaba supplier search. So you can see he can do real work.
+
+00:30:37
+These are not gimmicks for a video which you've probably seen a lot. You know, it works perfectly for the video when someone is writing content, you know, like writing on Twitter or something like that. That's easy, right? But what's hard is to actually implement it into real workflows, into real e-commerce business where you deal with suppliers, you deal with products, customers, inventory, a lot of these things. It's hard to implement your regular chatbot into these workflows and
+
+00:31:03
+that's why uh cloud code is so powerful. So what I can do now actually if we were about to do everything I can open a new session you know cloud code open. So I can have windows it's as in your browser and I can do multiple things. So I can tell him like hey you will handle number one you another one you will handle number three you will handle number four and let them work because they can work simultaneously you can spawn multiple instances of clot code at the same time right so I can tell him hey uh how are
+
+00:31:35
+you doing today and he can chat you know this is one instance this is another instance and they are separated and they can kind of work together work with the same files right so this becomes extremely powerful and If you like multitasking, you can even put them next to each other and see how they are working. Right? So, people who like multitasking are going to do well in the future thanks to these AI agents. Now, what we are going to do is that we are actually going to show you one of these workflows, the Alibaba
+
+00:32:05
+supplier search, where we're going to ask him, you know, turn into the plan mode and explain, you know, uh a little bit more detail on what we want to do. So we will probably cut it here uh so you don't have to see me you know talk to the AI the prompt but then we will review everything. So I gave him the assignment. I told him like, "Hey, let's start with the Alibaba supplier search." You know, I'm thinking we should scrape Alibaba. Uh, gather the suppliers. You know, make sure we are looking for
+
+00:32:30
+handblown champagne glasses, nothing plastic. And once you gather that, put it into spreadsheet and include your comment which ones you think are the best, which ones you recommend to contact, essentially the top picks and some of your like assessment that would help me to make decisions, right? And now he created a plan. So basically you see him thinking, reading files, you know, understanding the context and then he creates u essentially a plan and as you can see here is he's already asking
+
+00:32:57
+accept this plan and this is another thing that's super valuable about cloth code that you don't need to always reply to him. Sometimes you get these pop-ups when it's like hey how want to do this what are your thoughts on that and you're just selecting one two three to keeping it very very fast. So here's his plan. Alibaba supplier search. Scrape Alibaba for crystal hand blown glasses suppliers. Put it into CSV. These are the steps. Run Alibaba scraper via Epify MCP. I will explain later on because we
+
+00:33:24
+had Epify MCP already set up. Uh so he's going to search uh data to scraper supplier what he actually wants to search and then export to CSV. He will add an analysis column when he says topic consider pass and he will save it into our outputs. um into Alibaba Champagne Glass suppliers. So when it comes to MCBS, the easiest way uh he actually recommended to me when I was setting this up to use Epify and Epifi is essentially a scraper, right? That allows you to access information on other websites like Amazon, you know,
+
+00:34:00
+different stores or Alibaba and essentially allows us to gather the information easily without like going to the website and copy pasting, right? Let's say you want to scrape hundreds of reviews on Amazon listing or something. So, scrapers are used for that and Appify is one of the best uh because they also have free credits every single month. So, you don't have to pay anything for that. So, you will set up your account. You know, here you can see my uh you can see my account uh and he
+
+00:34:27
+recommended actually of course Cloud Code knows this. So, he recommended to me to use Alibaba listing scraper where we pay like $1 per 1,000 products. We already tested this before, right? And we ran, you know, like 300 whatever um products listings on on Alibaba and it cost us like less than $1, like 50 cents, right? So, Claude Code recommended this and what we want to do is set up the MCP. I can either ask cla like hey help me set this up to get access to the MCP. But the easiest way here is to set up uh the remote MCP
+
+00:35:05
+server because epify as I told you some like notion they have their own MCP server which allows us to interact with these scrapers put it into our AI. So I would just search Epify MCP and as I said Cloud Code would guide you through this. So don't worry about it. I'm just showing you because I've done this before based on the instructions from from cloth. And here we will f find epify mcp server and I'm just going to follow these instructions again. Uh what it means essentially that I will take uh
+
+00:35:37
+the mcp server URL. That's all I need. All right. Copy it. And then on my regular cloud, I simply go to connectors to settings to connectors and you connect epify MCP. So you add custom connector, you go epify and you copy the MCP server and you click add and then you're pretty much done, right? This is how you connect these MCP servers that are available. I didn't know that EPify has one. Cloud code told me like, hey, go ahead, connect it. This is the easiest way to do it. He literally instructed me search for he
+
+00:36:13
+sent me this website uh copy this link and put it here into the connectors. So he then from cloud code because essentially they're is shared uh from regular cloth on the website. You know this is your your cloth on the website uh are shared. So if I connect my notion here epify Google drive he can then interact with it. There would be other way to create your own but we are not going to cover this today. I will probably create another tutorial on that. But I created the API uh MCP. Now he has access to it and we are
+
+00:36:44
+essentially ready to accept the plan. So I will accept it and then we will see what he comes up with. So now we approved the plan. And the coolest thing about Claude code is that he shares his to-do right the tasks here are he's going to do you know he's going to run the Alibaba scraper uh to to scrape 200 to 300 listings. He's going to duplicate and aggregate by supplier. He's going to export them and then he's going to add his own assessment column. Right? Beautiful. And now, as I said, he's
+
+00:37:13
+going to ask me, can I do this? You know, can I do this? So, we are going to allow him all the edits and wait for a bit. And at this time, I could start another session and work on another task because he's now gathering, scraping, doing his thing, and I can do three things at the same time while drinking coffee and watching AI do all of my work for me. So, let's give him a minute. Now, while our agent is working, I want to show you how easy it actually is when you get stuck or you have some issues,
+
+00:37:39
+right? Let's say the Appify MCP. We don't know how to set it up. Maybe it doesn't connect for some reason. So, I would just go ahead and tell him, "Hey, I want to use Ampify for scraping and I know that there is an Appify MCP. Can you help me set it up locally so when I ask you to scrape something, you can actually do it from my computer? I don't really know how to do this. Please keep the plan simple, straight to the point, and tell me what you can do to set it up. And this is essentially the approach,
+
+00:38:13
+right? Suddenly, we don't have to rely as much as on the stuff we know. It's more about what we want to do, right? And as you can see, hey, I help you set up uh Epify MCP locally. So, he starts reading uh the skill, you know, that we set. Let me search the official Epify MCV package. and then he would download it and pretty much do it for us. But since I've connected the official one that I showed you through cloth uh uh through cloth website which is a little bit more straightforward, right? A
+
+00:38:41
+little bit more user friendly but this would definitely work but I'm not going to uh do that now. Let's see. So he's working and yeah, perfect. So it seems that he already ran the scrape, you know, um he scraped the listings. Got it. Running the scraper now. 250 listings scraped completely. 250 listings captured. Let me fetch the full data set. So I can also uh actually double check here on my API to see the runs. And as you can see, hey, he actually did it. 250 results. It cost 30 cents. You get $5 per month for free,
+
+00:39:18
+you know. Uh as you can see, I didn't have to do anything. Uh, and now I'm waiting for him to create um to create the the spreadsheet. And as you can see, he's the duplicating the suppliers, filtering out plastic items really. So, he's doing the heavy lifting for us. And as I said in at the same time, I could work on something else. You know, I could already be scraping Amazon, gathering reviews, creating reports, understanding the customer, and so on. But since we are doing this for the
+
+00:39:48
+video now, we're going to wait and see the final result. And also just as a side note, this is also very cool because you see that if he's doing this, he sometimes runs into issues, right? That's the red ones, you know, it didn't work. And he's like, "Hey, let me try a simpler approach. I didn't have to tell him anything." Like he's the one figuring stuff out. He is the one fixing things. So I don't even have to pay attention to it and I can do something
+
+00:40:09
+else while he's working. So he's done with his report and as you can see, he also decided to update our context, you know, our projects right here. So as we talked about it in the beginning, so he's keeping track of what we are working on. So the next time we uh we work on something, he will have that context. He said our top picks and he created a CSV file. Of course, this is CSV file. It's not a regular spreadsheet. Uh but he gathered the information. Uh we have 50 suppliers you
+
+00:40:37
+know he kind of merged them added the price ranges uh his top picks his kind of uh you know most experienced supplier over 20 20 years great rating lowQ very reliable so we could then go uh and see on the website if actually this is something where we could order right and suddenly I can start filtering this and he finished his task as I said sometimes it might not be perfect you know So I would tell him like hey spread the pricings you know into separate columns you know [snorts] uh what does it look like you know what
+
+00:41:12
+are they payment terms and he can start gathering more data and working on that file but as you can see now he was the middleman right gathering the information and preparing the report for me and this is something that would take hours uh for for an employee right and as we asked at the beginning when we said last start our day he said that he could save us two to three hours and I think that's actually very realistic So now you got a showcase of how this actually can help you and how it really
+
+00:41:39
+starts feeling as a as a proper AI employee and it all starts with this uh with this structure. As I said there will be a link in the link in below in the description where you can download this exact structure with these specific skills including the daily prep. So it kind of gives you and points you in the right direction and actually also created a more thorough analysis of your business. So he has a skill called uh automation discovery interview. So he then interviews you about your business,
+
+00:42:08
+how you operate, what is your team and the output of that is that actually he creates a nice dashboard for you to see how to think about AI into your business and how to integrate it. Right? So in this example we have a co and founder 8 figureure brand and he tells you you know how he can help you what are the automations you should do and he literally tells you where he can help you and how to really think about AI you know as an advisor uh and how to integrate it so this is like a very comprehensive breakdown essentially AI
+
+00:42:39
+audit that he can run for you and it's already part of this you know so you you install this uh project structure and tell him like hey I want to go my discovery interview. But if you don't have time for that, just start with the daily prep. Say, you know, let's start our day and then, you know, he can uh he can take it from there. And now, of course, the most powerful thing comes from scaling this across your team because it's just not about you saving 50% uh of your time. It's about everyone
+
+00:43:06
+on your team using this and really uh getting the ability not to only execute tasks with their own agent but also they can start building things like their custom apps and dashboards like what I just showed you cloud code can build that like it's literally made for coding so like building a custom app or dashboard or an internal tool automations you name it he can do it right and suddenly it's not just about you thinking it's every single person saving you know 30 40 60% of their time
+
+00:43:34
+creating cool tools that you can share with the team really the sky is the limit and that's kind of the idea you know to multiply to create the leverage that's what the AI is here for I have another video about cloud code actually it can create N8N automations as well so I will leave the link right here so you can watch it next because that's only scratching the surface what we just showed you today I'm also planning to do a very uh detailed deep dive how to actually implement this properly all of
+
+00:44:01
+the functions and everything so make sure to watch it next and subscribe for the next video. I'll see you next week.
+

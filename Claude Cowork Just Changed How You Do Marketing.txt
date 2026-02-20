@@ -1,0 +1,102 @@
+00:00:00
+Claude can now work on your computer like a real teammate, reading your files, creating deliverables, running multiple tasks at once. And when you combine Claude chat bot, cowork and Claudeer, you are building an entire marketing workflow system. So in this video, I want to watch you through six ways. These can completely change how you do marketing. Let's go. Right now there are many ways to access Claude and it can get confusing. For now, we have two main official ways to use Claude locally, Claude
+
+00:00:29
+desktop and Claude code terminal. And under Claude desktop, they still have three work modes, Claude chat cowork and Claude Code desktop. They all run Claude, but they work differently. Claude chat is like where you chat. Brainstorm organized projects with Claude, everything is still stored in Anthropic's cloud and this is your planning and brainstorming space. Cowork is basically Claude Code for non-technical. It used the same agent engine that is for task execution. It has local file access, can run parallel agents.
+
+00:01:00
+It is designed to do work end to end. So think of it as a AI digital teammate. Claude Code Desktop. This is the Claude code without terminal more powerful than cowork. And this gives you 95% of the same Claude Code power and on the side Claude code terminal. This is the full Claude Code experience and it's the most powerful and give you the most customization control. So use chat for thinking and brainstorming, CoWork for getting work done and Claude Code for creating and building. And the real magic is not to pick either one of them, but to use
+
+00:01:32
+them together when they make sense. For most of us, you probably already have different Claude projects set up with the custom instructions, project files, brand guidelines. But every time you're still uploading, copying the output. And so the biggest unlock of cowork in your workflow is executing end-to-end. You could just drop the file in a local folder, hit one prompt, and the deliverable is done. And let me show you with a strategy deck building use case. So once you on Claude Desktop, you will see there three sections.
+
+00:02:01
+Chat, cowork Claude code. So for example, on Claude chat, we have these Claude projects to generate a strategy slide deck from any given materials and transform it into a ready to present slide deck. So we have the custom instructions that contains the workflow details and a project context file, like the presentation templates, brand guidelines. And now, if you want to replicate these same workflow and work locally on your computer, the easiest way is to click here and add this Claude projects to CoWork.
+
+00:02:33
+So what it does is it will add the project instructions and files to the chat. Or another tip, or another tip is you can just directly add from the Claude core interface. So first, let's pick the working folder. So Claude will only use and save files to this working folder. So let's say we want to save it to the strategy deck folder. Now let's say we have this call transcript. Instead of uploading it to cowork, I highly recommend just putting it in the working folder as local file system access is exactly the
+
+00:03:02
+biggest selling point of cowork. And you can put whatever relevant materials like the project brief, guidelines, templates for Claude to access and then use this prompt to ask it, to generate the slide deck. And then the magic happens as it will follow the exact same workflow as you set in that Claude project. But everything will be saved locally. And here you'll see the to-do list process tracker, which is the big highlight of Claude agentic system. So Claude will be the main agent and plan the sub-tasks itself
+
+00:03:33
+and execute them one by one. And here you will see all the files that are being used at and generate in the process. And also it shows all the context and relevant skills that Claude is loading to complete this task. So in this case, that is the official PowerPoint skills. And immediately the deck is ready and saved it in this folder. So it follows exactly the same template set from that Claude project. The slide structure sections with content tailored for this brand only. So although there's still things that just are not yet finalized, this will save you
+
+00:04:06
+lots of time in getting the first draft. *** Now this is just one powerful way of using Claude CoWork for your daily marketing tasks. And if you want to get more inspiration, I recommend this free resource, the Claude CoWork stack 12 advanced Prompts to replace the week of work. You can find the link below. This resource will give you ready to use prompts for cowork covering most common marketing tasks from content performance analysis, competitive intelligence, to email outreach, and full marketing campaign builders.
+
+00:04:34
+These are not just basic prompts, they are structures specifically for how cowork operates with your files and connectors, so you can put them to work immediately. And what I've found useful is using these as starting templates and adjust for my needs, and that means don't just copy and paste, customize them for your specific workflows and build your own prompt library over time. You can grab this for free in the description below. And thank you HubSpot for sponsoring this video. Okay. That was one strategy deck from one input file.
+
+00:05:03
+But what about when you need to generate multiple marketing creatives for your campaign images, descriptions all at once, and this is where cowork get really powerful because it can spin up multiple agents to work in parallel and with your local folders. So the first step is to set up your project folder. So here we have already set up this folder called Marketing Creative Projects, and inside we have this folder that store all the raw product images, the ad creative folder that will be used there to store the generated ad images.
+
+00:05:34
+And very important, we will have these master plan spreadsheets that contain the product names, image path, and other relevant views. So it will be used to control the batch job and then the official nano banana prompting guide, and also an internal product description guideline. Now everything is ready. So go back to cowork and then pick the same project working folder. Then also make sure the nano banana MCP connector has been installed and enabled. So I will put the link below for the installation and then use this prompt to
+
+00:06:05
+let it split this into two parallel tasks. So the reason is that in cowork agents are built by Claude automatically depending on the task. So that means we can specify here to make sure it will spin up sub agents for more efficiency. So task one is to generate the ad image with three variations, and task two is to research the product and then generate the product description. And finally, we will ask it to update the master planner spreadsheets when finished. So now it is pulling up the to-do list loading the raw product images, the nano
+
+00:06:38
+banana MCP server and relevant skills. And particularly it spin up two separate agents to complete each task. And after like 10 minutes, it is done with the master spreadsheet being updated with the status complete and the image file path, and all the generator ad images are being saved successfully inside this folder where each product has three variations and they are pretty impressive. And you can always adjust the guideline to fine tune how you want this creative to be generated according to your brand style.
+
+00:07:11
+And that is what make our work powerful, is not doing one task, it's running the entire creative pipeline. Now what if you have a massive data set sitting in a local folder, campaign reports, research files, stuff you would never be able to upload to a regular Claude chat. And this is where working locally really shines because you can point to work to entire repository and it will analyze everything and turn those insights into multiple deliverables, a spreadsheets, a dashboard, and even a strategy deck all in one go.
+
+00:07:41
+For example, I'm doing growth research from Lenny's podcast, which I'm a big fan. So in this project folder, I have saved all his podcast episode transcript done with the top growth and marketing expert. And by the way, these transcript files are actually shared by Lenny to public. So I will put the link below so you can try yourself. So then also include the brand context files so that Claude will have understanding about the brand, the audience, and the growth challenges. Now on Cowork, pick the project folder.
+
+00:08:10
+And this time we will ask Claude to perform three parallel tasks. The first task is to analyze all the transcript data, identify top mentioned growth frameworks. The second task is to build an interactive dashboard to visualize the analysis. And the third task is to build a growth strategy playbook deck for this brand by picking the most relevant growth framework. And since there's so many files to analyze, we will ask Claude to create a progress tracker for itself so it can check off each transcript and it goes
+
+00:08:40
+and doesn't lose track halfway through. And since this is quite a complex task, you can see it now launches egg parallel subagent to first process all the transcript by batching and also follow up all subtask in the to-do list on the side panel. And eventually I found it was missing some episodes and so I asked it to double check again. So finally here are the three deliverables, the spreadsheets analysis that break down the episode topics, tools mentioned key takeaways, and then the interactive dashboard that summarize the topic distribution, the
+
+00:09:15
+top growth frameworks that mentioned the top tools used by growth professionals, which can be useful to evaluate our own growth marketing approach. And finally the growth playbook deck that is tailor made for this brand. And so it summarize the top five frameworks that can be applied to this brand, how it will work out, the implementation plan and the tracking metrics. And this is one of my favorite use case because you are not just asking for insights, but you let Claude to analyze and how you can apply these
+
+00:09:46
+framework into your marketing project. Of course this is an extreme case as the repository is big, but you can apply the same concept to other scenarios like paid campaign or content campaign analysis. So far, we see how Cowork can work with MCP official skills, but most of the time you will want to use custom skills for your own tailored marketing workflow. And what makes this even more powerful is to combine that with Claude in Chrome MCP, so Claude can browse Live website, do real time analysis and generate
+
+00:10:17
+deliverables all from one custom skill. So to create a new custom skills, the most obvious way is to use the regular Claude chat. But from my experience when using Claude desktop, I actually recommend to create the skills on the Claude Code whenever possible as the building experience I found is the best with the most reliable results. And it's actually not that intimidating as you think. So switch to Claude Code. Pick the folder you want the skills to be saved. So let's build a "Landing Page Audit" skills which every marketer would need.
+
+00:10:50
+So we will use the official Claude in Chrome connector tool. So this allow Claude to browse webpages and take action and make sure you also install the Claude for Chrome extension for it to work. So I'll put the line below and then we'll ask Claude to check the page against the conversion framework with the specified criteria. And then to generate the audit report. A tip here is to make sure it used the skill creator to ensure the proper formatting. And very quickly the new skills is created and we can actually see it
+
+00:11:20
+has been saved inside this folder. And to activate the skills, just go to settings under capabilities where you can add the custom skills by uploading the ZIP file. And then a quick tip is the first use this prompt to ask Claude to list out a full list of skills that it can access, so you can double confirm the skills has been installed. And now whenever we are doing a landing page audit, just make sure the Claude in Chrome MCP is turned on and then give it the target and competitor page URL, and then it will trigger the workflow immediately.
+
+00:11:52
+So this is amazing. It will turn Claude into a browser agent, browsing the websites, scrolling and doing real time analysis. So now is preparing the report, calling the document skills, and finally generate this report with the score, the side by side comparison detailed individual page analysis on the different areas and the prioritized recommendation. And so with building these custom skills, you can immediately turn a two hour task into less than 30 minutes, and that is what makes it a game changer.
+
+00:12:26
+Now, not just directly Ask Claude to create a custom skills from scratch, but we can also turn any workflow into a skills. So for example, I want Claude to help me to track search results from Google AI Mode, which is a tedious manual task that is hard to automate for marketers. So here I will put the workflow details how Claude should approach the task, step by step by searching the search queries and to generate the tracking reports. So for this example, I have given 10 prompts queries to track, and again,
+
+00:12:55
+Claude will do realtime search on Google AI Mode and capturing the search results. And this is incredible how Claude can browse on your behalf. And now it generates the tracking summary together with the report and spreadsheets. And this is well done it track all the top five cited page URL, domain for every prompt, and also the domain frequency as I instructed, and also summarize the findings in the report format for each of the query. So imagine how much time you save by delegating it to Claude or when you need
+
+00:13:28
+to build tracking report like this. So now the magic happens when we ask Claude to package this whole workflow into a reusable skills and also specify if any enhancement you want to make before it create the skill. And then it will package this workflow into a reusable skills where you can install and use it again. So we created custom skills connecting MCP tools. Now let's take this one step further as we can package all of them into what is called plugin in Claude ecosystem. The easiest way to think a plugin is they're like ready to use bundle toolkit
+
+00:14:02
+containing all your skills commands, agents, hooks, and MCP connections. Particularly for commands and skills, they are really the same thing except commands is you triggered it manually. So it's much more predictable while skills is triggered automatically by Claude, depending on the context, and I'll show you in a minute. And the biggest reason for using Plugin is you are not just sharing a skills or a MCP tool, you are sharing the entire setup with your marketing teammate instead of piece by piece.
+
+00:14:30
+So to install plugin on cowork, click add plugin. So here you will see a list of official plugin grouped up by different functions to get started, and you can also add your own plugin or input from GitHub Marketplace. So let's just install the official marketing plugin, and then you'll see a list of commands and skills available in CoWork that is ready to execute. And then you can view what is inside of this plugin. And you can click on each command or skills to view the prompt details.
+
+00:15:00
+And you can also make changes to any of the command or skills by clicking edit. But personally I recommend just clone a separate set instead of editing directly. So now you can just type the installed command. So command is completely triggered manually, and it will execute the define workflow exactly as it is. So like in this case, a competitive research report workflow for healthy snack brand. And this will be another huge time save. And most of the time you will want to build your own plugin,
+
+00:15:30
+as not all the official ones will fit your workflow needs. So for example, we already have a list of custom marketing skills created in our skill library. And then again, switch to Claude code, pick our skill library folder, and ask it to reference the official plugin documentation, and then create a plugin called marketing team with our defined commands and skills. And then pretty quickly the plugin is ready and then we can just upload it back to cowork. So now we can have our own marketing team commands and skills, and we can
+
+00:16:02
+mix them together in a complex task. So like in this case, I can ask it to first check the AI search results for these target query using the command, and then do keyword research and finally prepare the AI search friendly blog in our brand voice. And so it would trigger the workflow as expected. Loading the skills and calling the MCP tools and finally generate three outputs, the AI search friendly blog articles, the tracking report, and the detailed tracking spreadsheets for all the cited domains.
+
+00:16:33
+And so this has lost our possibilities in building your own marketing workflows. So think about the core skills you use often and package them into plugin that you can share with your team. So don't just use Claude as a chat bot, build your skills, package your workflow, and let it do the work for you. If you find this video useful, please give me a thumbs up. I really appreciate that. I also encourage you to join our community. Right now we are running a workshop series on building a marketing system with ai.
+
+00:17:02
+You can find the link in the description to join, and before you go, I highly recommend you check these two videos about Claude skills and Claude Code so you know more about how to use them for your marketing. See you next time.
+

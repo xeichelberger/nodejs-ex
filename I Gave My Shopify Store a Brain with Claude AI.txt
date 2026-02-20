@@ -1,0 +1,57 @@
+00:00:00
+Hi guys welcome to another video. In this video I'm going to show you guys how you can connect cloud ai directly with your Shopify store data. So what if I could tell you that you can directly chat with your data, do brainstorming and all you have to do is just add a query to cloud ai desktop version and it is going to directly read your products, read your orders data and suggest your improvement, create reports for you. There are unlimited use cases which you can perform using this trick which I'm going to show you with you guys and you will need cloud ai desktop,
+
+00:00:34
+you can use the free version and you will be connecting your store directly and chat with the data. So it's basically like adding a brain to your Shopify store data for brainstorming, for reading the nice looking reports just like I have created one so let me show you guys. So I just gave the cloud ai a prompt, create a beautiful graph showing comparison of my orders for last three months and that's what I got. So I am going to expand the size and you can see that it's giving me the number of orders which I got in May 2025, 11 orders, that's my revenue,
+
+00:01:11
+that's the average order value. By the way that's all dummy data and I'm going to show you in a bit on how you can connect your store and the data will be real. It directly pulls the data from your store. So the prompt which I gave it here and you can see that it got this order and it got all of the orders from my store directly and created this report where it's saying May orders, June orders, July orders and this is a nice looking graph here right an interactive graph, order count
+
+00:01:41
+by month, weekly performance trend, three months summary, total orders 42, total revenue and average order value. So if you want to do the same, watch the complete video and make sure to subscribe the channel because I keep creating videos related to Shopify, WordPress, especially Shopify where I've created a ton of free sections which you can use to improve UI of your store and get more sales. So without further ado let's start implementing that. The first thing you will need is to install
+
+00:02:12
+Claude AI Desktop version and how you can do that is basically go to Claude AI Desktop, search in Google and you will find a link here where it says download Claude. So here we have Mac version, Windows version and you can once you download that you will have it on your system. I have it on my MacBook and these are my chats so these are the two chats which I've created. Once you have downloaded the Claude desktop, make sure to login, I'm already logged into my account. Now once you have downloaded this and logged into your account, we will need
+
+00:02:52
+this MCP server which is from this guy JD2001. I really appreciate creating this MCP server. MCP server is basically giving contacts to your LLM, to your chat model about Shopify store which we will be connecting. So it's a really cool thing and the tool which it comes with this MCP server is we can read products, we can write products, read customers. So these are the tools which we can use in our Claude AI Desktop version. We can also get customers. So these are the tools which we will be using and if I go to my Claude and open up a new chat
+
+00:03:42
+and click on this icon here for search and tools, you can see that we have this Shopify MCP server showing up where we have these tools, get products, get products by ID, get customers, get orders, get orders by ID. So we will be using this MCP server with Claude AI Desktop. Now let me show you how you can connect that. I'm going to connect that with my development store and that is my development store which I'll use to connect. So that's my development store. Let me log into the backend and I have some demo order data here. So if I click on orders, you can see we have this
+
+00:04:26
+test data here which we will see in our Claude AI in a moment. Now in order to integrate, in order to connect this development store with the Claude, we will need to add in some code, a little bit of code. So first we will need to create an app in our development store, click on settings and then click on apps and sales channels and here click on develop apps. You can see I have some apps which I have created already. I'm going to create a new app, click on create an app and here I'm going to name my app Claude connection. So we are creating a connection
+
+00:05:09
+between our Claude and the Shopify development store. So let's click on create app and once the app is created click on configure admin API scopes and the scopes which we need as per this MCP server. By the way this MCP server link is in the description. You can also google that but just in case I have this link in the description as well. So we will need to give following scopes read products, write products, read customers, write customers, write orders, read orders. So let's give our app these scopes. So I'm going
+
+00:05:50
+to search for write products first. There we go. Now let's search for write orders. There we go. Now let's search for write customers. There we go. Once done click on save and then go back to the API credentials. Click on API credentials and then click on install app. Click on install again. And now we have our access token which we will need in order to connect it with Claude AI and that is our URL which we will need. So that is the URL which we will need to connect our store with Claude
+
+00:06:46
+AI. Before we proceed to the tutorial if you are new to Shopify or a fresh merchant you can use the link in the description to sign up for a store for just $1 a month. Limited time offer. Shopify keep changing the terms and conditions for their offer so make sure to avail this offer by clicking on the link in the description. Plus we have created an app for you called BigBulk Discount. So if you google BigBulk Discount Shopify you will find the app which will help you add volume discount feature.
+
+00:07:18
+So that's the app which you can add to enhance the sales and increase the average order value. This app comes with a 7 day free trial. No charges for 7 days. Use completely for free. If you find it useful keep using it otherwise uninstall. There's a YouTube tutorial on the app page which you can see and it also comes with a nice looking widget which you can add on your product page. So once we have our app installed and API credentials showing up here we will now connect it with our Claude desktop. Right and how we can do that let's open our Claude desktop
+
+00:07:57
+and here click on this arrow here on just beside your name and from here click on settings and from settings click on developer and here you can see that my store is already connected. I am going to click on add config, edit config to show you guys how you can connect your store. Right so that's the config file. I'm going to edit the config file in Visual Studio Goad and here what you will see is something like this so that's what you will see here. But you will need to add in your MCP server and you will find this in this github repository so
+
+00:08:41
+if we scroll down you can see that we have all of this code so click on this copy icon here and then paste it on your Claude desktop config.json file. Once you paste this you will have it something like this and here you will need to add in the access token which you generated. So we will go back to our store and we will copy the access token and then we will paste our access token here between the inverted commas. Make sure there's no typo. Right and here you can see that your underscore shop that's where you will need to
+
+00:09:20
+add in your URL which is this hill. So I'm going to copy it here you can also copy it from here and then paste it in our config file. Once you do that click on save and then exit your Claude desktop. So I'm going to restart it. I'm going to quit my Claude desktop and then I'm going to restart it. Okay I just restarted my Claude. Make sure you're logged into Claude. Once you do that go back to settings and then click on developer. You should see the URL of your store here and the
+
+00:10:07
+access token right. Once you do that you are connected with the Claudia. You have connected your store with the Claudia and I'm going to click on new chat. I'm going to say please pull up last seven days order from my Shopify store. Let's see what it does. Click on allow once or allow always. It's basically asking you for permission to use this tool which comes with the mcp server. So I'm going to click on allow once. So you can see the data from my store which is you can see all of the test orders. So order number
+
+00:10:52
+1058 1057. So if I go to my store and check out the orders you can see these are the last seven days last 1058. Okay so it didn't pull this one but we have these orders showing up 1058 1057. It just pulled up four orders. So actually we don't have any orders from the last seven days. So what I'm going to prompt it to please pull last seven orders in my Shopify store and create a simple graph for it. Let's see what it does. In first prompt I said please pull up last seven days order. We didn't have any orders
+
+00:11:51
+in last seven days. Now I'm saying please pull last seven orders not the last seven days. So it's now going to pull last seven orders from the Shopify store. Now it's creating a nice looking visualization for the last seven orders. Let it code. You can see these are the last seven orders. So here we go. You can see that we have last seven days orders, fulfilled orders, one unique customers, order by date, order details. So all of this data is pulling through from your store directly and you can just chat with this data. You can brainstorm and do a lot
+
+00:12:54
+of stuff with this right. So I think that's it for the video. If you like it let me know in the comments below. We'll have to create more tutorial for you guys. Until next video have a great day.
+
