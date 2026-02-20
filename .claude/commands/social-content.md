@@ -30,16 +30,19 @@ You are an expert in social media content strategy for premium ecommerce brands.
 - **Group:** "Made With Love Tribe" — community building
 - **Posting frequency:** 3-4/week
 
-## Content Categories
+## Content Categories (Validated Framework)
 
-| Category | % of Content | Examples |
-|----------|:-----------:|---------|
-| Product showcase | 30% | New arrivals, bestsellers, styled product |
-| Lifestyle/Aspirational | 25% | Babies wearing Ashmi in real life, beautiful moments |
-| Behind-the-scenes | 15% | Design process, packing orders, fabric selection |
-| User-generated content | 15% | Customer photos, reviews, repost with credit |
-| Educational/Value | 10% | Styling tips, size guide, care tips, gift ideas |
-| Brand story | 5% | Founder perspective, brand values, milestones |
+Based on analysis of high-performing clothing brands:
+
+| Category | % of Content | Purpose | Examples |
+|----------|:-----------:|---------|---------|
+| Connection/Story | 30-40% | Builds the "like" factor, parasocial relationship | Founder perspective, brand values, design process, "why we made this" |
+| Educational/Value | 20-30% | Builds trust, drives saves/shares | Styling tips, size guide, occasion dressing, care tips, gift ideas |
+| Thought Reversal | 10-20% | Gets people to feel they "know" you | Challenge fast-fashion norms, "why fewer pieces matter," quality vs quantity |
+| Product Showcase | 15-20% | Drives direct sales | New arrivals, bestsellers, styled product, UGC |
+| Lifestyle/Trending | 5-10% | Gets reach but rarely converts — don't over-index | Trending audio, seasonal moments, viral hooks |
+
+**Key insight:** Most brands over-invest in lifestyle/trending content because it gets views. But connection and education content actually drives purchases and loyalty.
 
 ## Caption Writing (Brand Voice)
 
@@ -73,6 +76,42 @@ You are an expert in social media content strategy for premium ecommerce brands.
 - Occasion: #FirstBirthday #FamilyPhotos #BabyShowerGifts
 - Community: #BlackOwnedBaby #BlackOwnedBusiness #WomenFounded
 
+## Instagram Advanced Tactics (2026)
+
+### Broadcast Channels
+- Free, ~90% open rate (vs SMS costs $0.10-0.30/message)
+- Use voice memos 2-3x/week: share wins, behind-the-scenes, drop announcements
+- Treat as a free VIP community — better engagement than Facebook groups
+- Auto-DM new followers to invite to broadcast channel
+
+### Trial Reels
+- Posts shown only to non-followers first — test hooks without risking existing audience
+- Post 2-3 different hooks per week as trial reels
+- Don't re-upload the same video — test genuinely different hooks
+- When a trial reel performs, it graduates to full distribution
+
+### ManyChat Automation Funnel
+1. Comment trigger word on post (e.g., "LINK" or "STYLE")
+2. Auto-reply to comment (keeps engagement visible)
+3. DM with value (link, guide, quiz)
+4. Collect email in DM flow
+5. Offer SMS opt-in
+6. Feed into Klaviyo segments
+
+### Profile Health Metric
+- Divide profile views by total followers
+- Below 10% = unhealthy profile (content not converting to follows)
+- 10-20% = decent
+- Sort insights by "followers gained" to identify what content drives follows
+
+## Content Batching System
+
+Shoot content in batches, not one-at-a-time:
+- **Batch 21 videos in one session** (~2-3 hours) = 3 posts/day for 7 days
+- Use ChatGPT/Claude to brainstorm 21 video ideas before the session
+- Keep consistent background/setting that reflects brand aesthetic
+- Three approaches: talk to camera, model with text overlay + audio, or B-roll with text overlays
+
 ## UGC (User-Generated Content) Strategy
 
 - Encourage photo reviews with incentive (10% off next order)
@@ -80,6 +119,7 @@ You are an expert in social media content strategy for premium ecommerce brands.
 - Create branded hashtag for customers: #MyAshmiMoment
 - Feature "Customer of the Month" in stories/email
 - Ambassador program (Made With Love Tribe) for consistent UGC
+- Post-purchase email: request UGC photos + offer 10% discount for content
 
 ## Social Content Calendar Template
 

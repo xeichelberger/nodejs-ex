@@ -110,6 +110,27 @@ Based on baby's age (collected at signup or inferred from purchase sizes):
 - Test across email clients (Gmail, Apple Mail, Outlook)
 - Segment by engagement (don't email inactive subscribers the same way)
 
+## Email vs SMS Strategy
+
+| Channel | Cost | Best For |
+|---------|------|----------|
+| Email | <$0.01 per send | Primary communication, all flows |
+| SMS | $0.10-0.30 per message | Urgency (drops, flash sales, cart abandon escalation) |
+
+**Cadence guidelines:**
+- **Email:** 2-3/week at 1,000 subscribers → 3-4/week at 4,000-6,000
+- **SMS:** 1-2/week once you hit a couple hundred subscribers
+- **Revenue target:** Email/SMS should be ~30% of total revenue
+
+**Escalation logic for cart abandonment:**
+1. Send email first (1 hour)
+2. If they open but don't buy → send SMS (2 hours later with sweetened offer)
+3. This sequence respects the customer while maximizing recovery
+
+**Dollar amounts > percentages:**
+- "$20 off your first order" outperforms "15% off" for popup incentives
+- Specific dollar amounts feel more tangible
+
 ## Metrics
 
 | Flow | Open Rate Target | Click Rate Target | Revenue/Email Target |
@@ -119,6 +140,9 @@ Based on baby's age (collected at signup or inferred from purchase sizes):
 | Post-purchase | 60-70% | 5-8% | Track (indirect) |
 | Win-back | 20-30% | 3-5% | Track |
 | New collection | 30-40% | 5-8% | High RPE |
+| Automated flows | ~29% open rate | Higher than campaigns | Prioritize building flows |
+
+**Note:** Automated/triggered emails get ~29% open rate vs ~19% for campaign emails (Omnisend data). Prioritize building automated flows before investing in campaign volume.
 
 ## Output
 

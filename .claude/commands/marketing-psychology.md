@@ -108,6 +108,34 @@ Limited availability increases perceived value.
 | Social proof | Customer photos and reviews |
 | Scarcity | "New collection — early access for you" |
 
+### 9. Submersive Marketing (Consumer Embedding)
+
+Instead of "buy my product," show the product existing naturally in the consumer's world — alongside other products, activities, and rituals they already engage in.
+
+**The Marvis Toothpaste Model ($100M+ revenue):**
+- Marvis didn't market toothpaste. They embedded their product in the lifestyle and aesthetic of their target consumer.
+- Result: A $10 toothpaste became a cultural status symbol.
+
+**How to apply for Ashmi:**
+
+1. **Define the Perfect Consumer Profile (PCP):**
+   - Go beyond demographics (age, income)
+   - Map their: aesthetics, environments, activities, rituals, habits, items they already use/buy
+
+2. **Research process:**
+   - Search your niche on Pinterest
+   - Extract the aesthetics, environments, and activities visible
+   - Identify sub-aesthetics within your audience (minimalist nursery, boho mama, classic Southern, etc.)
+
+3. **Content formula:**
+   - Combine rituals + habits + items from consumer research
+   - Weave Ashmi products naturally into that combination
+   - Example: "Packing for her first trip to grandma's" — shows the outfit alongside the bag, the car seat, the snacks. Product is part of the world, not the star.
+
+4. **Show product alongside aspirational brands:**
+   - Pairing Ashmi pieces with recognizable quality brands in the same frame elevates perceived status
+   - The nursery scene, the diaper bag contents, the family photo setup
+
 ## Ethical Boundaries
 
 **Always:**

@@ -38,6 +38,31 @@ Verify robots.txt allows these crawlers:
 
 **Decision:** Blocking AI crawlers = those platforms can't cite you. For an ecommerce brand seeking visibility, allow all search-related crawlers.
 
+## Shopify Agentic Storefronts (Winter 2026)
+
+Shopify's "Agentic Storefronts" integration enables customers to discover and purchase products directly within ChatGPT — without ever visiting your website. This is a paradigm shift comparable to TikTok Shop.
+
+### Immediate Action Items
+1. **Install the "Knowledgebase" app** from Shopify App Store
+2. **Populate it thoroughly** — fill out ALL store information to create AI-readable schema markup
+3. **Sign up for Agentic Storefronts notification** when it goes live
+4. This creates structured data that ChatGPT and other AI systems can parse for product recommendations
+
+### Other Shopify AI Features (Winter '26)
+- **Sidekick Pulse:** AI monitoring that scans store data and surfaces improvement recommendations
+- **Sidekick Skills:** Create reusable prompt shortcuts (e.g., "/bestseller" for weekly reporting)
+- **AI Image Generation:** Generate product images in AI environments directly within Shopify
+- **Vibe Coding:** Build custom internal apps via natural language prompts in Sidekick
+
+### SEO = "Search Everywhere Optimization" (2026)
+Search is no longer just Google. Create "answer first" content optimized for:
+- Google (traditional + AI Overviews)
+- YouTube (second largest search engine)
+- Reddit and Quora (increasingly surfaced in AI answers)
+- Pinterest (visual search engine)
+- Podcast transcripts (cited by AI systems)
+- ChatGPT, Perplexity, Claude (direct AI search)
+
 ## Ecommerce-Specific Optimization
 
 ### Product Pages — Make Them Citable

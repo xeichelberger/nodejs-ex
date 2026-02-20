@@ -74,11 +74,30 @@ Baby clothing has a built-in repeat purchase trigger — growth:
 - Referral rewards
 - UGC content drives social proof
 
+**Recommended Loyalty Apps:**
+| App | Best For | Notes |
+|-----|----------|-------|
+| Toki Loyalty | Fresh approach + mobile wallet passes | Modern UX |
+| Smile.io | Standard loyalty programs | Well-established |
+| Loyalty Lion | Advanced segmentation | More enterprise |
+
+**Gamification Elements:**
+- Progress bars for free shipping thresholds
+- Points per purchase, review, or referral
+- Tier levels (Bronze → Silver → Gold) with escalating perks
+- Alia for quiz-based popups (segment and capture simultaneously)
+
 **Review Program:**
 - Photo reviews are gold for conversion
-- Offer small reward (10% off next order) for photo reviews
+- Offer small reward (10% off next order) for photo reviews — Judge.me for review collection
 - Feature best reviews on product pages and social
 - Respond to every review (positive and negative)
+- Post-purchase flow: request UGC → request review → offer discount for photo content
+
+**Subscription/Bundle Options:**
+- ReCharge for subscription products (basics like bodysuits, socks)
+- Kaching Bundles for same-product volume discounts (buy 3 get discount)
+- Simple Bundles and Kits for curated sets (e.g., "First Birthday Set")
 
 ### 6. Win-Back Campaigns
 

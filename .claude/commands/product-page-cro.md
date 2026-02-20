@@ -33,20 +33,59 @@ Everything above the fold must answer: "Is this the right product for me?"
 
 ### Product Image Optimization
 
-Images are the #1 conversion driver for baby clothing:
+Images are the #1 conversion driver for baby clothing. Amazon data shows listings with 5+ images have doubled conversion rates.
 
+**Three image categories:**
+1. **Professional/Catalog** — White/clean background, for product page and Google Shopping
+2. **Lifestyle/Lookbook** — Real scenes matching brand aesthetic (nursery, garden, home)
+3. **UGC/Candid** — Customer photos, iPhone-style authenticity for social proof
+
+**Shot list per product:**
 1. **Hero image**: On-model (baby wearing the item) — lifestyle context
 2. **Detail shots**: Fabric texture close-up, button details, flutter sleeves
 3. **Flat lay**: Clean product-only shot on neutral background
 4. **Scale shot**: Baby wearing it in real context (crawling, sitting)
 5. **Back view**: Show all angles
 6. **Size reference**: Compare sizes side by side if possible
+7. **Walking/movement shot**: Baby actively moving in the garment (comfort proof)
+8. **Macro details**: Stitching, labels, closures up close
+
+**Image specs for Shopify:**
+- 2048x2048 square JPEGs for fast loading and mobile optimization
+- Compress before upload (Shopify CDN handles some, but start clean)
+- AI-generated backgrounds acceptable for variety (e.g., seasonal scenes)
 
 **Image UX:**
 - Swipe on mobile, thumbnails on desktop
 - Zoom on tap/hover
-- 4-6 images minimum per product
+- 5-8 images minimum per product (4 is too few)
 - Load hero image fast (LCP optimization)
+
+### Homepage Hero Section
+
+The hero section must answer three questions in 3 seconds:
+1. **What do you sell?**
+2. **Who is it for?**
+3. **What do I do next?**
+
+**"One Breath Hero" framework:**
+- Headline: what you sell + who it's for
+- Subheadline: differentiator (e.g., "Elevated everyday pieces for babies 0-24M")
+- Proof: social proof bar ("41K families follow us" or "As featured on Nordstrom")
+- One clear CTA button with contrasting color
+
+**Hero mistakes to avoid:**
+- White text on light backgrounds (contrast is critical)
+- Slideshow/carousel heroes — one static hero with one job performs better
+- No separate mobile hero image (mobile crops desktop images badly)
+- Vague headlines ("New Collection" without context)
+
+### Premium Website Signals
+
+Three things that make a clothing brand look cheap:
+1. **Screaming discounts** — Instant discount popups, spinning wheels, countdown timers. Use Klaviyo teaser bar at bottom instead of full-screen popup.
+2. **Template-looking design** — Use max two fonts (headline + body), tight color palette (one primary, one neutral, one accent). Do the "blur test": take a scrolling screenshot, blur it, see if it looks cohesive.
+3. **Slow pages** — Target 1-2 second load time. Audit app bloat regularly — every app adds code. Keep homepage video to 12 seconds/1080p max.
 
 ### Product Description
 

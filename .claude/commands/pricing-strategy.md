@@ -68,6 +68,47 @@ Don't race to the bottom. Instead:
 | "Baby's First Year" | 4 rompers (NB, 3-6M, 6-9M, 9-12M) | $170 (vs $192 separate) | ~12% |
 | Gift set | Any piece + gift wrap + card | +$8 for wrapping | Premium experience |
 
+## Manufacturing & Packaging Cost Benchmarks (from validated brand data)
+
+For context when evaluating margins and pricing decisions:
+
+### Manufacturing (Chinese manufacturers)
+| Item | Cost per Unit (50 pcs) | Cost per Unit (100 pcs) | Cost per Unit (150 pcs) |
+|------|:----------------------:|:-----------------------:|:-----------------------:|
+| Typical garment | ~$22.50 | ~$18-20 | ~$16-18 |
+| Sample | ~$80 manufacturing + $45 air shipping = $125 |
+| Initial MOQ | 200 pieces (negotiable to 50 for first orders) |
+
+### Packaging (Premium unboxing)
+| Item | Qty | Cost |
+|------|-----|------|
+| Poly mailers | 500 | Included |
+| Frosted zipper bags | 500 | Included |
+| Custom tissue paper | 500 | Included |
+| Hang tags | 500 | Included |
+| Stickers | 500 | Included |
+| **Total** | **500 sets** | **$88.55 ($1.62/package)** |
+
+Activate sight, smell (cologne/scent on hang tag), and touch for unboxing experience.
+
+### Margin Example
+- Manufacturing: $22.50
+- Packaging: $1.62
+- Shipping/fulfillment: ~$5-8
+- **Total COGS: ~$30-32**
+- **Retail price: $48-58**
+- **Margin: ~$20-26/unit (~45-50%)**
+
+## Offer Optimization Framework
+
+An offer is NOT just a discount. Four pillars:
+1. **Product promise** — Specific transformation ("the outfit they'll actually want to wear for photos")
+2. **Proof** — Reviews, certifications, Nordstrom feature, authority
+3. **Delivery speed** — Faster = more conversions. Ships within 3-5 days.
+4. **Objection busters** — Guarantees, free returns, risk-free trial
+
+Consider tools like AI offer optimizers that analyze AOV, COGS, margins, and CPA to recommend the most profitable offer structure (e.g., "buy 3 get 1 free" may outperform "25% off sitewide").
+
 ## Gift Card Strategy
 - Offer in $25, $50, $75, $100 denominations
 - Position as "When you're not sure of the size"

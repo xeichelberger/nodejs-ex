@@ -64,6 +64,58 @@ You are an expert in ecommerce advertising creative. Your goal is to generate hi
 - One emotion per ad (don't try to say everything)
 - CTA: "Shop Ashmi & Co." (simple, not "BUY NOW!!")
 
+## Meta Ads Campaign Structure (Validated)
+
+Based on analysis of $5M+ clothing brand ad accounts:
+
+### Two Campaigns Only
+1. **DPA (Dynamic Product Ads)** — Catalog/product ads segmented by collection
+2. **One CBO Sales Campaign** — Broad targeting, creative does the work
+
+### DPA Best Practices
+- Segment by collection or occasion (holiday, seasonal, gift sets) — not whole catalog
+- DPA consistently returns 2.1x-5x ROAS for clothing brands
+- Start seasonal DPAs early (October for holiday, not November)
+
+### Targeting (2026 Reality)
+- **Go broad.** Age, gender, location only. Advantage+ audiences on.
+- Interest targeting, bid caps, and cost caps are obsolete post-Andromeda update
+- Creative diversity IS your targeting — different creatives reach different audiences
+- Pixel warming/seasoning is a myth. Launch when ready.
+
+### Ad Creative Types That Work
+| Type | Description | When to Use |
+|------|------------|-------------|
+| Lookbook video | Multiple products, lifestyle setting, 15-30s | Top performer for awareness |
+| Grid/Brady Bunch static | 4-6 products in a grid layout | Showcase collection range |
+| Carousel | Product hero → lifestyle shots | Product-level retargeting |
+| Founder story video | Authentic, personal, brand origin | Connection building |
+| Us vs. Them | "Not fast fashion. Not couture. Something better." | Differentiation |
+| Before/After | Styling transformation or occasion reveal | Engagement driver |
+
+### Budget & Scaling Rules
+- **Minimum test budget:** $30-50/day for 7 days to get meaningful data
+- **Low-budget testing ($10-20/day):** Track CPM (<$25), CPC (<$1), Add to Cart (<$15) — don't use cost per purchase at low spend
+- **Don't scale until:** 2x ROAS over breakeven for 3 consecutive days
+- **Scaling pace:** Increase 5% daily (conservative) or 20-30% every 48 hours (aggressive)
+- **At $50+/day:** Split into scaling campaign (60-70% budget) + testing campaign (30-40%)
+- **Ad fatigue signal:** Frequency above 2.5 — rotate creative
+
+### Third-Party Attribution
+- Meta over-reports. Use Triple Whale, Northbeam, or similar for real numbers
+- Cross-reference with Shopify revenue to validate
+
+## Content Scaling for Ads
+| Category | Content Type | % of Creative Mix |
+|----------|-------------|:-----------------:|
+| Connection | Founder story, brand values, community | 30-40% |
+| Education | How to style, occasion guides, care tips | 20-30% |
+| Thought reversal | Challenge assumptions about baby fashion | 10-20% |
+| Lifestyle/Trending | Seasonal, viral hooks (smallest share) | 10% |
+| Product showcase | Features, benefits, reviews | 20% |
+
+**Key insight:** Most brands over-index on lifestyle/trending content because it gets views but rarely converts. Connection and education content drives purchases.
+
 ## Output
 
 Ad creative organized by:
@@ -71,10 +123,12 @@ Ad creative organized by:
 - Angle/theme
 - Copy variants (2-3 per angle) with character counts
 - Visual/creative direction notes
+- Campaign structure recommendation
+- Budget allocation and scaling plan
 - Recommended testing order
 
 ## Related Commands
 - `/project:copywriting` — Brand-voice copy
 - `/project:marketing-psychology` — Psychology behind ad performance
-- `/project:paid-ads` — Campaign strategy when ready
 - `/project:ab-test-setup` — Testing ad variants
+- `/project:launch-strategy` — Launch campaigns with paid support

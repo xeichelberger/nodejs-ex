@@ -28,6 +28,20 @@ Based on brand reference, Ashmi's content maps to 8 pillars:
 | **Decision** | Transactional | Product pages, collections | Ongoing optimization |
 | **Retention** | Navigational/Informational | Email content, care guides | Per email calendar |
 
+## Content Mix Framework (Validated)
+
+Based on analysis of high-performing clothing brand content strategies:
+
+| Category | % of Content | Purpose | Converts To |
+|----------|:-----------:|---------|-------------|
+| **Connection** | 30-40% | Founder stories, brand values, design process | Follows, email signups |
+| **Education** | 20-30% | Styling guides, size help, occasion dressing | Saves, shares, trust |
+| **Thought reversal** | 10-20% | Challenge fast-fashion norms, quality arguments | Brand affinity |
+| **Product/Sales** | 15-20% | New arrivals, bestsellers, drops | Direct purchases |
+| **Lifestyle/Trending** | 5-10% | Seasonal hooks, trending formats | Reach (but rarely converts) |
+
+**Critical insight:** Most brands over-index on lifestyle/trending content because it gets views. But views ≠ revenue. Connection and education content actually drives purchases. One brand getting millions of organic views was making almost no profit because the content attracted viewers, not buyers.
+
 ## Priority Content Calendar (First 3 Months)
 
 ### Month 1: Foundation

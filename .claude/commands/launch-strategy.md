@@ -52,6 +52,7 @@ You are an expert in ecommerce product launches and collection drops. Your goal 
 
 ## Launch Email Sequence
 
+### Standard Sequence
 | Email | Timing | Subject Line Approach |
 |-------|--------|----------------------|
 | Teaser | -7 days | "Something new is coming" |
@@ -60,6 +61,34 @@ You are an expert in ecommerce product launches and collection drops. Your goal 
 | Reminder | Day 3 | "In case you missed it" |
 | Bestsellers | Day 7 | "The pieces everyone's choosing" |
 | Last chance | Day 14 | (Only if genuinely low stock) |
+
+### High-Impact Drop Sequence (Validated from $300K+ drops)
+
+**Stage 1 — 3-Day Hype Campaign (-3 to -1 days):**
+- Post one new piece per day, story-based, pushing people to join SMS/email list
+- Maximum tease period: 2 weeks. Focused hype: 3 days is ideal
+- "Early access" as a concept needs a REAL reason — not just "be first"
+
+**Stage 2 — Launch Day Burst (3 emails in one day):**
+| Email | Timing | Purpose |
+|-------|--------|---------|
+| VIP early access | 30 min before public | Reward loyal customers |
+| Public launch | Drop time | Full collection reveal |
+| Momentum update | Evening | "Here's what's selling fastest" |
+
+**Stage 3 — Post-Purchase FOMO Promo:**
+- Incentivize buyers to share order confirmation screenshots on Instagram
+- Offer 3 random full refunds to buyers who screenshot and tag you
+- This creates social proof for non-buyers who see everyone buying
+- Use order confirmation page video to explain the promo
+
+### The "1 of 10" Collectible Strategy
+For creating site-camping behavior and true FOMO:
+- Announce the first 10 buyers receive a limited collectible item (branded keychain, mini accessory, etc.)
+- Number them (1 of 10, 2 of 10) to create collectibility
+- Item is never produced or sold again
+- Creates anticipation → fans strategize to be first to buy
+- Works especially well for brands with engaged community/Discord
 
 ## Launch Social Content
 

@@ -96,6 +96,31 @@ For a premium baby brand with $0 paid ad spend, influencer gifting is the highes
 - Don't use aggressive follow-ups
 - Don't offer "exposure" to influencers (they provide the exposure)
 
+## Ambassador Funnel (Validated Model)
+
+An alternative to pure gifting — creates skin-in-the-game:
+
+1. **Ambassadors BUY the product first** at a discount (20-30% off)
+2. **Give them an affiliate code** (15% of net sales via GoAffPro — free Shopify app)
+3. **They create content** because they actually own and love the product
+4. **Track performance** via affiliate dashboard
+
+**Why this works better than free gifting:**
+- Ensures they actually like the product (they paid for it)
+- Creates a content creation pipeline (they want to earn commissions)
+- Scales without increasing gifting costs
+- Better FTC compliance (they're affiliates, not just gifted)
+
+**Warning:** The "fake unboxing" tactic (sending product photos and having influencers pretend to unbox) has been observed in the space — avoid this as it's deceptive and damages trust.
+
+## Micro-Influencer Approach
+
+Focus on micro-influencers (under 50K followers):
+- Even with just a sample, the relationship starts
+- Paid six-figure influencers often produce zero measurable results
+- 10-20 UGC creators producing consistently > 1 macro influencer post
+- Send 20 product samples to UGC creators before spending on ads
+
 ## Tracking & Measurement
 
 | Metric | How to Track |
@@ -105,7 +130,8 @@ For a premium baby brand with $0 paid ad spend, influencer gifting is the highes
 | Engagement on influencer posts | Check likes, comments, saves |
 | Referral traffic | UTM links or unique discount codes |
 | Revenue attributed | Unique codes per influencer |
-| Relationship stage | Prospect → gifted → posted → ambassador |
+| Ambassador sales | GoAffPro or affiliate dashboard |
+| Relationship stage | Prospect → gifted → posted → ambassador → affiliate |
 
 ## Output
 
