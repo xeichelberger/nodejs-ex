@@ -25,7 +25,7 @@ from pathlib import Path
 # CONFIGURATION — Edit these to customize behavior
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-MONTHS_TO_SCAN = 12
+MONTHS_TO_SCAN = 6
 RCLONE_REMOTE = "gdrive"
 DRIVE_BASE_FOLDER = "Instagram Videos"
 FRAMES_PER_VIDEO = 4          # Number of frames to extract per video
@@ -359,9 +359,10 @@ def detect_instagram_confidence(photo):
                 is_insta_resolution = True
                 break
 
-    # ── TIER 2: Screen recording of vertical content ──
-    # A vertical screen recording is almost certainly social media (IG/TikTok)
-    if is_screen_recording and is_vertical:
+    # ── TIER 2: Screen recording of short vertical content ──
+    # A short vertical screen recording is likely a saved Instagram reel/story.
+    # Longer screen recordings (tutorials, meetings, games) are filtered out.
+    if is_screen_recording and is_vertical and (is_short or is_medium_len):
         return "medium"
 
     # ── TIER 3: Downloaded video with Instagram-specific resolution ──
