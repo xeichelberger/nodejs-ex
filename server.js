@@ -16,7 +16,10 @@ require('./database').getDb();
 const app = express();
 
 // Middleware
-app.use(helmet({ contentSecurityPolicy: false })); // CSP off for dashboard inline scripts
+app.use(helmet({
+  contentSecurityPolicy: false,
+  strictTransportSecurity: false, // HSTS breaks localhost (upgrades fetches to HTTPS)
+}));
 app.use(cors());
 app.use(morgan('combined'));
 app.use(express.json({ limit: '5mb' }));

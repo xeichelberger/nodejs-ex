@@ -227,6 +227,8 @@
         document.getElementById('ai-status').innerHTML = 'Claude AI: <span style="color:#6ee7b7">Ready</span>';
       } catch (err) {
         console.error('Dashboard load error:', err);
+        document.getElementById('site-count').textContent = '!';
+        document.getElementById('sites-table').innerHTML = '<div class="empty-state"><h3>Error loading dashboard</h3><p style="color:#fca5a5">' + err.message + '</p><p style="margin-top:8px">Check browser console (F12) for details.</p></div>';
       }
     }
 
