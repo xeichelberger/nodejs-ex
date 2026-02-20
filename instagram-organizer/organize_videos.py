@@ -351,26 +351,21 @@ def detect_instagram_confidence(photo):
         w, h = photo.width, photo.height
         insta_resolutions = [
             (1080, 1920),  # Standard reel / story (9:16)
-            (1080, 1350),  # Portrait post (4:5)
-            (720, 1280),   # Lower quality reel
         ]
         for iw, ih in insta_resolutions:
             if abs(w - iw) <= 10 and abs(h - ih) <= 10:
                 is_insta_resolution = True
                 break
 
-    # ── TIER 2: Screen recording of short vertical content ──
-    # A short vertical screen recording is likely a saved Instagram reel/story.
-    # Longer screen recordings (tutorials, meetings, games) are filtered out.
-    if is_screen_recording and is_vertical and (is_short or is_medium_len):
-        return "medium"
+    # ── TIER 2: Screen recordings — SKIP ──
+    # We cannot distinguish which app a screen recording came from (Instagram
+    # vs TikTok vs YouTube Shorts vs Snapchat), so don't auto-detect them.
+    # Screen recordings with "instagram" in metadata are already caught by Tier 1.
 
-    # ── TIER 3: Downloaded video with Instagram-specific resolution ──
-    # Require the exact Instagram encoding resolution to distinguish from
-    # WhatsApp, iMessage, Snapchat, and other received videos.
-    # Instagram always encodes at 1080x1920 (reels/stories), 1080x1350
-    # (portrait posts), or 720x1280 (lower quality).
-    if not has_camera and is_insta_resolution:
+    # ── TIER 3: Downloaded video with Instagram's exact reel resolution ──
+    # Instagram encodes reels/stories at exactly 1080x1920. Require this plus
+    # no camera EXIF and vertical orientation to keep the filter tight.
+    if not has_camera and is_vertical and is_insta_resolution:
         return "medium"
 
     # ── Everything else → low confidence (personal recordings, etc.) ──
