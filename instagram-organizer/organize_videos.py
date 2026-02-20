@@ -31,9 +31,9 @@ DRIVE_BASE_FOLDER = "Instagram Videos"
 FRAMES_PER_VIDEO = 4          # Number of frames to extract per video
 WHISPER_MODEL = "base"        # Whisper model size: tiny, base, small, medium
 
-# AI backend for categorization: "claude" (best) or "ollama" (free/local)
-AI_BACKEND = "claude"
-CLAUDE_MODEL = "claude-sonnet-4-5-20250929"
+# AI backend for categorization: "ollama" (free/local) or "claude" (paid API)
+AI_BACKEND = "ollama"
+CLAUDE_MODEL = "claude-sonnet-4-5-20250929"  # Only used if AI_BACKEND = "claude"
 OLLAMA_MODEL = "llava"        # Vision model for Ollama (llava can see images)
 OLLAMA_TEXT_MODEL = "llama3.1" # Text-only fallback
 
