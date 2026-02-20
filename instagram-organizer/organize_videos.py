@@ -270,6 +270,90 @@ def scan_photos():
     else:
         print()
     print(f"  Other videos (personal recordings, etc.): {len(non_instagram)}")
+
+    # ── Diagnostic: show why "other" videos were excluded ──
+    # Count how many pass each individual check to find the bottleneck
+    no_cam = 0
+    no_gps = 0
+    vertical = 0
+    insta_res = 0
+    short_dur = 0
+    near_miss = []  # Videos that passed 4 out of 5 checks
+
+    for v in non_instagram:
+        fname = (v.original_filename or v.filename or "").lower()
+        checks = {}
+
+        # Camera EXIF
+        has_camera = False
+        try:
+            exif = getattr(v, "exif_info", None)
+            if exif:
+                if getattr(exif, "camera_make", None) or getattr(exif, "camera_model", None):
+                    has_camera = True
+        except Exception:
+            pass
+        checks["no_camera"] = not has_camera
+        if not has_camera:
+            no_cam += 1
+
+        # GPS
+        has_loc = False
+        try:
+            loc = getattr(v, "location", None)
+            if loc and loc[0] is not None and loc[1] is not None:
+                has_loc = True
+        except Exception:
+            pass
+        checks["no_gps"] = not has_loc
+        if not has_loc:
+            no_gps += 1
+
+        # Vertical
+        is_vert = False
+        if v.width and v.height and v.height > v.width:
+            ratio = v.height / v.width
+            if 1.5 <= ratio <= 2.2:
+                is_vert = True
+        checks["vertical"] = is_vert
+        if is_vert:
+            vertical += 1
+
+        # Resolution
+        is_res = False
+        if v.width and v.height:
+            if abs(v.width - 1080) <= 10 and abs(v.height - 1920) <= 10:
+                is_res = True
+        checks["1080x1920"] = is_res
+        if is_res:
+            insta_res += 1
+
+        # Duration
+        dur = getattr(v, "duration", None) or 0
+        is_s = 3 <= dur <= 90
+        checks["short"] = is_s
+        if is_s:
+            short_dur += 1
+
+        # Near miss = passed 4 of 5
+        passed = sum(1 for c in checks.values() if c)
+        if passed >= 4 and len(near_miss) < 10:
+            failed = [k for k, ok in checks.items() if not ok]
+            near_miss.append((v, checks, failed, dur))
+
+    print(f"\n  ── Diagnostic: why {len(non_instagram)} videos were excluded ──")
+    print(f"     No camera EXIF:  {no_cam:>5} / {len(non_instagram)}")
+    print(f"     No GPS:          {no_gps:>5} / {len(non_instagram)}")
+    print(f"     Vertical 9:16:   {vertical:>5} / {len(non_instagram)}")
+    print(f"     1080x1920:       {insta_res:>5} / {len(non_instagram)}")
+    print(f"     Short (3-90s):   {short_dur:>5} / {len(non_instagram)}")
+
+    if near_miss:
+        print(f"\n  ── Near misses (passed 4/5 checks, showing up to 10): ──")
+        for v, checks, failed, dur in near_miss:
+            name = v.original_filename or v.filename
+            dims = f"{v.width}x{v.height}" if v.width and v.height else "?"
+            print(f"     {name}  ({dims}, {dur:.0f}s)  — failed: {', '.join(failed)}")
     print()
 
     return instagram_confident, instagram_possible, non_instagram
