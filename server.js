@@ -104,6 +104,12 @@ app.use('/api/performance', require('./routes/performance'));
 // Auto-reoptimization (autonomous fixes for underperforming content)
 app.use('/api/reoptimize', require('./routes/reoptimize'));
 
+// ==================== Test page (verify browser connectivity) ====================
+
+app.get('/test', (req, res) => {
+  res.send(`<h1>It works!</h1><p>Server time: ${new Date().toISOString()}</p><p><a href="/">Go to Dashboard</a></p>`);
+});
+
 // ==================== Health check ====================
 
 app.get('/health', (req, res) => {
