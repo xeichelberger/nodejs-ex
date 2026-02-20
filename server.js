@@ -43,7 +43,15 @@ app.use((req, res, next) => {
 // ==================== Dashboard ====================
 
 app.get('/', (req, res) => {
-  res.render('dashboard', { apiKey: config.apiKey || '' });
+  const { getDb } = require('./database');
+  const db = getDb();
+  const sites = db.prepare('SELECT * FROM sites ORDER BY created_at DESC').all();
+  const integrations = {
+    shopify: require('./services/shopify').isConfigured(),
+    gsc: require('./services/google-search-console').isConfigured(),
+    anthropic: require('./services/content-generator').isConfigured(),
+  };
+  res.render('dashboard', { sites, integrations });
 });
 
 // ==================== Shopify OAuth (no auth required — one-time setup) ====================
