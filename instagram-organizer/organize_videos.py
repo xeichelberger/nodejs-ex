@@ -447,12 +447,10 @@ def detect_instagram_confidence(photo):
     # Screen recordings with "instagram" in metadata are already caught by Tier 1.
 
     # ── TIER 3: Downloaded video with Instagram's exact reel resolution ──
-    # Require ALL of: no camera EXIF, no GPS (personal recordings have GPS,
-    # downloads never do), vertical, exactly 1080x1920, and short duration
-    # (reels are under 90 seconds). This is intentionally very strict to
-    # avoid false positives from personal portrait recordings and other apps.
+    # Require: no camera EXIF, no GPS, vertical, and exactly 1080x1920.
+    # Note: duration check removed — osxphotos reports 0s for all videos.
     if (not has_camera and not has_location and is_vertical
-            and is_insta_resolution and is_short):
+            and is_insta_resolution):
         return "medium"
 
     # ── Everything else → low confidence (personal recordings, etc.) ──
