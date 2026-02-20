@@ -353,7 +353,6 @@ def detect_instagram_confidence(photo):
             (1080, 1920),  # Standard reel / story (9:16)
             (1080, 1350),  # Portrait post (4:5)
             (720, 1280),   # Lower quality reel
-            (640, 1136),   # Older device reel
         ]
         for iw, ih in insta_resolutions:
             if abs(w - iw) <= 10 and abs(h - ih) <= 10:
@@ -365,20 +364,13 @@ def detect_instagram_confidence(photo):
     if is_screen_recording and is_vertical:
         return "medium"
 
-    # ── TIER 3: Downloaded video (no camera EXIF = not shot on this phone) ──
-    if not has_camera:
-        score = 0
-        if is_vertical:
-            score += 3           # Vertical download = likely social media
-        if is_insta_resolution:
-            score += 2           # Exact Instagram encoding resolution
-        if not has_location:
-            score += 1           # No GPS = further confirms download
-        if is_short or is_medium_len:
-            score += 1           # Reel-typical duration
-
-        if score >= 3:
-            return "medium"
+    # ── TIER 3: Downloaded video with Instagram-specific resolution ──
+    # Require the exact Instagram encoding resolution to distinguish from
+    # WhatsApp, iMessage, Snapchat, and other received videos.
+    # Instagram always encodes at 1080x1920 (reels/stories), 1080x1350
+    # (portrait posts), or 720x1280 (lower quality).
+    if not has_camera and is_insta_resolution:
+        return "medium"
 
     # ── Everything else → low confidence (personal recordings, etc.) ──
     return "low"
