@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reel Insight Engine</title>
+  <style>
+    :root {
+      --bg: #0f0f13;
+      --surface: #1a1a24;
+      --surface2: #24243a;
+      --border: #2e2e48;
+      --text: #e4e4ef;
+      --text-muted: #8888a8;
+      --accent: #7c6cf0;
+      --accent-hover: #9b8ff7;
+      --success: #34d399;
+      --warning: #fbbf24;
+      --danger: #f87171;
+      --info: #60a5fa;
+      --radius: 10px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+
+    /* Header */
+    header {
+      text-align: center;
+      padding: 40px 0 30px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 32px;
+    }
+    header h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; }
+    header h1 span { color: var(--accent); }
+    header p { color: var(--text-muted); margin-top: 6px; font-size: 15px; }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 4px;
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 4px;
+      margin-bottom: 28px;
+    }
+    .tab {
+      flex: 1;
+      padding: 10px 16px;
+      text-align: center;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: all .15s;
+      border: none;
+      background: none;
+    }
+    .tab:hover { color: var(--text); background: var(--surface2); }
+    .tab.active { background: var(--accent); color: #fff; }
+
+    /* Analyze Section */
+    .analyze-section {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 28px;
+      border: 1px solid var(--border);
+    }
+    .input-row { display: flex; gap: 12px; }
+    .input-row input {
+      flex: 1;
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      outline: none;
+      transition: border-color .15s;
+    }
+    .input-row input:focus { border-color: var(--accent); }
+    .input-row input::placeholder { color: var(--text-muted); }
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-primary:disabled { opacity: .5; cursor: not-allowed; }
+    .btn-sm { padding: 6px 14px; font-size: 13px; }
+    .btn-ghost { background: var(--surface2); color: var(--text-muted); }
+    .btn-ghost:hover { color: var(--text); }
+    .btn-danger { background: #3b1a1a; color: var(--danger); }
+    .btn-danger:hover { background: #4d2020; }
+
+    /* Status / Progress */
+    .status-bar {
+      margin-top: 20px;
+      padding: 16px;
+      border-radius: 8px;
+      display: none;
+      font-size: 14px;
+    }
+    .status-bar.active { display: block; }
+    .status-bar.loading {
+      background: #1a1a3a;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+    }
+    .status-bar.success { background: #0f2922; border: 1px solid var(--success); color: var(--success); }
+    .status-bar.error { background: #2a1515; border: 1px solid var(--danger); color: var(--danger); }
+    .status-bar.skipped { background: #2a2210; border: 1px solid var(--warning); color: var(--warning); }
+    .spinner {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid var(--accent);
+      border-top: 2px solid transparent;
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Result Card */
+    .result-card {
+      margin-top: 20px;
+      background: var(--surface2);
+      border-radius: var(--radius);
+      padding: 24px;
+      display: none;
+      border: 1px solid var(--border);
+    }
+    .result-card.active { display: block; }
+    .result-card h3 { font-size: 18px; margin-bottom: 12px; }
+    .result-meta { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 16px; }
+    .badge {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .badge-category { background: #1e1e4a; color: var(--accent); }
+    .badge-priority-critical { background: #3b1a1a; color: var(--danger); }
+    .badge-priority-high { background: #3b2a0a; color: var(--warning); }
+    .badge-priority-medium { background: #1a2a3a; color: var(--info); }
+    .badge-priority-low { background: #1a2a1a; color: var(--success); }
+    .score-row { display: flex; gap: 24px; margin: 12px 0; }
+    .score-item { text-align: center; }
+    .score-value {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .score-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; }
+    .insight-list { list-style: none; padding: 0; }
+    .insight-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+    .insight-list li:last-child { border-bottom: none; }
+    .insight-list li::before { content: "->  "; color: var(--accent); font-weight: bold; }
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin: 16px 0 6px;
+      letter-spacing: .5px;
+    }
+    .text-block {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.7;
+      background: var(--bg);
+      padding: 12px;
+      border-radius: 6px;
+    }
+    .tag-list { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+    .tag {
+      padding: 3px 10px;
+      background: var(--bg);
+      border-radius: 12px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Backlog Table */
+    .backlog-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+    .filters select {
+      padding: 8px 12px;
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 13px;
+    }
+    .backlog-list { display: flex; flex-direction: column; gap: 12px; }
+    .backlog-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      cursor: pointer;
+      transition: border-color .15s;
+    }
+    .backlog-item:hover { border-color: var(--accent); }
+    .backlog-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 12px;
+    }
+    .backlog-item-title {
+      font-size: 15px;
+      font-weight: 500;
+      flex: 1;
+    }
+    .backlog-item-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+      align-items: center;
+    }
+    .backlog-item-scores {
+      display: flex;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .backlog-item-url {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .backlog-empty {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+    }
+
+    /* Detail Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.7);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal {
+      background: var(--surface);
+      border-radius: 12px;
+      max-width: 700px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 28px;
+      border: 1px solid var(--border);
+    }
+    .modal-close {
+      float: right;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .modal-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    /* Stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align: center;
+    }
+    .stat-value { font-size: 32px; font-weight: 700; color: var(--accent); }
+    .stat-label { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+
+    .hidden { display: none; }
+    .section { display: none; }
+    .section.active { display: block; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Reel <span>Insight</span> Engine</h1>
+      <p>Analyze IG Reels & YouTube videos for ecomm, marketing & AI insights</p>
+    </header>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="analyze">Analyze</button>
+      <button class="tab" data-tab="backlog">Backlog</button>
+      <button class="tab" data-tab="stats">Stats</button>
+    </div>
+
+    <!-- Analyze Section -->
+    <div class="section active" id="sec-analyze">
+      <div class="analyze-section">
+        <div class="input-row">
+          <input type="url" id="url-input" placeholder="Paste an Instagram Reel or YouTube video URL..." />
+          <button class="btn btn-primary" id="analyze-btn">Analyze</button>
+        </div>
+        <div class="status-bar" id="status-bar">
+          <span class="spinner" id="status-spinner"></span>
+          <span id="status-text"></span>
+        </div>
+        <div class="result-card" id="result-card"></div>
+      </div>
+    </div>
+
+    <!-- Backlog Section -->
+    <div class="section" id="sec-backlog">
+      <div class="backlog-header">
+        <h2 id="backlog-title">Backlog</h2>
+        <div class="filters">
+          <select id="filter-status">
+            <option value="">All Status</option>
+            <option value="pending">Pending</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+            <option value="implemented">Implemented</option>
+          </select>
+          <select id="filter-priority">
+            <option value="">All Priority</option>
+            <option value="critical">Critical</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+          </select>
+          <select id="filter-platform">
+            <option value="">All Platforms</option>
+            <option value="instagram">Instagram</option>
+            <option value="youtube">YouTube</option>
+          </select>
+        </div>
+      </div>
+      <div class="backlog-list" id="backlog-list"></div>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="section" id="sec-stats">
+      <h2 style="margin-bottom: 20px;">Dashboard</h2>
+      <div class="stats-grid" id="stats-grid"></div>
+    </div>
+  </div>
+
+  <!-- Detail Modal -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal" id="modal-content"></div>
+  </div>
+
+  <script>
+    // Tab navigation
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('sec-' + tab.dataset.tab).classList.add('active');
+        if (tab.dataset.tab === 'backlog') loadBacklog();
+        if (tab.dataset.tab === 'stats') loadStats();
+      });
+    });
+
+    // Analyze
+    const urlInput = document.getElementById('url-input');
+    const analyzeBtn = document.getElementById('analyze-btn');
+    const statusBar = document.getElementById('status-bar');
+    const statusText = document.getElementById('status-text');
+    const statusSpinner = document.getElementById('status-spinner');
+    const resultCard = document.getElementById('result-card');
+
+    function setStatus(type, msg) {
+      statusBar.className = 'status-bar active ' + type;
+      statusText.textContent = msg;
+      statusSpinner.style.display = type === 'loading' ? 'inline-block' : 'none';
+    }
+
+    analyzeBtn.addEventListener('click', async () => {
+      const url = urlInput.value.trim();
+      if (!url) return;
+
+      analyzeBtn.disabled = true;
+      resultCard.className = 'result-card';
+      setStatus('loading', 'Downloading video and extracting content... This may take a minute.');
+
+      try {
+        const res = await fetch('/api/analyze', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url })
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          setStatus('error', 'Error: ' + (data.error || 'Unknown error'));
+          return;
+        }
+
+        if (data.skipped) {
+          setStatus('skipped', 'Skipped: ' + data.skipReason);
+          return;
+        }
+
+        if (data.backlogItem) {
+          setStatus('success', 'Analysis complete! Added to backlog.');
+          renderResult(data.backlogItem);
+        }
+      } catch (e) {
+        setStatus('error', 'Network error: ' + e.message);
+      } finally {
+        analyzeBtn.disabled = false;
+      }
+    });
+
+    urlInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') analyzeBtn.click();
+    });
+
+    function renderResult(item) {
+      const a = item.analysis;
+      resultCard.innerHTML = `
+        <h3>${a.summary}</h3>
+        <div class="result-meta">
+          <span class="badge badge-category">${a.category}</span>
+          <span class="badge badge-priority-${item.priority}">${item.priority} priority</span>
+          <span class="badge" style="background:var(--surface);color:var(--text-muted)">${item.source.platform}</span>
+        </div>
+        <div class="score-row">
+          <div class="score-item"><div class="score-value">${a.relevanceScore}</div><div class="score-label">Relevance</div></div>
+          <div class="score-item"><div class="score-value">${a.actionability}</div><div class="score-label">Actionability</div></div>
+          ${a.brandFitScores.map(b => `<div class="score-item"><div class="score-value">${b.score}</div><div class="score-label">${b.brandName}</div></div>`).join('')}
+        </div>
+        <div class="section-label">Key Insights</div>
+        <ul class="insight-list">${a.keyInsights.map(i => `<li>${i}</li>`).join('')}</ul>
+        <div class="section-label">Suggested Implementation</div>
+        <div class="text-block">${a.suggestedImplementation}</div>
+        <div class="section-label">Reasoning</div>
+        <div class="text-block">${a.reasoning}</div>
+        <div class="section-label">Tags</div>
+        <div class="tag-list">${a.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+      `;
+      resultCard.className = 'result-card active';
+    }
+
+    // Backlog
+    async function loadBacklog() {
+      const status = document.getElementById('filter-status').value;
+      const priority = document.getElementById('filter-priority').value;
+      const platform = document.getElementById('filter-platform').value;
+
+      const params = new URLSearchParams();
+      if (status) params.set('status', status);
+      if (priority) params.set('priority', priority);
+      if (platform) params.set('platform', platform);
+
+      const res = await fetch('/api/backlog?' + params.toString());
+      const items = await res.json();
+      const list = document.getElementById('backlog-list');
+      document.getElementById('backlog-title').textContent = `Backlog (${items.length})`;
+
+      if (items.length === 0) {
+        list.innerHTML = '<div class="backlog-empty">No items yet. Analyze a video to get started.</div>';
+        return;
+      }
+
+      list.innerHTML = items.map(item => `
+        <div class="backlog-item" onclick="showDetail('${item.id}')">
+          <div class="backlog-item-header">
+            <div class="backlog-item-title">${item.analysis.summary}</div>
+            <span class="badge badge-priority-${item.priority}">${item.priority}</span>
+          </div>
+          <div class="backlog-item-meta">
+            <span class="badge badge-category">${item.analysis.category}</span>
+            <span class="badge" style="background:${item.status==='approved'?'#0f2922':item.status==='rejected'?'#2a1515':'var(--surface2)'};color:${item.status==='approved'?'var(--success)':item.status==='rejected'?'var(--danger)':'var(--text-muted)'}">${item.status}</span>
+            <span class="backlog-item-scores">Relevance: ${item.analysis.relevanceScore}/10 | Action: ${item.analysis.actionability}/10</span>
+          </div>
+          <div class="backlog-item-url">${item.source.platform} | ${item.source.url}</div>
+        </div>
+      `).join('');
+    }
+
+    document.getElementById('filter-status').addEventListener('change', loadBacklog);
+    document.getElementById('filter-priority').addEventListener('change', loadBacklog);
+    document.getElementById('filter-platform').addEventListener('change', loadBacklog);
+
+    // Detail modal
+    async function showDetail(id) {
+      const res = await fetch('/api/backlog/' + id);
+      const item = await res.json();
+      const a = item.analysis;
+      const modal = document.getElementById('modal-content');
+
+      modal.innerHTML = `
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <h3 style="margin-bottom:12px">${a.summary}</h3>
+        <div class="result-meta">
+          <span class="badge badge-category">${a.category}</span>
+          <span class="badge badge-priority-${item.priority}">${item.priority}</span>
+          <span class="badge" style="background:var(--surface2);color:var(--text-muted)">${item.source.platform}</span>
+        </div>
+        <div style="margin:8px 0"><a href="${item.source.url}" target="_blank" style="color:var(--accent);font-size:13px">${item.source.url}</a></div>
+        ${item.source.title ? `<div style="font-size:13px;color:var(--text-muted)">Title: ${item.source.title}</div>` : ''}
+        ${item.source.author ? `<div style="font-size:13px;color:var(--text-muted)">Creator: ${item.source.author}</div>` : ''}
+
+        <div class="score-row">
+          <div class="score-item"><div class="score-value">${a.relevanceScore}</div><div class="score-label">Relevance</div></div>
+          <div class="score-item"><div class="score-value">${a.actionability}</div><div class="score-label">Actionability</div></div>
+          ${a.brandFitScores.map(b => `<div class="score-item"><div class="score-value">${b.score}</div><div class="score-label">${b.brandName}</div></div>`).join('')}
+        </div>
+
+        <div class="section-label">Key Insights</div>
+        <ul class="insight-list">${a.keyInsights.map(i => `<li>${i}</li>`).join('')}</ul>
+
+        ${a.brandFitScores.length ? `
+          <div class="section-label">Brand Fit</div>
+          ${a.brandFitScores.map(b => `<div class="text-block" style="margin-bottom:8px"><strong>${b.brandName}</strong> (${b.score}/10): ${b.reasoning}</div>`).join('')}
+        ` : ''}
+
+        <div class="section-label">Visual Context</div>
+        <div class="text-block">${a.visualContext}</div>
+
+        <div class="section-label">Spoken Content</div>
+        <div class="text-block">${a.spokenContent}</div>
+
+        <div class="section-label">Suggested Implementation</div>
+        <div class="text-block">${a.suggestedImplementation}</div>
+
+        <div class="section-label">Reasoning</div>
+        <div class="text-block">${a.reasoning}</div>
+
+        ${item.transcript ? `
+          <div class="section-label">Full Transcript</div>
+          <div class="text-block" style="max-height:200px;overflow-y:auto">${item.transcript}</div>
+        ` : ''}
+
+        <div class="section-label">Tags</div>
+        <div class="tag-list">${a.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+
+        <div class="modal-actions">
+          <button class="btn btn-primary btn-sm" onclick="updateStatus('${item.id}','approved')">Approve</button>
+          <button class="btn btn-ghost btn-sm" onclick="updateStatus('${item.id}','rejected')">Reject</button>
+          <button class="btn btn-ghost btn-sm" onclick="updateStatus('${item.id}','implemented')">Mark Implemented</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteItem('${item.id}')">Delete</button>
+        </div>
+      `;
+
+      document.getElementById('modal-overlay').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('modal-overlay').classList.remove('active');
+    }
+    document.getElementById('modal-overlay').addEventListener('click', e => {
+      if (e.target === e.currentTarget) closeModal();
+    });
+
+    async function updateStatus(id, status) {
+      await fetch(`/api/backlog/${id}/status`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status })
+      });
+      closeModal();
+      loadBacklog();
+    }
+
+    async function deleteItem(id) {
+      if (!confirm('Delete this item?')) return;
+      await fetch(`/api/backlog/${id}`, { method: 'DELETE' });
+      closeModal();
+      loadBacklog();
+    }
+
+    // Stats
+    async function loadStats() {
+      const res = await fetch('/api/backlog/stats');
+      const stats = await res.json();
+      const grid = document.getElementById('stats-grid');
+
+      grid.innerHTML = `
+        <div class="stat-card"><div class="stat-value">${stats.total}</div><div class="stat-label">Total Ideas</div></div>
+        <div class="stat-card"><div class="stat-value">${stats.avgRelevance.toFixed(1)}</div><div class="stat-label">Avg Relevance</div></div>
+        <div class="stat-card"><div class="stat-value">${stats.avgActionability.toFixed(1)}</div><div class="stat-label">Avg Actionability</div></div>
+        <div class="stat-card"><div class="stat-value">${stats.byStatus.pending || 0}</div><div class="stat-label">Pending Review</div></div>
+        <div class="stat-card"><div class="stat-value">${stats.byStatus.approved || 0}</div><div class="stat-label">Approved</div></div>
+        <div class="stat-card"><div class="stat-value">${stats.byStatus.implemented || 0}</div><div class="stat-label">Implemented</div></div>
+        <div class="stat-card"><div class="stat-value">${stats.byPriority.critical || 0}</div><div class="stat-label">Critical Priority</div></div>
+        <div class="stat-card"><div class="stat-value">${stats.byPriority.high || 0}</div><div class="stat-label">High Priority</div></div>
+        ${Object.entries(stats.byCategory).map(([k,v]) => `<div class="stat-card"><div class="stat-value">${v}</div><div class="stat-label">${k}</div></div>`).join('')}
+        ${Object.entries(stats.byPlatform).map(([k,v]) => `<div class="stat-card"><div class="stat-value">${v}</div><div class="stat-label">${k}</div></div>`).join('')}
+      `;
+    }
+  </script>
+</body>
+</html>

@@ -1,2 +1,8 @@
 /node_modules/
+/dist/
+/data/
+/tmp/
 npm-debug.log
+*.log
+.env
+config.json
