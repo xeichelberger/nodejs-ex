@@ -46,6 +46,16 @@ export function loadConfig(): AppConfig {
     maxFrames: userConfig.maxFrames ?? 8,
     frameIntervalSec: userConfig.frameIntervalSec ?? 5,
     port: userConfig.port ?? (Number(process.env.PORT) || 3000),
+    // Notion
+    notionApiKey: userConfig.notionApiKey ?? process.env.NOTION_API_KEY,
+    notionDatabaseId:
+      userConfig.notionDatabaseId ?? process.env.NOTION_DATABASE_ID,
+    notionParentPageId:
+      userConfig.notionParentPageId ?? process.env.NOTION_PARENT_PAGE_ID,
+    // Telegram
+    telegramBotToken:
+      userConfig.telegramBotToken ?? process.env.TELEGRAM_BOT_TOKEN,
+    telegramAllowedUsers: userConfig.telegramAllowedUsers,
   };
 
   // Ensure directories exist

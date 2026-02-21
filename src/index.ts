@@ -1,9 +1,11 @@
 import express from "express";
 import path from "path";
-import { loadConfig } from "./lib/config";
+import { loadConfig, saveConfig } from "./lib/config";
 import { BacklogManager } from "./lib/backlog";
 import { runPipeline, checkDependencies } from "./lib/pipeline";
 import { detectPlatform } from "./lib/downloader";
+import { createNotionDatabase } from "./lib/notion";
+import { startTelegramBot } from "./lib/telegram";
 
 const config = loadConfig();
 const backlog = new BacklogManager(config.dataDir);
@@ -20,7 +22,41 @@ app.get("/api/health", async (_req, res) => {
     status: "ok",
     dependencies: deps,
     hasApiKey: !!config.anthropicApiKey,
+    hasNotion: !!(config.notionApiKey && config.notionDatabaseId),
+    hasTelegram: !!config.telegramBotToken,
   });
+});
+
+// ─── Setup: Create Notion database ───────────────────────────
+app.post("/api/setup/notion", async (req, res) => {
+  const { notionApiKey, notionParentPageId } = req.body;
+
+  const apiKey = notionApiKey || config.notionApiKey;
+  const parentPageId = notionParentPageId || config.notionParentPageId;
+
+  if (!apiKey || !parentPageId) {
+    res.status(400).json({
+      error: "Both notionApiKey and notionParentPageId are required",
+    });
+    return;
+  }
+
+  try {
+    config.notionApiKey = apiKey;
+    config.notionParentPageId = parentPageId;
+    const databaseId = await createNotionDatabase(config);
+    config.notionDatabaseId = databaseId;
+    saveConfig(config);
+
+    res.json({
+      success: true,
+      databaseId,
+      message: "Notion database created! Open Notion to see it.",
+    });
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : String(err);
+    res.status(500).json({ error: msg });
+  }
 });
 
 // ─── Analyze a URL ────────────────────────────────────────────
@@ -153,6 +189,28 @@ app.listen(config.port, () => {
 ║  API:     http://localhost:${String(config.port).padEnd(24)}║
 ╚══════════════════════════════════════════════════╝
   `);
+
+  // Start Telegram bot if configured
+  if (config.telegramBotToken) {
+    try {
+      startTelegramBot(config, backlog);
+      console.log("  Telegram bot: RUNNING");
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : String(err);
+      console.error(`  Telegram bot: FAILED - ${msg}`);
+    }
+  } else {
+    console.log("  Telegram bot: not configured (set TELEGRAM_BOT_TOKEN)");
+  }
+
+  // Notion status
+  if (config.notionApiKey && config.notionDatabaseId) {
+    console.log("  Notion backlog: CONNECTED");
+  } else {
+    console.log("  Notion backlog: not configured (use Setup tab in web UI)");
+  }
+
+  console.log("");
 });
 
 export default app;

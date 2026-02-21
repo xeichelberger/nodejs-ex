@@ -319,6 +319,100 @@
     .stat-value { font-size: 32px; font-weight: 700; color: var(--accent); }
     .stat-label { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
 
+    /* Status Banner */
+    .status-banner {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      font-size: 13px;
+    }
+    .status-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+    .status-dot.on { background: var(--success); }
+    .status-dot.off { background: var(--danger); }
+
+    /* Setup Section */
+    .setup-card {
+      display: flex;
+      gap: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+    .setup-step {
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+    }
+    .setup-content { flex: 1; }
+    .setup-content h3 { font-size: 16px; margin-bottom: 8px; }
+    .setup-content p { font-size: 14px; color: var(--text-muted); }
+    .setup-content ol, .setup-steps {
+      margin: 12px 0;
+      padding-left: 20px;
+      font-size: 14px;
+    }
+    .setup-content li { margin-bottom: 6px; color: var(--text); }
+    .setup-content code {
+      background: var(--bg);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+      color: var(--accent);
+    }
+    .setup-badge {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-weight: 500;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .setup-badge.connected { background: #0f2922; color: var(--success); }
+    .setup-badge.disconnected { background: #2a1515; color: var(--danger); }
+    .deploy-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .deploy-option {
+      background: var(--bg);
+      padding: 16px;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    .deploy-option p { margin: 6px 0; }
+    .deploy-option code { font-size: 11px; word-break: break-all; }
+    .code-block {
+      background: var(--bg);
+      padding: 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: monospace;
+      margin-top: 8px;
+      overflow-x: auto;
+      white-space: pre;
+      color: var(--text);
+    }
+
     .hidden { display: none; }
     .section { display: none; }
     .section.active { display: block; }
@@ -331,10 +425,14 @@
       <p>Analyze IG Reels & YouTube videos for ecomm, marketing & AI insights</p>
     </header>
 
+    <!-- Connection status banner -->
+    <div class="status-banner" id="status-banner"></div>
+
     <div class="tabs">
       <button class="tab active" data-tab="analyze">Analyze</button>
       <button class="tab" data-tab="backlog">Backlog</button>
       <button class="tab" data-tab="stats">Stats</button>
+      <button class="tab" data-tab="setup">Setup</button>
     </div>
 
     <!-- Analyze Section -->
@@ -388,12 +486,177 @@
     </div>
   </div>
 
+    <!-- Setup Section -->
+    <div class="section" id="sec-setup">
+      <h2 style="margin-bottom:20px">Setup Guide</h2>
+      <p style="color:var(--text-muted);margin-bottom:24px">Get everything connected in about 5 minutes. No coding required.</p>
+
+      <!-- Step 1: Telegram -->
+      <div class="setup-card">
+        <div class="setup-step">1</div>
+        <div class="setup-content">
+          <h3>Create your Telegram Bot <span class="setup-badge" id="tg-status">not connected</span></h3>
+          <p>This lets you send IG/YT links from your phone and get analysis back instantly.</p>
+          <ol class="setup-steps">
+            <li>Open Telegram and search for <strong>@BotFather</strong></li>
+            <li>Send <code>/newbot</code> and follow the prompts (pick any name)</li>
+            <li>BotFather will give you a token like <code>123456:ABC-DEF1234...</code></li>
+            <li>Set it as the <code>TELEGRAM_BOT_TOKEN</code> environment variable on your server</li>
+            <li>Restart the server &mdash; the bot starts automatically</li>
+          </ol>
+          <p style="margin-top:12px;font-size:13px;color:var(--text-muted)">Then just open the bot in Telegram and send it any IG Reel or YouTube link!</p>
+        </div>
+      </div>
+
+      <!-- Step 2: Notion -->
+      <div class="setup-card">
+        <div class="setup-step">2</div>
+        <div class="setup-content">
+          <h3>Connect your Notion Backlog <span class="setup-badge" id="notion-status">not connected</span></h3>
+          <p>Your idea backlog will live as a Notion database you can browse on your phone.</p>
+          <ol class="setup-steps">
+            <li>Go to <a href="https://www.notion.so/my-integrations" target="_blank" style="color:var(--accent)">notion.so/my-integrations</a> and click <strong>"New integration"</strong></li>
+            <li>Name it "Reel Insight", select your workspace, click Submit</li>
+            <li>Copy the <strong>Internal Integration Secret</strong> (starts with <code>ntn_</code> or <code>secret_</code>)</li>
+            <li>In Notion, create a page where you want the backlog (e.g. "Content Ideas")</li>
+            <li>On that page, click <strong>...</strong> &rarr; <strong>Connections</strong> &rarr; add your "Reel Insight" integration</li>
+            <li>Copy the page ID from the URL: <code>notion.so/Your-Page-<strong>abc123def456</strong></code> (the long ID at the end)</li>
+          </ol>
+          <div style="margin-top:16px">
+            <div class="input-row" style="margin-bottom:8px">
+              <input type="text" id="notion-key" placeholder="Notion API key (ntn_... or secret_...)" />
+            </div>
+            <div class="input-row" style="margin-bottom:12px">
+              <input type="text" id="notion-page-id" placeholder="Notion parent page ID" />
+            </div>
+            <button class="btn btn-primary" id="notion-connect-btn" onclick="connectNotion()">Create Backlog Database</button>
+            <span id="notion-result" style="margin-left:12px;font-size:13px"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: Deploy -->
+      <div class="setup-card">
+        <div class="setup-step">3</div>
+        <div class="setup-content">
+          <h3>Deploy for Free</h3>
+          <p>Host this on a free server so it runs 24/7 and your Telegram bot works anytime.</p>
+          <div class="deploy-options">
+            <div class="deploy-option">
+              <strong>Render.com</strong> (recommended)
+              <p>Free tier, auto-deploys from GitHub. Add your env vars in the dashboard.</p>
+              <code>ANTHROPIC_API_KEY, TELEGRAM_BOT_TOKEN, NOTION_API_KEY, NOTION_DATABASE_ID</code>
+            </div>
+            <div class="deploy-option">
+              <strong>Railway.app</strong>
+              <p>Free $5/month credit. One-click deploy from GitHub.</p>
+            </div>
+          </div>
+          <p style="margin-top:12px;font-size:13px;color:var(--text-muted)">
+            Both platforms support yt-dlp and ffmpeg. Just push this repo to GitHub and connect it.
+          </p>
+        </div>
+      </div>
+
+      <!-- Step 4: Brand Config -->
+      <div class="setup-card">
+        <div class="setup-step">4</div>
+        <div class="setup-content">
+          <h3>Configure Your Brand (Optional)</h3>
+          <p>Tell the AI about your brand so it scores ideas more accurately.</p>
+          <p style="font-size:13px;color:var(--text-muted);margin-top:8px">
+            Create a <code>config.json</code> file in the project root:
+          </p>
+          <pre class="code-block">{
+  "brands": [{
+    "name": "Your Brand Name",
+    "description": "What your business does",
+    "verticals": ["ecommerce", "marketing", "AI"],
+    "targetAudience": "Who you serve",
+    "toneKeywords": ["professional", "bold"]
+  }]
+}</pre>
+        </div>
+      </div>
+    </div>
+
   <!-- Detail Modal -->
   <div class="modal-overlay" id="modal-overlay">
     <div class="modal" id="modal-content"></div>
   </div>
 
   <script>
+    // Health check on load
+    async function checkHealth() {
+      try {
+        const res = await fetch('/api/health');
+        const h = await res.json();
+        const banner = document.getElementById('status-banner');
+        banner.innerHTML = `
+          <span><span class="status-dot ${h.hasApiKey ? 'on' : 'off'}"></span>Claude API</span>
+          <span><span class="status-dot ${h.hasNotion ? 'on' : 'off'}"></span>Notion</span>
+          <span><span class="status-dot ${h.hasTelegram ? 'on' : 'off'}"></span>Telegram Bot</span>
+          <span><span class="status-dot ${h.dependencies.ytDlp ? 'on' : 'off'}"></span>yt-dlp</span>
+          <span><span class="status-dot ${h.dependencies.ffmpeg ? 'on' : 'off'}"></span>ffmpeg</span>
+        `;
+        // Update setup tab badges
+        const tgBadge = document.getElementById('tg-status');
+        const notionBadge = document.getElementById('notion-status');
+        if (tgBadge) {
+          tgBadge.textContent = h.hasTelegram ? 'connected' : 'not connected';
+          tgBadge.className = 'setup-badge ' + (h.hasTelegram ? 'connected' : 'disconnected');
+        }
+        if (notionBadge) {
+          notionBadge.textContent = h.hasNotion ? 'connected' : 'not connected';
+          notionBadge.className = 'setup-badge ' + (h.hasNotion ? 'connected' : 'disconnected');
+        }
+        // If nothing is configured, auto-show setup tab
+        if (!h.hasApiKey && !h.hasNotion && !h.hasTelegram) {
+          document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+          document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+          document.querySelector('[data-tab="setup"]').classList.add('active');
+          document.getElementById('sec-setup').classList.add('active');
+        }
+      } catch (e) { /* ignore */ }
+    }
+    checkHealth();
+
+    // Notion connect
+    async function connectNotion() {
+      const key = document.getElementById('notion-key').value.trim();
+      const pageId = document.getElementById('notion-page-id').value.trim();
+      const resultEl = document.getElementById('notion-result');
+
+      if (!key || !pageId) {
+        resultEl.textContent = 'Both fields are required';
+        resultEl.style.color = 'var(--danger)';
+        return;
+      }
+
+      resultEl.textContent = 'Creating database...';
+      resultEl.style.color = 'var(--accent)';
+
+      try {
+        const res = await fetch('/api/setup/notion', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ notionApiKey: key, notionParentPageId: pageId })
+        });
+        const data = await res.json();
+        if (res.ok) {
+          resultEl.textContent = 'Connected! Open Notion to see your backlog database.';
+          resultEl.style.color = 'var(--success)';
+          checkHealth();
+        } else {
+          resultEl.textContent = 'Error: ' + data.error;
+          resultEl.style.color = 'var(--danger)';
+        }
+      } catch (e) {
+        resultEl.textContent = 'Network error: ' + e.message;
+        resultEl.style.color = 'var(--danger)';
+      }
+    }
+
     // Tab navigation
     document.querySelectorAll('.tab').forEach(tab => {
       tab.addEventListener('click', () => {

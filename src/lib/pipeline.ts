@@ -3,6 +3,7 @@ import { extractFrames } from "./frameExtractor";
 import { extractTranscript } from "./transcriber";
 import { analyzeContent } from "./analyzer";
 import { BacklogManager } from "./backlog";
+import { addToNotion } from "./notion";
 import { AppConfig, AnalysisPipelineResult, ExtractionResult } from "./types";
 
 /**
@@ -96,6 +97,17 @@ export async function runPipeline(
     console.log(`Priority: ${item.priority}`);
     console.log(`Category: ${analysis.category}`);
     console.log(`Summary: ${analysis.summary}`);
+
+    // Push to Notion if configured
+    if (config.notionApiKey && config.notionDatabaseId) {
+      try {
+        const notionUrl = await addToNotion(item, config);
+        console.log(`[notion] Synced to Notion: ${notionUrl}`);
+      } catch (err: unknown) {
+        const errMsg = err instanceof Error ? err.message : String(err);
+        console.error(`[notion] Failed to sync to Notion: ${errMsg}`);
+      }
+    }
 
     return {
       success: true,

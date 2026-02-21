@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: reel-insight-engine
+    runtime: node
+    plan: free
+    buildCommand: |
+      npm install &&
+      npm run build &&
+      apt-get update && apt-get install -y ffmpeg &&
+      pip install yt-dlp
+    startCommand: npm start
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: NOTION_API_KEY
+        sync: false
+      - key: NOTION_DATABASE_ID
+        sync: false
+      - key: NODE_ENV
+        value: production

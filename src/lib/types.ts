@@ -88,4 +88,11 @@ export interface AppConfig {
   maxFrames: number; // max frames to extract per video
   frameIntervalSec: number; // seconds between frame captures
   port: number;
+  // Notion integration
+  notionApiKey?: string;
+  notionDatabaseId?: string; // set after first run creates the DB
+  notionParentPageId?: string; // page to create the database under
+  // Telegram bot
+  telegramBotToken?: string;
+  telegramAllowedUsers?: string[]; // optional: restrict to specific usernames
 }
