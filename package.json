@@ -21,6 +21,7 @@
     "@types/node-telegram-bot-api": "^0.64.13",
     "express": "^4.21.0",
     "node-telegram-bot-api": "^0.67.0",
+    "openai": "^6.22.0",
     "uuid": "^11.0.0"
   },
   "devDependencies": {

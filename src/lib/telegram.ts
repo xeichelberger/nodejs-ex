@@ -1,5 +1,6 @@
 import TelegramBot from "node-telegram-bot-api";
 import { AppConfig } from "./types";
+import { PROVIDER_LABELS } from "./config";
 import { detectPlatform } from "./downloader";
 import { BacklogManager } from "./backlog";
 import { runPipeline } from "./pipeline";
@@ -49,11 +50,15 @@ export function startTelegramBot(
   // /status command
   bot.onText(/\/status/, (msg) => {
     const hasNotion = !!(config.notionApiKey && config.notionDatabaseId);
-    const hasClaude = !!config.anthropicApiKey;
+    const hasAiKey =
+      config.aiProvider === "claude"
+        ? !!config.anthropicApiKey
+        : !!(config.kimiApiKey || config.openaiCompatibleApiKey);
+    const providerLabel = PROVIDER_LABELS[config.aiProvider];
     bot.sendMessage(
       msg.chat.id,
       `*System Status*\n\n` +
-        `Claude API: ${hasClaude ? "✅ Connected" : "❌ Missing"}\n` +
+        `AI: ${hasAiKey ? "✅" : "❌"} ${providerLabel}\n` +
         `Notion: ${hasNotion ? "✅ Connected" : "❌ Not configured"}\n` +
         `Backlog items: ${backlog.getAll().length}`,
       { parse_mode: "Markdown" }
@@ -145,8 +150,12 @@ export function startTelegramBot(
       return;
     }
 
-    if (!config.anthropicApiKey) {
-      bot.sendMessage(chatId, "Error: Claude API key is not configured.");
+    const hasAiKey =
+      config.aiProvider === "claude"
+        ? !!config.anthropicApiKey
+        : !!(config.kimiApiKey || config.openaiCompatibleApiKey);
+    if (!hasAiKey) {
+      bot.sendMessage(chatId, `Error: AI API key is not configured for ${PROVIDER_LABELS[config.aiProvider]}.`);
       return;
     }
 

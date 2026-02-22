@@ -79,9 +79,25 @@ export interface AnalysisPipelineResult {
   skipReason?: string;
 }
 
+export type AIProvider = "claude" | "kimi-nvidia" | "kimi-moonshot" | "kimi-together" | "openai-compatible";
+
+export interface AIProviderConfig {
+  provider: AIProvider;
+  apiKey?: string;
+  baseUrl?: string; // for openai-compatible providers
+  model?: string; // override default model per provider
+}
+
 export interface AppConfig {
   brands: BrandProfile[];
+  // AI provider settings
+  aiProvider: AIProvider;
   anthropicApiKey?: string;
+  kimiApiKey?: string; // for Moonshot direct / NVIDIA
+  openaiCompatibleBaseUrl?: string;
+  openaiCompatibleApiKey?: string;
+  openaiCompatibleModel?: string;
+  // General
   dataDir: string;
   tempDir: string;
   minRelevanceScore: number; // threshold for auto-adding to backlog

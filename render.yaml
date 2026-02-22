@@ -10,7 +10,7 @@ services:
       pip install yt-dlp
     startCommand: npm start
     envVars:
-      - key: ANTHROPIC_API_KEY
+      - key: NVIDIA_API_KEY
         sync: false
       - key: TELEGRAM_BOT_TOKEN
         sync: false

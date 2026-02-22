@@ -1,6 +1,6 @@
 import path from "path";
 import fs from "fs";
-import { AppConfig, BrandProfile } from "./types";
+import { AIProvider, AppConfig, BrandProfile } from "./types";
 
 const ROOT_DIR = path.resolve(__dirname, "../..");
 const DATA_DIR = path.join(ROOT_DIR, "data");
@@ -24,6 +24,29 @@ const DEFAULT_BRANDS: BrandProfile[] = [
   },
 ];
 
+/**
+ * Auto-detect the best available AI provider based on which API keys are set.
+ * Priority: kimi-nvidia (free) > kimi-moonshot (cheap) > claude (premium)
+ */
+function detectProvider(userConfig: Partial<AppConfig>): AIProvider {
+  // If user explicitly set a provider, use it
+  if (userConfig.aiProvider) return userConfig.aiProvider;
+
+  // Check env vars and keys to auto-detect
+  const hasKimi =
+    userConfig.kimiApiKey || process.env.KIMI_API_KEY || process.env.NVIDIA_API_KEY;
+  const hasClaude =
+    userConfig.anthropicApiKey || process.env.ANTHROPIC_API_KEY;
+
+  // Prefer free Kimi via NVIDIA, then Moonshot, then Claude
+  if (process.env.NVIDIA_API_KEY) return "kimi-nvidia";
+  if (hasKimi) return "kimi-moonshot";
+  if (hasClaude) return "claude";
+
+  // Default to kimi-nvidia (user will need to get a free NVIDIA key)
+  return "kimi-nvidia";
+}
+
 export function loadConfig(): AppConfig {
   const configPath = path.join(ROOT_DIR, "config.json");
 
@@ -38,8 +61,18 @@ export function loadConfig(): AppConfig {
 
   const config: AppConfig = {
     brands: userConfig.brands ?? DEFAULT_BRANDS,
+    // AI provider
+    aiProvider: detectProvider(userConfig),
     anthropicApiKey:
       userConfig.anthropicApiKey ?? process.env.ANTHROPIC_API_KEY,
+    kimiApiKey:
+      userConfig.kimiApiKey ??
+      process.env.KIMI_API_KEY ??
+      process.env.NVIDIA_API_KEY,
+    openaiCompatibleBaseUrl: userConfig.openaiCompatibleBaseUrl,
+    openaiCompatibleApiKey: userConfig.openaiCompatibleApiKey,
+    openaiCompatibleModel: userConfig.openaiCompatibleModel,
+    // General
     dataDir: userConfig.dataDir ?? DATA_DIR,
     tempDir: userConfig.tempDir ?? TEMP_DIR,
     minRelevanceScore: userConfig.minRelevanceScore ?? 6,
@@ -67,6 +100,17 @@ export function loadConfig(): AppConfig {
 
 export function saveConfig(config: AppConfig): void {
   const configPath = path.join(ROOT_DIR, "config.json");
-  const { anthropicApiKey, ...safeConfig } = config;
+  // Don't write API keys to disk
+  const { anthropicApiKey, kimiApiKey, openaiCompatibleApiKey, ...safeConfig } =
+    config;
   fs.writeFileSync(configPath, JSON.stringify(safeConfig, null, 2));
 }
+
+/** Provider display names for UI */
+export const PROVIDER_LABELS: Record<AIProvider, string> = {
+  claude: "Claude (Anthropic)",
+  "kimi-nvidia": "Kimi K2.5 (NVIDIA — Free)",
+  "kimi-moonshot": "Kimi K2.5 (Moonshot)",
+  "kimi-together": "Kimi K2.5 (Together AI)",
+  "openai-compatible": "Custom (OpenAI-compatible)",
+};

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { loadConfig } from "./lib/config";
+import { loadConfig, PROVIDER_LABELS } from "./lib/config";
 import { BacklogManager } from "./lib/backlog";
 import { runPipeline, checkDependencies } from "./lib/pipeline";
 import { detectPlatform } from "./lib/downloader";
@@ -84,11 +84,17 @@ async function main() {
   if (command === "check") {
     console.log("Checking dependencies...\n");
     const deps = await checkDependencies();
-    console.log(`  yt-dlp:  ${deps.ytDlp ? "OK" : "MISSING - install with: pip install yt-dlp"}`);
-    console.log(`  ffmpeg:  ${deps.ffmpeg ? "OK" : "MISSING - install with: apt install ffmpeg"}`);
-    console.log(`  API key: ${config.anthropicApiKey ? "SET" : "MISSING - set ANTHROPIC_API_KEY"}`);
+    const hasAiKey =
+      config.aiProvider === "claude"
+        ? !!config.anthropicApiKey
+        : !!(config.kimiApiKey || config.openaiCompatibleApiKey);
+    console.log(`  yt-dlp:     ${deps.ytDlp ? "OK" : "MISSING - install with: pip install yt-dlp"}`);
+    console.log(`  ffmpeg:     ${deps.ffmpeg ? "OK" : "MISSING - install with: apt install ffmpeg"}`);
+    console.log(`  AI:         ${hasAiKey ? "OK" : "MISSING"} (${PROVIDER_LABELS[config.aiProvider]})`);
+    console.log(`  Notion:     ${config.notionDatabaseId ? "OK" : "not configured"}`);
+    console.log(`  Telegram:   ${config.telegramBotToken ? "OK" : "not configured"}`);
     console.log(
-      `\n${deps.allGood && config.anthropicApiKey ? "All good! Ready to analyze." : "Please install missing dependencies."}`
+      `\n${deps.allGood && hasAiKey ? "All good! Ready to analyze." : "Please set up missing items above."}`
     );
     return;
   }
@@ -106,8 +112,19 @@ async function main() {
       process.exit(1);
     }
 
-    if (!config.anthropicApiKey) {
-      console.error("Error: ANTHROPIC_API_KEY is not set.");
+    const hasAiKey =
+      config.aiProvider === "claude"
+        ? !!config.anthropicApiKey
+        : !!(config.kimiApiKey || config.openaiCompatibleApiKey);
+    if (!hasAiKey) {
+      console.error(
+        `Error: No API key set for ${config.aiProvider}. ` +
+          (config.aiProvider === "kimi-nvidia"
+            ? "Set NVIDIA_API_KEY (free at build.nvidia.com)"
+            : config.aiProvider === "claude"
+              ? "Set ANTHROPIC_API_KEY"
+              : "Set KIMI_API_KEY")
+      );
       process.exit(1);
     }
 

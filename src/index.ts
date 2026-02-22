@@ -1,6 +1,6 @@
 import express from "express";
 import path from "path";
-import { loadConfig, saveConfig } from "./lib/config";
+import { loadConfig, saveConfig, PROVIDER_LABELS } from "./lib/config";
 import { BacklogManager } from "./lib/backlog";
 import { runPipeline, checkDependencies } from "./lib/pipeline";
 import { detectPlatform } from "./lib/downloader";
@@ -18,10 +18,16 @@ app.use(express.static(path.join(__dirname, "../public")));
 // ─── Health / Status ──────────────────────────────────────────
 app.get("/api/health", async (_req, res) => {
   const deps = await checkDependencies();
+  const hasAiKey =
+    config.aiProvider === "claude"
+      ? !!config.anthropicApiKey
+      : !!(config.kimiApiKey || config.openaiCompatibleApiKey);
   res.json({
     status: "ok",
     dependencies: deps,
-    hasApiKey: !!config.anthropicApiKey,
+    hasApiKey: hasAiKey,
+    aiProvider: config.aiProvider,
+    aiProviderLabel: PROVIDER_LABELS[config.aiProvider],
     hasNotion: !!(config.notionApiKey && config.notionDatabaseId),
     hasTelegram: !!config.telegramBotToken,
   });
@@ -76,9 +82,19 @@ app.post("/api/analyze", async (req, res) => {
     return;
   }
 
-  if (!config.anthropicApiKey) {
+  const hasAiKey =
+    config.aiProvider === "claude"
+      ? !!config.anthropicApiKey
+      : !!(config.kimiApiKey || config.openaiCompatibleApiKey);
+  if (!hasAiKey) {
+    const keyName =
+      config.aiProvider === "claude"
+        ? "ANTHROPIC_API_KEY"
+        : config.aiProvider === "kimi-nvidia"
+          ? "NVIDIA_API_KEY (free at build.nvidia.com)"
+          : "KIMI_API_KEY";
     res.status(500).json({
-      error: "ANTHROPIC_API_KEY is not configured. Set it as an environment variable or in config.json.",
+      error: `${keyName} is not configured. Set it as an environment variable.`,
     });
     return;
   }

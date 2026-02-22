@@ -61,14 +61,14 @@ export async function runPipeline(
       videoPath: download.videoPath,
     };
 
-    // Step 4: Analyze with Claude
-    console.log("\n=== Step 4/4: Analyzing with Claude ===");
+    // Step 4: Analyze with AI
+    console.log(`\n=== Step 4/4: Analyzing with ${config.aiProvider} ===`);
     const analysis = await analyzeContent({
       frames: extraction.frames,
       transcript: extraction.transcript,
       source: extraction.source,
       brands: config.brands,
-      apiKey: config.anthropicApiKey,
+      config,
     });
 
     // Decision: add to backlog or skip

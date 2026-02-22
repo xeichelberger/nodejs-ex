@@ -491,9 +491,36 @@
       <h2 style="margin-bottom:20px">Setup Guide</h2>
       <p style="color:var(--text-muted);margin-bottom:24px">Get everything connected in about 5 minutes. No coding required.</p>
 
-      <!-- Step 1: Telegram -->
+      <!-- Step 0: AI Provider -->
       <div class="setup-card">
         <div class="setup-step">1</div>
+        <div class="setup-content">
+          <h3>Get your AI API Key (Free) <span class="setup-badge" id="ai-status">not connected</span></h3>
+          <p>The tool uses AI vision to understand video content. <strong>Kimi K2.5 via NVIDIA is free.</strong></p>
+          <div class="deploy-options" style="margin-top:12px">
+            <div class="deploy-option">
+              <strong>Kimi K2.5 via NVIDIA (Free)</strong>
+              <ol class="setup-steps" style="margin:8px 0">
+                <li>Go to <a href="https://build.nvidia.com/moonshotai/kimi-k2.5" target="_blank" style="color:var(--accent)">build.nvidia.com</a></li>
+                <li>Sign up (free, no credit card)</li>
+                <li>Get your API key</li>
+                <li>Set <code>NVIDIA_API_KEY</code> env var</li>
+              </ol>
+            </div>
+            <div class="deploy-option">
+              <strong>Claude (Anthropic) — Premium</strong>
+              <p style="margin:8px 0;font-size:13px">Higher quality, ~$0.05-0.15/video</p>
+              <p style="font-size:13px">Set <code>ANTHROPIC_API_KEY</code> env var</p>
+              <p style="font-size:13px">Set <code>AI_PROVIDER=claude</code> to use it</p>
+            </div>
+          </div>
+          <p style="margin-top:10px;font-size:13px;color:var(--text-muted)">Current provider: <strong id="ai-provider-label">detecting...</strong></p>
+        </div>
+      </div>
+
+      <!-- Step 2: Telegram -->
+      <div class="setup-card">
+        <div class="setup-step">2</div>
         <div class="setup-content">
           <h3>Create your Telegram Bot <span class="setup-badge" id="tg-status">not connected</span></h3>
           <p>This lets you send IG/YT links from your phone and get analysis back instantly.</p>
@@ -508,9 +535,9 @@
         </div>
       </div>
 
-      <!-- Step 2: Notion -->
+      <!-- Step 3: Notion -->
       <div class="setup-card">
-        <div class="setup-step">2</div>
+        <div class="setup-step">3</div>
         <div class="setup-content">
           <h3>Connect your Notion Backlog <span class="setup-badge" id="notion-status">not connected</span></h3>
           <p>Your idea backlog will live as a Notion database you can browse on your phone.</p>
@@ -535,9 +562,9 @@
         </div>
       </div>
 
-      <!-- Step 3: Deploy -->
+      <!-- Step 4: Deploy -->
       <div class="setup-card">
-        <div class="setup-step">3</div>
+        <div class="setup-step">4</div>
         <div class="setup-content">
           <h3>Deploy for Free</h3>
           <p>Host this on a free server so it runs 24/7 and your Telegram bot works anytime.</p>
@@ -545,7 +572,7 @@
             <div class="deploy-option">
               <strong>Render.com</strong> (recommended)
               <p>Free tier, auto-deploys from GitHub. Add your env vars in the dashboard.</p>
-              <code>ANTHROPIC_API_KEY, TELEGRAM_BOT_TOKEN, NOTION_API_KEY, NOTION_DATABASE_ID</code>
+              <code>NVIDIA_API_KEY (free), TELEGRAM_BOT_TOKEN, NOTION_API_KEY, NOTION_DATABASE_ID</code>
             </div>
             <div class="deploy-option">
               <strong>Railway.app</strong>
@@ -558,9 +585,9 @@
         </div>
       </div>
 
-      <!-- Step 4: Brand Config -->
+      <!-- Step 5: Brand Config -->
       <div class="setup-card">
-        <div class="setup-step">4</div>
+        <div class="setup-step">5</div>
         <div class="setup-content">
           <h3>Configure Your Brand (Optional)</h3>
           <p>Tell the AI about your brand so it scores ideas more accurately.</p>
@@ -593,12 +620,20 @@
         const h = await res.json();
         const banner = document.getElementById('status-banner');
         banner.innerHTML = `
-          <span><span class="status-dot ${h.hasApiKey ? 'on' : 'off'}"></span>Claude API</span>
+          <span><span class="status-dot ${h.hasApiKey ? 'on' : 'off'}"></span>${h.aiProviderLabel || 'AI'}</span>
           <span><span class="status-dot ${h.hasNotion ? 'on' : 'off'}"></span>Notion</span>
           <span><span class="status-dot ${h.hasTelegram ? 'on' : 'off'}"></span>Telegram Bot</span>
           <span><span class="status-dot ${h.dependencies.ytDlp ? 'on' : 'off'}"></span>yt-dlp</span>
           <span><span class="status-dot ${h.dependencies.ffmpeg ? 'on' : 'off'}"></span>ffmpeg</span>
         `;
+        // Update AI provider label in setup
+        const aiLabel = document.getElementById('ai-provider-label');
+        if (aiLabel) aiLabel.textContent = h.aiProviderLabel || 'unknown';
+        const aiBadge = document.getElementById('ai-status');
+        if (aiBadge) {
+          aiBadge.textContent = h.hasApiKey ? 'connected' : 'not connected';
+          aiBadge.className = 'setup-badge ' + (h.hasApiKey ? 'connected' : 'disconnected');
+        }
         // Update setup tab badges
         const tgBadge = document.getElementById('tg-status');
         const notionBadge = document.getElementById('notion-status');
