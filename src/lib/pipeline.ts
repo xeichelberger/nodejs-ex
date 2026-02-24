@@ -4,6 +4,7 @@ import { extractTranscript } from "./transcriber";
 import { analyzeContent } from "./analyzer";
 import { BacklogManager } from "./backlog";
 import { addToNotion } from "./notion";
+import { appendToMarkdownBacklog } from "./markdown-backlog";
 import { AppConfig, AnalysisPipelineResult, ExtractionResult } from "./types";
 
 /**
@@ -98,7 +99,16 @@ export async function runPipeline(
     console.log(`Category: ${analysis.category}`);
     console.log(`Summary: ${analysis.summary}`);
 
-    // Push to Notion if configured
+    // Write to BACKLOG.md
+    try {
+      appendToMarkdownBacklog(item);
+      console.log(`[backlog-md] Written to BACKLOG.md`);
+    } catch (err: unknown) {
+      const errMsg = err instanceof Error ? err.message : String(err);
+      console.error(`[backlog-md] Failed to write BACKLOG.md: ${errMsg}`);
+    }
+
+    // Push to Notion if configured (optional)
     if (config.notionApiKey && config.notionDatabaseId) {
       try {
         const notionUrl = await addToNotion(item, config);

@@ -219,11 +219,12 @@ app.listen(config.port, () => {
     console.log("  Telegram bot: not configured (set TELEGRAM_BOT_TOKEN)");
   }
 
-  // Notion status
+  // Backlog output
+  console.log("  Backlog: BACKLOG.md (auto-generated in project root)");
+
+  // Notion status (optional)
   if (config.notionApiKey && config.notionDatabaseId) {
-    console.log("  Notion backlog: CONNECTED");
-  } else {
-    console.log("  Notion backlog: not configured (use Setup tab in web UI)");
+    console.log("  Notion sync: CONNECTED (optional)");
   }
 
   console.log("");

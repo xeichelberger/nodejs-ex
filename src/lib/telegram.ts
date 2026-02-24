@@ -4,7 +4,6 @@ import { PROVIDER_LABELS } from "./config";
 import { detectPlatform } from "./downloader";
 import { BacklogManager } from "./backlog";
 import { runPipeline } from "./pipeline";
-import { addToNotion } from "./notion";
 
 /**
  * Start the Telegram bot.
@@ -28,7 +27,7 @@ export function startTelegramBot(
     const chatId = msg.chat.id;
     bot.sendMessage(
       chatId,
-      `*Reel Insight Engine* 🎬\n\nSend me an Instagram Reel or YouTube video link and I'll:\n\n1. Download and watch the video\n2. Read what's said AND see what's shown\n3. Score it for relevance to your brand\n4. Add high-value ideas to your Notion backlog\n\nJust paste a link to get started!`,
+      `*Reel Insight Engine* 🎬\n\nSend me an Instagram Reel or YouTube video link and I'll:\n\n1. Download and watch the video\n2. Read what's said AND see what's shown\n3. Score it for relevance to your brand\n4. Add high-value ideas to your BACKLOG.md\n\nJust paste a link to get started!`,
       { parse_mode: "Markdown" }
     );
   });
@@ -49,7 +48,6 @@ export function startTelegramBot(
 
   // /status command
   bot.onText(/\/status/, (msg) => {
-    const hasNotion = !!(config.notionApiKey && config.notionDatabaseId);
     const hasAiKey =
       config.aiProvider === "claude"
         ? !!config.anthropicApiKey
@@ -59,7 +57,7 @@ export function startTelegramBot(
       msg.chat.id,
       `*System Status*\n\n` +
         `AI: ${hasAiKey ? "✅" : "❌"} ${providerLabel}\n` +
-        `Notion: ${hasNotion ? "✅ Connected" : "❌ Not configured"}\n` +
+        `Backlog: ✅ BACKLOG.md\n` +
         `Backlog items: ${backlog.getAll().length}`,
       { parse_mode: "Markdown" }
     );
@@ -192,17 +190,6 @@ export function startTelegramBot(
       const item = result.backlogItem;
       const a = item.analysis;
 
-      // Try to add to Notion
-      let notionUrl = "";
-      if (config.notionApiKey && config.notionDatabaseId) {
-        try {
-          notionUrl = await addToNotion(item, config);
-        } catch (err: unknown) {
-          const errMsg = err instanceof Error ? err.message : String(err);
-          console.error("[telegram] Notion error:", errMsg);
-        }
-      }
-
       // Build response message
       const recIcon =
         a.overallRecommendation === "add_to_backlog"
@@ -236,9 +223,7 @@ export function startTelegramBot(
         response += `\n\n🏷 ${a.tags.slice(0, 6).map((t) => `#${t.replace(/\s+/g, "_")}`).join(" ")}`;
       }
 
-      if (notionUrl) {
-        response += `\n\n📋 [View in Notion](${notionUrl})`;
-      }
+      response += `\n\n📋 Saved to BACKLOG.md`;
 
       await bot.editMessageText(response, {
         chat_id: chatId,
