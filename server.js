@@ -58,6 +58,10 @@ var initDb = function(callback) {
   });
 };
 
+app.get('/size-guide', function (req, res) {
+  res.render('size-guide.html');
+});
+
 app.get('/xeichelberger-app2', function (req, res) {
   // try to initialize the db on every request if it's not already
   // initialized.

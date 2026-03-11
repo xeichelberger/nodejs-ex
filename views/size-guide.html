@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Size Guide - Ashmi &amp; Co.</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background-color: #f8f6f3;
+      color: #2c3e50;
+      line-height: 1.6;
+    }
+
+    .size-guide {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .size-guide__title {
+      font-family: 'Georgia', serif;
+      font-size: 42px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      color: #2a2f3a;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .size-guide__subtitle {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 16px;
+      color: #4a5568;
+      margin-bottom: 35px;
+      font-weight: 400;
+    }
+
+    .size-guide__buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 60px;
+    }
+
+    .size-guide__btn {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 18px 50px;
+      border: 2px solid #5a7d7c;
+      background: transparent;
+      color: #2a2f3a;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .size-guide__btn:hover {
+      background-color: #5a7d7c;
+      color: #fff;
+    }
+
+    .size-guide__btn--active {
+      background-color: #5a7d7c;
+      color: #fff;
+    }
+
+    .quick-finder {
+      margin-bottom: 60px;
+    }
+
+    .quick-finder__title {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #2a2f3a;
+      margin-bottom: 15px;
+    }
+
+    .quick-finder__prompt {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 16px;
+      color: #4a5568;
+      margin-bottom: 30px;
+    }
+
+    .quick-finder__ages {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .quick-finder__age-btn {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 15px;
+      padding: 14px 24px;
+      border: 1px solid #d1d5db;
+      background: #fff;
+      color: #2a2f3a;
+      cursor: pointer;
+      transition: border-color 0.3s, background-color 0.3s;
+      min-width: 90px;
+    }
+
+    .quick-finder__age-btn:hover {
+      border-color: #5a7d7c;
+    }
+
+    .quick-finder__age-btn--active {
+      border-color: #5a7d7c;
+      background-color: #f0f7f7;
+    }
+
+    .quick-finder__result {
+      background-color: #eef5f4;
+      padding: 30px;
+      border-radius: 4px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .quick-finder__result-title {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 16px;
+      color: #2a2f3a;
+      margin-bottom: 8px;
+    }
+
+    .quick-finder__result-detail {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 15px;
+      color: #4a5568;
+    }
+
+    .size-chart {
+      margin-top: 60px;
+    }
+
+    .size-chart__title {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #2a2f3a;
+      margin-bottom: 15px;
+    }
+
+    .size-chart__subtitle {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 16px;
+      color: #4a5568;
+      margin-bottom: 30px;
+    }
+
+    .size-chart__table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 14px;
+    }
+
+    .size-chart__table th {
+      background-color: #2a2f3a;
+      color: #fff;
+      padding: 14px 12px;
+      text-align: center;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .size-chart__table td {
+      padding: 14px 12px;
+      text-align: center;
+      border-bottom: 1px solid #e5e7eb;
+      background-color: #fff;
+    }
+
+    .size-chart__table tr:nth-child(even) td {
+      background-color: #f9fafb;
+    }
+
+    @media (max-width: 768px) {
+      .size-guide__title {
+        font-size: 28px;
+      }
+
+      .size-guide__buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 50px;
+      }
+
+      .size-guide__btn {
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .quick-finder__ages {
+        gap: 8px;
+      }
+
+      .quick-finder__age-btn {
+        padding: 10px 16px;
+        min-width: 70px;
+        font-size: 13px;
+      }
+
+      .size-chart__table {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="size-guide">
+    <h1 class="size-guide__title">Find Their Perfect Fit</h1>
+    <p class="size-guide__subtitle">Our pieces are designed with room to grow. Here's how to find the right size for your little one.</p>
+
+    <div class="size-guide__buttons">
+      <button class="size-guide__btn size-guide__btn--active" id="btn-baby" onclick="setMode('baby')">Shopping for Your Baby</button>
+      <button class="size-guide__btn" id="btn-gift" onclick="setMode('gift')">Buying a Gift?</button>
+    </div>
+
+    <section class="quick-finder">
+      <h2 class="quick-finder__title">Quick Size Finder</h2>
+      <p class="quick-finder__prompt">How old is the baby? Select an age range to see our recommendation.</p>
+
+      <div class="quick-finder__ages">
+        <button class="quick-finder__age-btn quick-finder__age-btn--active" onclick="selectAge(this, 'nb')">Newborn</button>
+        <button class="quick-finder__age-btn" onclick="selectAge(this, '0-3')">0&ndash;3M</button>
+        <button class="quick-finder__age-btn" onclick="selectAge(this, '3-6')">3&ndash;6M</button>
+        <button class="quick-finder__age-btn" onclick="selectAge(this, '6-9')">6&ndash;9M</button>
+        <button class="quick-finder__age-btn" onclick="selectAge(this, '9-12')">9&ndash;12M</button>
+        <button class="quick-finder__age-btn" onclick="selectAge(this, '12-18')">12&ndash;18M</button>
+        <button class="quick-finder__age-btn" onclick="selectAge(this, '18-24')">18&ndash;24M</button>
+      </div>
+
+      <div class="quick-finder__result" id="result-box">
+        <p class="quick-finder__result-title" id="result-title">We suggest: Newborn (NB)</p>
+        <p class="quick-finder__result-detail" id="result-detail">Up to 8 lbs, up to 21.5". Typically fits 0-4 weeks.</p>
+      </div>
+    </section>
+
+    <section class="size-chart">
+      <h2 class="size-chart__title">Size Chart</h2>
+      <p class="size-chart__subtitle">Ashmi &amp; Co. sizing with industry-standard weight and height ranges.</p>
+
+      <table class="size-chart__table">
+        <thead>
+          <tr>
+            <th>Size</th>
+            <th>Age</th>
+            <th>Weight</th>
+            <th>Height</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>NB</td>
+            <td>0&ndash;4 weeks</td>
+            <td>Up to 8 lbs</td>
+            <td>Up to 21.5"</td>
+          </tr>
+          <tr>
+            <td>0&ndash;3M</td>
+            <td>0&ndash;3 months</td>
+            <td>8&ndash;12 lbs</td>
+            <td>21.5&ndash;24"</td>
+          </tr>
+          <tr>
+            <td>3&ndash;6M</td>
+            <td>3&ndash;6 months</td>
+            <td>12&ndash;16 lbs</td>
+            <td>24&ndash;26.5"</td>
+          </tr>
+          <tr>
+            <td>6&ndash;9M</td>
+            <td>6&ndash;9 months</td>
+            <td>16&ndash;20 lbs</td>
+            <td>26.5&ndash;28.5"</td>
+          </tr>
+          <tr>
+            <td>9&ndash;12M</td>
+            <td>9&ndash;12 months</td>
+            <td>20&ndash;24 lbs</td>
+            <td>28.5&ndash;30"</td>
+          </tr>
+          <tr>
+            <td>12&ndash;18M</td>
+            <td>12&ndash;18 months</td>
+            <td>24&ndash;28 lbs</td>
+            <td>30&ndash;32"</td>
+          </tr>
+          <tr>
+            <td>18&ndash;24M</td>
+            <td>18&ndash;24 months</td>
+            <td>28&ndash;30 lbs</td>
+            <td>32&ndash;34"</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <script>
+    var sizeData = {
+      'nb':    { title: 'We suggest: Newborn (NB)', detail: 'Up to 8 lbs, up to 21.5". Typically fits 0-4 weeks.' },
+      '0-3':   { title: 'We suggest: 0-3M', detail: '8-12 lbs, 21.5-24". Typically fits 0-3 months.' },
+      '3-6':   { title: 'We suggest: 3-6M', detail: '12-16 lbs, 24-26.5". Typically fits 3-6 months.' },
+      '6-9':   { title: 'We suggest: 6-9M', detail: '16-20 lbs, 26.5-28.5". Typically fits 6-9 months.' },
+      '9-12':  { title: 'We suggest: 9-12M', detail: '20-24 lbs, 28.5-30". Typically fits 9-12 months.' },
+      '12-18': { title: 'We suggest: 12-18M', detail: '24-28 lbs, 30-32". Typically fits 12-18 months.' },
+      '18-24': { title: 'We suggest: 18-24M', detail: '28-30 lbs, 32-34". Typically fits 18-24 months.' }
+    };
+
+    function selectAge(btn, age) {
+      var buttons = document.querySelectorAll('.quick-finder__age-btn');
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove('quick-finder__age-btn--active');
+      }
+      btn.classList.add('quick-finder__age-btn--active');
+
+      var data = sizeData[age];
+      document.getElementById('result-title').textContent = data.title;
+      document.getElementById('result-detail').textContent = data.detail;
+    }
+
+    function setMode(mode) {
+      var btnBaby = document.getElementById('btn-baby');
+      var btnGift = document.getElementById('btn-gift');
+      btnBaby.classList.remove('size-guide__btn--active');
+      btnGift.classList.remove('size-guide__btn--active');
+      if (mode === 'baby') {
+        btnBaby.classList.add('size-guide__btn--active');
+      } else {
+        btnGift.classList.add('size-guide__btn--active');
+      }
+    }
+  </script>
+
+</body>
+</html>
